@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/space_18"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="133dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="88dp"
+            android:src="@mipmap/login_icon" />
+
+        <LinearLayout
+            style="@style/login_item_layout"
+            android:layout_marginTop="263dp">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="17dp"
+                android:src="@mipmap/phone" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:background="@color/color_white" />
+
+            <EditText
+                style="@style/login_edittext_style"
+                android:id="@+id/phone"
+                android:hint="@string/input_phone_hint"
+                android:imeOptions="actionNext" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/login_item_layout"
+            android:layout_marginTop="347dp">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="17dp"
+                android:src="@mipmap/password" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:background="@color/color_white" />
+
+            <EditText
+                style="@style/login_edittext_style"
+                android:hint="@string/input_password_hint"
+                android:id="@+id/password"
+                android:inputType="textPassword"
+                android:imeOptions="actionGo"
+                />
+        </LinearLayout>
+
+        <Button
+            style="@style/comm_button_style"
+            android:id="@+id/login_button"
+            android:layout_marginTop="465dp"
+            android:background="@drawable/login_button"
+            android:text="@string/login_text" />
+
+        <Button
+            android:id="@+id/but_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="529dp"
+            android:background="@null"
+            android:text="@string/line_apply_text"
+            android:textColor="@drawable/comm_button_text_sel"
+            android:textSize="@dimen/textsize_14" />
+
+        <Button
+            android:id="@+id/but_repassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="529dp"
+            android:background="@null"
+            android:text="@string/title_activity_repassword"
+            android:textColor="@drawable/comm_button_text_sel"
+            android:textSize="@dimen/textsize_14" />
+
+    </RelativeLayout>
+</ScrollView>

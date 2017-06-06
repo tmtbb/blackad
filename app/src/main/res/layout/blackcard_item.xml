@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/blackcard_layout"
+    android:layout_width="101dp"
+    android:layout_height="81dp"
+    android:background="@drawable/edittext_bg"
+    android:drawable="@null"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/blackcard_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="云栖会籍"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/textsize_16" />
+
+    <TextView
+        android:id="@+id/blackcard_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="¥199.00"
+        android:textColor="#E3A63F"
+        android:textSize="@dimen/textsize_12" />
+</LinearLayout>
