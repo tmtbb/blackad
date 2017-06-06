@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="221dp"
+            android:layout_margin="13dp"
+            android:background="@drawable/my_home_top_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:background="@drawable/my_home_user_head_bg"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/user_head_def" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="180"
+                android:textColor="#F8F8F8"
+                android:textSize="@dimen/textsize_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:paddingTop="11dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="会员等级"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/textsize_14" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="会员额度"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/textsize_14" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:paddingBottom="17dp"
+            android:paddingTop="11dp">
+
+            <TextView
+                android:id="@+id/blackcard_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="会员等级"
+                android:textColor="#E3A63F"
+                android:textSize="@dimen/textsize_16" />
+
+            <TextView
+                android:id="@+id/blackcard_creditline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="会员额度"
+                android:textColor="#E3A63F"
+                android:textSize="@dimen/textsize_18" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:divider="@null"
+            android:layout_marginTop="5dp"
+            android:cacheColorHint="#D7D7D7"
+            android:layout_marginBottom="10dp"
+            >
+        </ListView>
+    </LinearLayout>
+</ScrollView>

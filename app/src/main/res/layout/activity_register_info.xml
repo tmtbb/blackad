@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/height_64">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="247dp"
+                android:background="#D7D7D7"
+                android:paddingBottom="13dp"
+                android:paddingTop="13dp"
+                android:elevation="3dip"
+                android:src="@mipmap/backcard_card" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/privilege_tips"
+                    android:background="#D7D7D7"></View>
+
+
+                <TextView
+                    android:id="@+id/privilege_tips"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="精英黑卡订单支付"
+                    android:textColor="#E3A63F" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/privilege_tips"
+                    android:background="#D7D7D7"></View>
+
+
+            </RelativeLayout>
+
+            <EditText
+                style="@style/comm_edittext_style"
+                android:id="@+id/phone"
+                android:hint="@string/input_phone_hint"
+                android:inputType="number"
+               />
+
+
+            <EditText
+                style="@style/comm_edittext_style"
+                android:id="@+id/email"
+                android:digits="1234567890.qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM\@"
+                android:hint="@string/input_email_hint" />
+
+            <TextView
+                android:id="@+id/province_city"
+                style="@style/comm_edittext_style"
+                android:gravity="center_vertical"
+                android:hint="@string/input_province_city_hint"
+                 />
+
+            <EditText
+                android:id="@+id/addr"
+                style="@style/comm_edittext_style"
+                android:hint="请输入您的详细地址" />
+
+            <EditText
+                android:id="@+id/addr1"
+                style="@style/comm_edittext_style"
+                android:hint="备注（第二地址）"  />
+
+
+            <EditText
+                android:id="@+id/fullName"
+                style="@style/comm_edittext_style"
+                android:layout_marginTop="40dp"
+                android:hint="真实姓名（我们将保密您的私人信息）" />
+
+            <EditText
+                android:id="@+id/identity_card"
+                style="@style/comm_edittext_style"
+                android:hint="真实身份证号码（我们将保密您的私人信息）"
+                android:digits="1234567890xX"
+                android:imeOptions="actionGo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:text="购卡无忧"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/textsize_14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="56dp"
+                android:layout_marginRight="56dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingMultiplier="1.1"
+                android:text="为确保您成功收卡，请在详细地址中输入第二地 址，我们会在发卡前联系您确认最终收件地址。"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/textsize_12" />
+
+            <Button
+                android:id="@+id/but_next"
+                style="@style/comm_button_style"
+                android:layout_marginTop="34dp"
+                android:text="@string/next_text"
+                 />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

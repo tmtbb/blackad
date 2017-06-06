@@ -1,0 +1,80 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.AppStartLoadTranslucent" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="login_item_layout">
+        <item name="android:layout_marginLeft">@dimen/space_12</item>
+        <item name="android:layout_marginRight">@dimen/space_12</item>
+        <item name="android:layout_height">@dimen/height_44</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/login_layout</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="comm_edittext_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_44</item>
+        <item name="android:layout_marginLeft">@dimen/space_12</item>
+        <item name="android:layout_marginRight">@dimen/space_12</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/edittext_bg</item>
+        <item name="android:paddingLeft">37dp</item>
+        <item name="android:textColorHint">#A6A6A6</item>
+        <item name="android:textSize">@dimen/textsize_16</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+    <style name="comm_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginBottom">47dp</item>
+        <item name="android:textColor">@drawable/comm_button_text_sel</item>
+        <item name="android:background">@drawable/comm_button_sel</item>
+        <item name="android:textSize">@dimen/textsize_16</item>
+    </style>
+    <style name="login_edittext_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">@dimen/textsize_14</item>
+        <item name="android:textColorHint">#F4F4F4</item>
+        <item name="android:background">@null</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+
+
+    </style>
+
+    <style name="privilege_name_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">@dimen/textsize_12</item>
+        <item name="android:textColor">@drawable/privilege_name_sel</item>
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

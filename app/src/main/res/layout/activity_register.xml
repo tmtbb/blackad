@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:id="@+id/content"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/height_64">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="247dp"
+                android:background="@color/color_d7d7d7"
+                android:elevation="3dip"
+                android:paddingBottom="13dp"
+                android:paddingTop="13dp"
+                android:src="@mipmap/backcard_card" />
+
+            <GridView
+                android:id="@+id/blackcard_gridview"
+                android:paddingTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:gravity="center"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:numColumns="3">
+
+            </GridView>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/privilege_tips"
+                    android:background="@color/color_d7d7d7"></View>
+
+
+                <TextView
+                    android:id="@+id/privilege_tips"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/privilege_tips"
+                    android:textColor="#E3A63F" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/privilege_tips"
+                    android:background="@color/color_d7d7d7"></View>
+
+
+            </RelativeLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="0dp" />
+
+            <com.yundian.viewpagerindicator.IconPageIndicator
+                android:id="@+id/pageindicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/name_tips"
+                    android:background="@color/color_d7d7d7"></View>
+
+
+                <TextView
+                    android:id="@+id/name_tips"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/custom_name_title"
+                    android:textColor="@color/color_e3a63f" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/name_tips"
+                    android:background="@color/color_d7d7d7"></View>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="102dp"
+                android:gravity="center">
+
+                <LinearLayout android:id="@+id/no_custom_name"
+                    android:layout_width="135dp"
+                    android:layout_height="61dp"
+                    android:background="@drawable/edittext_bg"
+                    android:drawable="@null"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="不定制"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/textsize_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="黑卡没有姓名"
+                        android:textColor="@color/color_a6a6a6"
+                        android:textSize="@dimen/textsize_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/yes_custom_name"
+                    android:layout_width="135dp"
+                    android:layout_height="61dp"
+                    android:layout_marginLeft="23dp"
+                    android:background="@drawable/blackcard_item_sel_bg"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/custom_name_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="定制姓名(¥60)"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/textsize_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="您的专属黑卡"
+                        android:textColor="@color/color_a6a6a6"
+                        android:textSize="@dimen/textsize_12" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/custom_name"
+                style="@style/comm_edittext_style"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:hint="@string/custom_name_hint"
+                android:digits=" qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"/>
+                android:imeOptions="actionGo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="@string/custom_name_tips"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/textsize_12" />
+
+            <Button
+                android:id="@+id/but_next"
+                style="@style/comm_button_style"
+                android:layout_marginTop="45dp"
+                android:text="@string/next_text" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

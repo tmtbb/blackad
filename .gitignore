@@ -1,3 +1,16 @@
+
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+gradlew
+gradlew.bat
+=======
 # Built application files
 *.apk
 *.ap_

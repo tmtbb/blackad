@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_height="61dp"
+        android:layout_width="61dp"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:padding="5dp"
+        android:background="@drawable/gridview_item_bg"
+        android:layout_gravity="center" android:layout_marginTop="20dp" >
+        <ImageView
+            android:id="@+id/privilege_icon"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            >
+        </ImageView>
+        <TextView android:id="@+id/privilege_name" style="@style/privilege_name_style" />
+    </LinearLayout>
+</LinearLayout>
