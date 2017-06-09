@@ -1,6 +1,7 @@
 package com.yundian.blackcard.android.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,8 +89,7 @@ public class MyFragment extends BaseFragment {
                         next(ShoppingRecordActivity.class);
                         break;
                     case 2:
-                        next(OrderDetailActivity.class);
-                        //showToast("敬请期待");
+                        showToast("敬请期待");
                         break;
                     case 3:
                         next(UserSetInfoActivity.class);

@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -38,6 +39,10 @@ public class OrderDetailActivity extends BaseActivity {
 
     @BindView(R.id.tradeGoodsNameCell)
     protected UserSetInfoCell tradeGoodsNameCell;
+
+
+    @BindView(R.id.payButton)
+    protected Button payButton;
 
     @BindView(R.id.tradeNoCell)
     protected UserSetInfoCell tradeNoCell;
@@ -76,7 +81,8 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
-        serviceNo = "20170609131549180000";
+        String dataString = getIntent().getDataString();
+        serviceNo = dataString.split("/")[dataString.split("/").length - 2];
         showLoader();
         NetworkAPIFactory.getTradeService().butlerserviceInfo(serviceNo, new OnAPIListener<ButlerserviceInfo>() {
             @Override
@@ -97,6 +103,8 @@ public class OrderDetailActivity extends BaseActivity {
                 phoneNumCell.update(info.getServiceUserTel());
                 tradeTimeCell.update(TimeUtil.formatDate(info.getCreateTime()));
                 tradeTimeCell.setLineViewVisibility(View.GONE);
+
+                payButton.setVisibility(info.getServiceStatus() == 0 ? View.VISIBLE : View.GONE);
             }
         });
     }

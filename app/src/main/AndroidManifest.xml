@@ -96,14 +96,23 @@
         <activity
             android:name=".activity.ShopDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+
         <activity
             android:name=".activity.OrderDetailActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="app.jingyingheika.com"
+                    android:scheme="ydservice" />
+                <action android:name="android.intent.action.VIEW" />
+
+            </intent-filter>
+        </activity>
+
         <activity
-            android:name=".activity.ServiceMessageActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:name=".activity.ServiceMessageActivity"/>
         <activity android:name=".activity.WebViewActivity"></activity>
     </application>
 
