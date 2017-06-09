@@ -13,11 +13,16 @@ public interface ActionConstant {
 
     interface Action {
         int EMPTY_BUTTON = 0;
+        int PAY_CLOSE = EMPTY_BUTTON + 1;
+        int PAY_PURSE = PAY_CLOSE + 1;
+        int PAY_ALI = PAY_PURSE + 1;
+        int PAY_WEIXIN = PAY_ALI + 1;
     }
 
     interface IntentKey {
         String PAY_PASSOWRD = "PAY_PASSOWRD";
-        String PHONE= "PHONE";
-        String SMS_CODE= "SMS_CODE";
+        String PHONE = "PHONE";
+        String SHOP = "SHOP";
+        String SMS_CODE = "SMS_CODE";
     }
 }

@@ -69,6 +69,8 @@ public class ShopRecordAdapter extends BaseListViewAdapter<PurchaseHistoryModel>
 
         @BindView(R.id.tradeNo)
         protected TextView tradeNo;
+        @BindView(R.id.cellView)
+        protected View cellView;
         @BindView(R.id.tradeGoodsName)
         protected TextView tradeGoodsName;
         @BindView(R.id.tradeTime)
@@ -87,6 +89,16 @@ public class ShopRecordAdapter extends BaseListViewAdapter<PurchaseHistoryModel>
             return R.layout.item_shop_record;
         }
 
+        @Override
+        protected void initListener() {
+            super.initListener();
+            cellView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemChildViewClick(v, 99);
+                }
+            });
+        }
 
         @Override
         protected void update(PurchaseHistoryModel data) {

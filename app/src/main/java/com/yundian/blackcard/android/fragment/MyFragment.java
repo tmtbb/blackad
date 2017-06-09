@@ -13,6 +13,7 @@ import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.activity.MyPurseActivity;
+import com.yundian.blackcard.android.activity.OrderDetailActivity;
 import com.yundian.blackcard.android.activity.SetupPasswordActivity;
 import com.yundian.blackcard.android.activity.ShoppingRecordActivity;
 import com.yundian.blackcard.android.activity.UserSetInfoActivity;
@@ -87,7 +88,8 @@ public class MyFragment extends BaseFragment {
                         next(ShoppingRecordActivity.class);
                         break;
                     case 2:
-                        showToast("敬请期待");
+                        next(OrderDetailActivity.class);
+                        //showToast("敬请期待");
                         break;
                     case 3:
                         next(UserSetInfoActivity.class);

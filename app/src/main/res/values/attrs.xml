@@ -9,8 +9,14 @@
     <declare-styleable name="UserSetInfoCell">
         <attr name="user_info_title" format="string|reference" />
         <attr name="user_info_content" format="string|reference" />
-        <attr name="user_info_show_icon" format="boolean" />
+        <attr name="user_info_content_color" format="color|reference" />
+        <attr name="user_info_show_icon" format="enum">
+            <enum name="invisible" value="4" />
+            <enum name="gone" value="8" />
+            <enum name="visible" value="0" />
+        </attr>
         <attr name="user_info_edit_clickable" format="boolean" />
+
     </declare-styleable>
 
 </resources>

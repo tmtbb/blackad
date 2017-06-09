@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="234dp"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/closeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/space_12"
+            android:src="@mipmap/icon_pay_close" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付金额 "
+                android:textColor="@color/color_434343"
+                android:textSize="@dimen/textsize_14" />
+
+            <TextView
+                android:id="@+id/priceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥356.00"
+                android:textColor="@color/color_434343"
+                android:textSize="@dimen/textsize_16"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/purseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/space_12">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/space_12"
+            android:src="@mipmap/ic_more" />
+
+        <ImageView
+            android:id="@+id/purseIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_pursepay" />
+
+        <TextView
+            android:id="@+id/purseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/purseIcon"
+            android:text="钱包支付"
+            android:textColor="@color/color_434343"
+            android:textSize="@dimen/textsize_14" />
+
+        <TextView
+            android:id="@+id/purseAmountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/purseText"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/purseIcon"
+            android:text="当前可用余额¥18.00"
+            android:textColor="@color/color_a6a6a6"
+            android:textSize="@dimen/textsize_10" />
+    </RelativeLayout>
+
+    <include layout="@layout/comm_line_12dp" />
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/aliPayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/space_12">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/space_12"
+            android:src="@mipmap/ic_more" />
+
+        <ImageView
+            android:id="@+id/aliPayIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_alipay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/aliPayIcon"
+            android:text="支付宝支付" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/comm_line_12dp" />
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/weixinPayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/space_12">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/space_12"
+            android:src="@mipmap/ic_more" />
+
+        <ImageView
+            android:id="@+id/weixinPayIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_weixin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/weixinPayIcon"
+            android:text="微信支付" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

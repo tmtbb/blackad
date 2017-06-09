@@ -54,9 +54,19 @@ public class UserSetInfoCell extends BaseDataFrameLayout<String> {
                 titleText.setText(typedArray.getString(R.styleable.UserSetInfoCell_user_info_title));
             if (typedArray.hasValue(R.styleable.UserSetInfoCell_user_info_content))
                 contentText.setText(typedArray.getString(R.styleable.UserSetInfoCell_user_info_content));
+            if (typedArray.hasValue(R.styleable.UserSetInfoCell_user_info_content_color))
+                contentText.setTextColor(typedArray.getColor(R.styleable.UserSetInfoCell_user_info_content_color, getResources().getColor(R.color.color_a6a6a6)));
             if (typedArray.hasValue(R.styleable.UserSetInfoCell_user_info_show_icon)) {
-                boolean showIcon = typedArray.getBoolean(R.styleable.UserSetInfoCell_user_info_show_icon, false);
-                iconMore.setVisibility(showIcon ? VISIBLE : INVISIBLE);
+                int visibility = typedArray.getInt(R.styleable.UserSetInfoCell_user_info_show_icon, View.INVISIBLE);
+                if (visibility == View.GONE) {
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(0, 0);
+                    layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+                    layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    iconMore.setLayoutParams(layoutParams);
+                    iconMore.setVisibility(INVISIBLE);
+                } else {
+                    iconMore.setVisibility(visibility);
+                }
             }
             if (typedArray.hasValue(R.styleable.UserSetInfoCell_user_info_edit_clickable)) {
                 boolean clickable = typedArray.getBoolean(R.styleable.UserSetInfoCell_user_info_edit_clickable, false);

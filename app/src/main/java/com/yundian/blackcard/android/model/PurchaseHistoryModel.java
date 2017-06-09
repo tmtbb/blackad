@@ -2,6 +2,8 @@ package com.yundian.blackcard.android.model;
 
 import com.yundian.blackcard.android.util.TimeUtil;
 
+import java.io.Serializable;
+
 /**
  * @author : created by chuangWu
  * @version : 0.01
@@ -11,7 +13,7 @@ import com.yundian.blackcard.android.util.TimeUtil;
  * @for your attention : none
  * @revise : none
  */
-public class PurchaseHistoryModel {
+public class PurchaseHistoryModel implements Serializable{
 
 
     private int tradeId;

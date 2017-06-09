@@ -2,6 +2,7 @@ package com.yundian.blackcard.android.networkapi.okhttp;
 
 import com.yundian.blackcard.android.model.AccountInfo;
 import com.yundian.blackcard.android.model.BalanceModel;
+import com.yundian.blackcard.android.model.ButlerserviceInfo;
 import com.yundian.blackcard.android.model.DeviceInfo;
 import com.yundian.blackcard.android.model.MyPurseDetailModel;
 import com.yundian.blackcard.android.model.PayInfo;
@@ -33,11 +34,21 @@ public class TradeServiceImpl extends OkHttpService<TradeServiceImpl.RetrofitUse
         @FormUrlEncoded
         @POST("/api/trade/usertrades.json")
         Observable<DefResponse<List<PurchaseHistoryModel>>> userTrades(@Field("page") int page);
+
+        @FormUrlEncoded
+        @POST("/api/butlerservice/info.json")
+        Observable<DefResponse<ButlerserviceInfo>> butlerserviceInfo(@Field("serviceNo") String serviceNo);
     }
 
     @Override
     public void userTrades(int page, OnAPIListener<List<PurchaseHistoryModel>> listener) {
         setSubscribe(service.userTrades(page), new DefObserver<List<PurchaseHistoryModel>>(listener));
+    }
+
+    @Override
+    public void butlerserviceInfo(String serviceNo, OnAPIListener<ButlerserviceInfo> listener) {
+        setSubscribe(service.butlerserviceInfo(serviceNo), new DefObserver<ButlerserviceInfo>(listener));
+
     }
 
 }

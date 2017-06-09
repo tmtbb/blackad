@@ -1,16 +1,20 @@
 package com.yundian.blackcard.android.activity;
 
+import android.content.Intent;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ListView;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.adapter.ShopRecordAdapter;
+import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.DataFractory;
 import com.yundian.blackcard.android.model.PurchaseHistoryModel;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.blackcard.android.util.EmptyViewEntityUtil;
 import com.yundian.blackcard.android.view.SpaceView;
 import com.yundian.comm.adapter.base.IListAdapter;
+import com.yundian.comm.listener.OnItemChildViewClickListener;
 import com.yundian.comm.listener.OnRefreshPageListener;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
@@ -30,6 +34,8 @@ import butterknife.BindView;
 public class ShoppingRecordActivity extends BaseRefreshAbsListControllerActivity<PurchaseHistoryModel> {
     @BindView(R.id.contentView)
     protected ListView contentView;
+
+    private ShopRecordAdapter shopRecordAdapter;
 
     @Override
     public int getLayoutId() {
@@ -53,7 +59,7 @@ public class ShoppingRecordActivity extends BaseRefreshAbsListControllerActivity
 
     @Override
     protected IListAdapter<PurchaseHistoryModel> createAdapter() {
-        return new ShopRecordAdapter(context);
+        return shopRecordAdapter = new ShopRecordAdapter(context);
     }
 
     @Override
@@ -73,6 +79,18 @@ public class ShoppingRecordActivity extends BaseRefreshAbsListControllerActivity
                         getRefreshController().refreshComplete(purchaseHistoryModels);
                     }
                 });
+            }
+        });
+        shopRecordAdapter.setOnItemChildViewClickListener(new OnItemChildViewClickListener() {
+            @Override
+            public void onItemChildViewClick(View childView, int position, int action, Object obj) {
+                PurchaseHistoryModel item = shopRecordAdapter.getItem(position);
+                if (item != null) {
+                    Intent intent = new Intent(context, ShopDetailActivity.class);
+                    intent.putExtra(ActionConstant.IntentKey.SHOP, item);
+                    startActivity(intent);
+                }
+
             }
         });
     }
