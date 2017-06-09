@@ -1,10 +1,12 @@
 package com.yundian.blackcard.android.model;
 
+import java.io.Serializable;
+
 /**
  * Created by yaowang on 2017/5/11.
  */
 
-public class SMSCode {
+public class SMSCode implements Serializable{
     private String codeToken;
     private String phoneNum;
     private String phoneCode;

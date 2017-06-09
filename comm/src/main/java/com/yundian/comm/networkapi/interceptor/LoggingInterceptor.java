@@ -18,19 +18,19 @@ public class LoggingInterceptor implements Interceptor {
     @Override public Response intercept(Interceptor.Chain chain) throws IOException {
 
         Request request = chain.request();
-        Log.d(this.getClass().getSimpleName(),String.format("Sending request %s on %s%n%s", request.url(), chain.connection(), request.headers()));
+        Log.e(this.getClass().getSimpleName(),String.format("Sending request %s on %s%n%s", request.url(), chain.connection(), request.headers()));
         if( request.body() != null && request.body().contentLength() > 0 ) {
-            Log.d(this.getClass().getSimpleName(),String.format("Sending body %s", request.body().toString()));
+            Log.e(this.getClass().getSimpleName(), String.format("Sending body %s", request.body().toString()));
         }
         long t1 = System.nanoTime();
         okhttp3.Response response = chain.proceed(chain.request());
         long t2 = System.nanoTime();
-        Log.d(this.getClass().getSimpleName(),String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s",
+        Log.e(this.getClass().getSimpleName(),String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s",
                 response.request().url(), (t2 - t1) / 1e6d, response.headers()));
 
         okhttp3.MediaType mediaType = response.body().contentType();
         String content = response.body().string();
-        Log.d(this.getClass().getSimpleName(),content);
+        Log.e(this.getClass().getSimpleName(),content);
         return response.newBuilder()
                 .body(okhttp3.ResponseBody.create(mediaType, content))
                 .build();

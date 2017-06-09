@@ -21,6 +21,9 @@
     <string name="input_repassword1_hint">重新输入重置密码</string>
     <string name="login_text">登录</string>
     <string name="next_text">下一步</string>
+    <string name="pay_text">充值</string>
+    <string name="pay_sure">确认</string>
+    <string name="pay_sure_text">确认充值</string>
     <string name="line_apply_text">在线申请</string>
     <string name="home_user_title" formatted="false">尊贵的 %s %s，您好。</string>
 </resources>

@@ -49,7 +49,7 @@ public class OkHttpUtils {
         builder.readTimeout(config.getReadTimeout(), TimeUnit.SECONDS);
         SignInterceptor signInterceptor = new SignInterceptor(config.getSignCalculate(), config.getCommParameter());
         builder.addInterceptor(signInterceptor);
-//        builder.addInterceptor(new LoggingInterceptor());
+        builder.addInterceptor(new LoggingInterceptor());
         okHttpClient = builder.build();
         createRetrofit();
     }

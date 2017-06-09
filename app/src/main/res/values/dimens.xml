@@ -5,10 +5,14 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="space_12">12dp</dimen>
     <dimen name="space_18">18dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+    <dimen name="space_24">24dp</dimen>
     <dimen name="height_44">44dp</dimen>
     <dimen name="height_64">64dp</dimen>
+    <dimen name="textsize_10">10sp</dimen>
     <dimen name="textsize_12">12sp</dimen>
     <dimen name="textsize_14">14sp</dimen>
     <dimen name="textsize_16">16sp</dimen>
     <dimen name="textsize_18">18sp</dimen>
+    <dimen name="textsize_20">20sp</dimen>
 </resources>

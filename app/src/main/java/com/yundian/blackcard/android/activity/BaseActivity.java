@@ -1,5 +1,7 @@
 package com.yundian.blackcard.android.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -28,7 +31,7 @@ import butterknife.ButterKnife;
  * Created by yaowang on 2017/5/8.
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements InitPageListener , OnErrorListener {
+public abstract class BaseActivity extends AppCompatActivity implements InitPageListener, OnErrorListener {
 
     @Nullable
     @BindView(R.id.toolbar)
@@ -41,15 +44,18 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
     protected TextView mToolbarSubTitle;
     protected LoaderLayout loaderLayout;
     protected View rootView;
+    protected Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rootView = LayoutInflater.from(this).inflate(getLayoutId(), null);
+        context = this;
         setContentView(rootView);
-        ButterKnife.bind(this);
 
+        onInit();
         initStatusBar();
+
         initView();
         initListener();
         initData();
@@ -63,10 +69,20 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
         }
     }
 
+    public void setSubTitle(CharSequence subTitle) {
+        if (mToolbarSubTitle != null) {
+            mToolbarSubTitle.setText(subTitle);
+            mToolbarSubTitle.setVisibility(View.VISIBLE);
+        }
+    }
+
     protected boolean isShowBackButton() {
         return false;
     }
 
+    public void onInit() {
+        ButterKnife.bind(this);
+    }
 
     @Override
     public void initView() {
@@ -112,8 +128,7 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
     }
 
     protected void onShowError(Throwable ex) {
-        if( ! this.isFinishing() )
-        {
+        if (!this.isFinishing()) {
             ToastUtils.show(this, ex.getLocalizedMessage());
         }
         LogUtils.showException(ex);
@@ -121,10 +136,10 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
     }
 
     protected void showToast(String string) {
-        ToastUtils.show(this,string);
+        ToastUtils.show(this, string);
     }
 
-    protected void showToast(CharSequence charSequence){
+    protected void showToast(CharSequence charSequence) {
         showToast(charSequence.toString());
     }
 
@@ -165,4 +180,20 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
         if (loaderLayout != null)
             loaderLayout.setVisibility(View.GONE);
     }
+
+    protected void next(Class clazz) {
+        startActivity(new Intent(context, clazz));
+    }
+
+    protected void nextForResult(Class clazz, int requestCode) {
+        startActivityForResult(new Intent(context, clazz), requestCode);
+    }
+
+    public void openSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        view.requestFocus();
+        imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+    }
+
+
 }

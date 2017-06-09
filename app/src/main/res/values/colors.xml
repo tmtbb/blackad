@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="red">#ff0000</color>
+    <color name="blue">#0000ff</color>
+    <color name="yellow">#ff9000</color>
+    <color name="green">#008000</color>
+
     <color name="colorPrimary">#434343</color>
     <color name="colorPrimaryDark">#434343</color>
     <color name="colorAccent">#434343</color>
@@ -11,4 +17,6 @@
     <color name="color_cda351">#cda351</color>
     <color name="color_a6a6a6">#a6a6a6</color>
     <color name="color_f8f8f8">#f8f8f8</color>
+    <color name="color_1FCF55">#1FCF55</color>
+    <color name="color_DB462E">#DB462E</color>
 </resources>

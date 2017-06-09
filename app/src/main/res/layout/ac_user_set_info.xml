@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f8"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/headerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/color_white"
+                android:clickable="true"
+                android:paddingLeft="@dimen/space_12"
+                android:paddingRight="@dimen/space_12">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="头像"
+                    android:textColor="@color/color_434343"
+                    android:textSize="@dimen/textsize_14" />
+
+                <ImageView
+                    android:id="@+id/iconMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_more" />
+
+                <com.yundian.blackcard.android.view.RoundImageView
+                    android:id="@+id/headerIcon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@id/iconMore"
+                    android:src="@mipmap/user_head_def"
+                    app:roundHeight="25dp"
+                    app:roundWidth="25dp" />
+            </RelativeLayout>
+
+            <View xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/space_12"
+                android:background="#D7D7D7" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/blackCardNoCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="5884668"
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="false"
+                app:user_info_title="黑卡卡号" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/fullNameCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="李开复"
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="false"
+                app:user_info_title="真实姓名" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/nicknameCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:user_info_content="180"
+                app:user_info_edit_clickable="true"
+                app:user_info_show_icon="false"
+                app:user_info_title="昵称" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/sexCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="男"
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="false"
+                app:user_info_title="性别" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/companyCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="ywwl"
+                app:user_info_edit_clickable="true"
+                app:user_info_show_icon="false"
+                app:user_info_title="公司名称(选填)" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/positionCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="码农"
+                app:user_info_edit_clickable="true"
+                app:user_info_show_icon="false"
+                app:user_info_title="公司职务(选填)" />
+
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/identityCardCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="234543212******"
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="false"
+                app:user_info_title="身份证号" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/phoneNumCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="131********"
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="false"
+                app:user_info_title="手机号" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/emailCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content="yaobanglin@163.com"
+                app:user_info_edit_clickable="true"
+                app:user_info_show_icon="false"
+                app:user_info_title="邮箱" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:id="@+id/setupPwdCell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content=""
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="true"
+                app:user_info_title="密码设置" />
+
+            <com.yundian.blackcard.android.view.UserSetInfoCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:user_info_content=""
+                app:user_info_edit_clickable="false"
+                app:user_info_show_icon="true"
+                app:user_info_title="微信绑定" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <include layout="@layout/comm_line_1px" />
+
+
+            <TextView
+                android:id="@+id/logoutText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/color_white"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/color_434343"
+                android:textSize="@dimen/textsize_14" />
+
+            <include layout="@layout/comm_line_1px" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

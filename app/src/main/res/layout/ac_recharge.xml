@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f8"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout"/>
+
+    <EditText
+        android:inputType="numberDecimal"
+        android:id="@+id/amountEdit"
+        android:layout_width="351dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@color/color_white"
+        android:gravity="center"
+        android:hint="请输入充值金额"
+        android:textColorHint="@color/color_a6a6a6"
+        android:textSize="@dimen/textsize_14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="30dp"
+        android:text="选择充值方式"
+        android:textColor="@color/color_a6a6a6"
+        android:textSize="@dimen/textsize_12" />
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/aliPayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/color_white"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_alipay"
+            android:drawablePadding="5dp"
+            android:text="支付宝充值"
+            android:textColor="@color/color_a6a6a6"
+            android:textSize="@dimen/textsize_14" />
+
+        <ImageView
+            android:id="@+id/aliPayIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/paydefault" />
+    </RelativeLayout>
+
+    <include layout="@layout/comm_line" />
+
+    <RelativeLayout
+        android:clickable="true"
+        android:id="@+id/weixinPayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:padding="@dimen/space_12">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_weixin"
+            android:drawablePadding="5dp"
+            android:text="微信充值"
+            android:textColor="@color/color_a6a6a6"
+            android:textSize="@dimen/textsize_14" />
+
+        <ImageView
+            android:id="@+id/weixinPayIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/payselect" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/payButton"
+        style="@style/comm_button_style"
+        android:layout_marginTop="80dp"
+        android:text="@string/pay_sure_text" />
+
+</LinearLayout>
