@@ -38,6 +38,10 @@ public class TradeServiceImpl extends OkHttpService<TradeServiceImpl.RetrofitUse
         @FormUrlEncoded
         @POST("/api/butlerservice/info.json")
         Observable<DefResponse<ButlerserviceInfo>> butlerserviceInfo(@Field("serviceNo") String serviceNo);
+
+         @FormUrlEncoded
+        @POST("/api/butlerservice/pay.json")
+        Observable<DefResponse<PayInfo>> butlerservicePay(@Field("serviceNo") String serviceNo,@Field("payType") int payType,@Field("payPassword") String payPassword);
     }
 
     @Override
@@ -48,6 +52,12 @@ public class TradeServiceImpl extends OkHttpService<TradeServiceImpl.RetrofitUse
     @Override
     public void butlerserviceInfo(String serviceNo, OnAPIListener<ButlerserviceInfo> listener) {
         setSubscribe(service.butlerserviceInfo(serviceNo), new DefObserver<ButlerserviceInfo>(listener));
+
+    }
+
+    @Override
+    public void butlerservicePay(String serviceNo, int payType, String payPassword, OnAPIListener<PayInfo> listener) {
+        setSubscribe(service.butlerservicePay(serviceNo, payType, payPassword), new DefObserver<PayInfo>(listener));
 
     }
 

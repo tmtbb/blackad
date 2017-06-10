@@ -96,6 +96,9 @@
         <activity
             android:name=".activity.ShopDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.PursePayActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
             android:name=".activity.OrderDetailActivity"

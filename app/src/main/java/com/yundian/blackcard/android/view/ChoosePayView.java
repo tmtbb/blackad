@@ -44,9 +44,13 @@ public class ChoosePayView extends BaseDataFrameLayout<ButlerserviceInfo> {
     public void update(ButlerserviceInfo data) {
         if (data != null) {
             priceText.setText("¥" + data.getServiceAmount());
-            purseAmountText.setText("当前可用余额 ¥");
-        }
 
+        }
+    }
+
+
+    public void setCurrentAmount(double amount) {
+        purseAmountText.setText("当前可用余额 ¥" + amount);
     }
 
     @Override

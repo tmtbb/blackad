@@ -24,5 +24,6 @@ public interface ActionConstant {
         String PHONE = "PHONE";
         String SHOP = "SHOP";
         String SMS_CODE = "SMS_CODE";
+        String PAY_PASSWORD = "PAY_PASSWORD";
     }
 }
