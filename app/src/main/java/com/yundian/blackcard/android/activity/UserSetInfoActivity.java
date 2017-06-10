@@ -13,12 +13,14 @@ import android.widget.ScrollView;
 import com.bumptech.glide.Glide;
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.constant.ActionConstant;
+import com.yundian.blackcard.android.manager.UserDetailManager;
 import com.yundian.blackcard.android.model.UploadInfo;
 import com.yundian.blackcard.android.model.UserDetailModel;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.blackcard.android.view.ActionSheetDialog;
 import com.yundian.blackcard.android.view.UserSetInfoCell;
 import com.yundian.comm.listener.OnChildViewClickListener;
+import com.yundian.comm.listener.OnRefreshListener;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.SPUtils;
 import com.yundian.comm.util.StringUtils;
@@ -39,7 +41,7 @@ import me.nereo.multi_image_selector.MultiImageSelectorHelper;
  * @for your attention : none
  * @revise : none
  */
-public class UserSetInfoActivity extends BaseActivity {
+public class UserSetInfoActivity extends BaseRefreshActivity {
 
     @BindView(R.id.nicknameCell)
     protected UserSetInfoCell nicknameCell;
@@ -79,6 +81,7 @@ public class UserSetInfoActivity extends BaseActivity {
         setTitle("个人资料");
         setSubTitle("完成");
         selectorHelper = new MultiImageSelectorHelper(this);
+        contentView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -124,35 +127,35 @@ public class UserSetInfoActivity extends BaseActivity {
                         }).show();
             }
         });
-        contentView.setVisibility(View.INVISIBLE);
-    }
 
 
-    @Override
-    public void initData() {
-        super.initData();
-        showLoader();
-        NetworkAPIFactory.getUserService().userDetail(new OnAPIListener<UserDetailModel>() {
+        setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onError(Throwable ex) {
-                onShowError(ex);
-            }
+            public void onRefresh() {
+                NetworkAPIFactory.getUserService().userDetail(new OnAPIListener<UserDetailModel>() {
+                    @Override
+                    public void onError(Throwable ex) {
+                        onShowError(ex);
+                    }
 
-            @Override
-            public void onSuccess(UserDetailModel userDetailModel) {
-                closeLoader();
-                UserSetInfoActivity.this.userDetailModel = userDetailModel;
-                contentView.setVisibility(View.VISIBLE);
-                Glide.with(context).load(userDetailModel.getHeadUrl()).centerCrop().placeholder(R.mipmap.user_head_def).into(headerIcon);
-                blackCardNoCell.update(userDetailModel.getBlackCardNo());
-                fullNameCell.update(userDetailModel.getFullName());
-                nicknameCell.update(userDetailModel.getNickName());
-                sexCell.update(userDetailModel.getSex());
-                companyCell.update(userDetailModel.getCompany());
-                positionCell.update(userDetailModel.getPosition());
-                identityCardCell.update(StringUtils.replaceInfo(4, userDetailModel.getIdentityCard()));
-                phoneNumCell.update(StringUtils.replaceInfo(3, userDetailModel.getPhoneNum()));
-                emailCell.update(userDetailModel.getEmail());
+                    @Override
+                    public void onSuccess(UserDetailModel userDetailModel) {
+                        UserDetailManager.getInstance().notifyUserDetailChanged(userDetailModel);
+                        getRefreshController().refreshComplete();
+                        UserSetInfoActivity.this.userDetailModel = userDetailModel;
+                        contentView.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(userDetailModel.getHeadUrl()).centerCrop().placeholder(R.mipmap.user_head_def).into(headerIcon);
+                        blackCardNoCell.update(userDetailModel.getBlackCardNo());
+                        fullNameCell.update(userDetailModel.getFullName());
+                        nicknameCell.update(userDetailModel.getNickName());
+                        sexCell.update(userDetailModel.getSex());
+                        companyCell.update(userDetailModel.getCompany());
+                        positionCell.update(userDetailModel.getPosition());
+                        identityCardCell.update(StringUtils.replaceInfo(4, userDetailModel.getIdentityCard()));
+                        phoneNumCell.update(StringUtils.replaceInfo(3, userDetailModel.getPhoneNum()));
+                        emailCell.update(userDetailModel.getEmail());
+                    }
+                });
             }
         });
     }
@@ -178,8 +181,9 @@ public class UserSetInfoActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(Object o) {
+                        closeLoader();
                         showToast("修改完成");
-                        finish();
+                        getRefreshController().refreshBegin();
                     }
                 });
                 break;
@@ -196,12 +200,8 @@ public class UserSetInfoActivity extends BaseActivity {
         model.setIdentityCard(userDetailModel.getIdentityCard());
         model.setEmail(emailCell.getContent());
         model.setNickName(nicknameCell.getContent());
-        if (!TextUtils.isEmpty(userDetailModel.getHeadUrl())) {
-            if (userDetailModel.getHeadUrl().startsWith("http://") || userDetailModel.getHeadUrl().startsWith("https://")) {
-
-            } else {
-                model.setHeadUrl(userDetailModel.getHeadUrl());
-            }
+        if (selectorHelper.getmSelectPath().size() > 0) {
+            model.setHeadUrl(userDetailModel.getHeadUrl());
         }
         return model;
     }

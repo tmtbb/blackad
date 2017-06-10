@@ -19,6 +19,8 @@ import com.yundian.blackcard.android.activity.SetupPasswordActivity;
 import com.yundian.blackcard.android.activity.ShoppingRecordActivity;
 import com.yundian.blackcard.android.activity.UserSetInfoActivity;
 import com.yundian.blackcard.android.activity.WebViewActivity;
+import com.yundian.blackcard.android.manager.UserDetailManager;
+import com.yundian.blackcard.android.model.UserDetailModel;
 import com.yundian.blackcard.android.model.UserInfo;
 
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import butterknife.OnClick;
  * Created by yaowang on 2017/5/10.
  */
 
-public class MyFragment extends BaseFragment {
+public class MyFragment extends BaseFragment implements UserDetailManager.OnUserDetailUpdateListener {
 
 
     @BindView(R.id.username)
@@ -57,7 +59,7 @@ public class MyFragment extends BaseFragment {
         UserInfo userInfo = (UserInfo) getActivity().getIntent().getSerializableExtra(UserInfo.class.getName());
         username.setText(userInfo.getName());
         blackcardName.setText(userInfo.getBlackCardName());
-        Glide.with(this).load(userInfo.getHeadUrl()).placeholder(R.mipmap.user_head_def).into(headerIcon);
+        Glide.with(this).load(userInfo.getHeadUrl()).centerCrop().placeholder(R.mipmap.user_head_def).into(headerIcon);
         blackcardCreditline.setText(String.format("%.2f", userInfo.getBlackcardCreditline()));
         stringList = new ArrayList<String>();
         stringList.add("我的钱包");
@@ -108,6 +110,7 @@ public class MyFragment extends BaseFragment {
                 }
             }
         });
+        UserDetailManager.getInstance().registerUserDetailUpdateListener(this);
     }
 
     @OnClick(value = R.id.headerIcon)
@@ -116,4 +119,10 @@ public class MyFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onUserDetailUpdate(UserDetailModel model) {
+        username.setText(model.getFullName());
+        Glide.with(this).load(model.getHeadUrl()).centerCrop().placeholder(R.mipmap.user_head_def).into(headerIcon);
+
+    }
 }
