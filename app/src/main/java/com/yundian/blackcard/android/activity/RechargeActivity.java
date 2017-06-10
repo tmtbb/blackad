@@ -9,9 +9,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.model.AliPayInfo;
 import com.yundian.blackcard.android.model.PayInfo;
 import com.yundian.blackcard.android.model.WXPayInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
+import com.yundian.blackcard.android.util.AliPayUtil;
 import com.yundian.blackcard.android.util.CashierInputFilter;
 import com.yundian.blackcard.android.wxapi.WXPayUtil;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
@@ -90,31 +92,41 @@ public class RechargeActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(PayInfo payInfo) {
-                        wxPay(payInfo);
+                        if (payInfo.getPayType() == 1)
+                            wxPay(payInfo);
+                        else if (payInfo.getPayType() == 2)
+                            aliPay(payInfo);
                     }
                 });
                 break;
         }
     }
 
+    private void aliPay(PayInfo payInfo) {
+        AliPayInfo aliPayInfo = payInfo.getAliPayInfo();
+        AliPayUtil.pay(this, aliPayInfo, listener);
+    }
+
     private void wxPay(PayInfo payInfo) {
         WXPayInfo wxPayInfo = payInfo.getWxPayInfo();
-        WXPayUtil.pay(this, wxPayInfo, new OnAPIListener<Boolean>() {
-            @Override
-            public void onError(Throwable ex) {
-                onShowError(ex);
-                payButton.setText("重新支付");
-            }
-
-            @Override
-            public void onSuccess(Boolean aBoolean) {
-                if (aBoolean) {
-                    closeLoader();
-                    showToast("支付成功");
-                    setResult(RESULT_OK);
-                    finish();
-                }
-            }
-        });
+        WXPayUtil.pay(this, wxPayInfo, listener);
     }
+
+    private OnAPIListener<Boolean> listener = new OnAPIListener<Boolean>() {
+        @Override
+        public void onError(Throwable ex) {
+            onShowError(ex);
+            payButton.setText("重新支付");
+        }
+
+        @Override
+        public void onSuccess(Boolean aBoolean) {
+            if (aBoolean) {
+                closeLoader();
+                showToast("支付成功");
+                setResult(RESULT_OK);
+                finish();
+            }
+        }
+    };
 }
