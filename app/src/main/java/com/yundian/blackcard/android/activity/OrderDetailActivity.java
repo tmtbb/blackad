@@ -20,10 +20,12 @@ import com.yundian.blackcard.android.model.WXPayInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.blackcard.android.util.AliPayUtil;
 import com.yundian.blackcard.android.util.TimeUtil;
+import com.yundian.blackcard.android.view.AlertDialog;
 import com.yundian.blackcard.android.view.ChoosePayView;
 import com.yundian.blackcard.android.view.UserSetInfoCell;
 import com.yundian.blackcard.android.wxapi.WXPayUtil;
 import com.yundian.comm.listener.OnChildViewClickListener;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
 import butterknife.BindView;
@@ -43,14 +45,10 @@ public class OrderDetailActivity extends BaseActivity {
 
     @BindView(R.id.contentView)
     protected ScrollView contentView;
-
     @BindView(R.id.tradeGoodsNameCell)
     protected UserSetInfoCell tradeGoodsNameCell;
-
-
     @BindView(R.id.payButton)
     protected Button payButton;
-
     @BindView(R.id.tradeNoCell)
     protected UserSetInfoCell tradeNoCell;
     @BindView(R.id.serviceDetailsText)
@@ -136,6 +134,7 @@ public class OrderDetailActivity extends BaseActivity {
                         break;
                     case ActionConstant.Action.PAY_PURSE:
                         Intent intent = new Intent(context, PursePayActivity.class);
+                        intent.putExtra(ActionConstant.IntentKey.PHONE,butlerserviceInfo.getServiceUserTel());
                         startActivityForResult(intent, 0);
                         break;
                 }
@@ -170,7 +169,11 @@ public class OrderDetailActivity extends BaseActivity {
         NetworkAPIFactory.getTradeService().butlerservicePay(serviceNo, payType, payPassword, new OnAPIListener<PayInfo>() {
             @Override
             public void onError(Throwable ex) {
-                onShowError(ex);
+                if (ex instanceof NetworkAPIException) {
+                    if (((NetworkAPIException) ex).getErrorCode() == 10020) {
+                        createAlertDialog();
+                    }
+                }
             }
 
             @Override
@@ -188,6 +191,28 @@ public class OrderDetailActivity extends BaseActivity {
         });
     }
 
+
+    private void createAlertDialog() {
+        final AlertDialog alertDialog = new AlertDialog(context).builder()
+                .setTitle("提示")
+                .setCancelable(false)
+                .setMsg("你尚未设置支付密码，是否立即设置")
+                .setNegativeButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                })
+                .setPositiveButton("确定", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, SetupPayPasswordActivity.class);
+                        intent.putExtra(ActionConstant.IntentKey.PHONE, butlerserviceInfo.getServiceUserTel());
+                        startActivity(intent);
+                    }
+                });
+        alertDialog.show();
+    }
 
     private void aliPay(PayInfo payInfo) {
         AliPayInfo aliPayInfo = payInfo.getAliPayInfo();

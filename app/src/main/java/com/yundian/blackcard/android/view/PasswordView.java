@@ -36,7 +36,10 @@ public class PasswordView extends RelativeLayout {
 
     private TextView titleText;
 
+    private TextView forgetPasswordText;
+
     private ArrayList<Map<String, String>> valueList;
+
 
     private int currentIndex = -1;    //用于记录当前输入密码格位置
 
@@ -52,6 +55,7 @@ public class PasswordView extends RelativeLayout {
 
         virtualKeyboardView = (VirtualKeyboardView) view.findViewById(R.id.virtualKeyboardView);
         titleText = (TextView) view.findViewById(R.id.titleText);
+        forgetPasswordText = (TextView) view.findViewById(R.id.forgetPasswordText);
         gridView = virtualKeyboardView.getGridView();
 
         initValueList();
@@ -61,6 +65,10 @@ public class PasswordView extends RelativeLayout {
         setupView();
 
         addView(view);
+    }
+
+    public TextView getForgetPasswordText() {
+        return forgetPasswordText;
     }
 
     private void initView(View view) {

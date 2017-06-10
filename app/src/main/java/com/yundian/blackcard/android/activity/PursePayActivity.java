@@ -1,6 +1,7 @@
 package com.yundian.blackcard.android.activity;
 
 import android.content.Intent;
+import android.view.View;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.constant.ActionConstant;
@@ -26,6 +27,8 @@ public class PursePayActivity extends BaseActivity {
     @BindView(R.id.passwordView)
     protected PasswordView passwordView;
 
+    private String phoneNum;
+
     @Override
     public int getLayoutId() {
         return R.layout.ac_purse_pay;
@@ -41,6 +44,8 @@ public class PursePayActivity extends BaseActivity {
         super.initView();
         setTitle("输入支付密码");
         passwordView.setTitleText("请输入支付密码");
+        passwordView.getForgetPasswordText().setVisibility(View.VISIBLE);
+        phoneNum = getIntent().getStringExtra(ActionConstant.IntentKey.PHONE);
     }
 
     @Override
@@ -51,6 +56,15 @@ public class PursePayActivity extends BaseActivity {
     @Override
     public void initListener() {
         super.initListener();
+        passwordView.getForgetPasswordText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SetupPayPasswordActivity.class);
+                intent.putExtra(ActionConstant.IntentKey.PHONE, phoneNum);
+                startActivity(intent);
+                finish();
+            }
+        });
         passwordView.setOnFinishInput(new OnPasswordInputFinish() {
             @Override
             public void inputFinish(String password) {

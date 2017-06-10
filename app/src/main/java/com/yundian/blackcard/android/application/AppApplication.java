@@ -75,7 +75,8 @@ public class AppApplication extends Application {
             @Override
             public void onURLClicked(Context context, String url) {
 
-                String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
+                //String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
+                String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170528185430788003/pay.html";
                 if (testUrl.startsWith("http://")) {
                     testUrl = testUrl.substring(7, testUrl.length());
                 }
