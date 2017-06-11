@@ -5,8 +5,6 @@ import android.content.Context;
 import com.yundian.blackcard.android.networkapi.okhttp.BlackcardServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.CommServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.TradeServiceImpl;
-import com.yundian.blackcard.android.networkapi.okhttp.UserServiceImpl;
-import com.yundian.comm.annotation.Service;
 import com.yundian.comm.networkapi.config.NetworkAPIConfig;
 import com.yundian.comm.networkapi.invocationhandler.RetrofitServiceProxy;
 import com.yundian.comm.networkapi.manage.ServiceManage;
@@ -39,6 +37,7 @@ public class NetworkAPIFactory extends ServiceManage {
 
     public static void init(Context context) {
         commParameter.put("appVersion", DeviceUtils.getVersionName(context));
+        commParameter.put("appVersionCode", DeviceUtils.getVersionCode(context));
         commParameter.put("osType", "1");
         if (SPUtils.contains(context, "UserToken")) {
             commParameter.put("token", SPUtils.get(context, "UserToken", ""));
