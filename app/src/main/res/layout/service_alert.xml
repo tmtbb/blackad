@@ -16,7 +16,8 @@
             android:id="@+id/privilege_img"
             android:layout_width="match_parent"
             android:layout_height="271dp"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
+
             android:background="@mipmap/service_img_def"
              />
 
