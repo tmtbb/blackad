@@ -16,6 +16,7 @@ import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.blackcard.android.util.AliPayUtil;
 import com.yundian.blackcard.android.util.CashierInputFilter;
 import com.yundian.blackcard.android.wxapi.WXPayUtil;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.ToastUtils;
 
@@ -46,6 +47,9 @@ public class RechargeActivity extends BaseActivity {
     @BindView(R.id.payButton)
     protected Button payButton;
     private int payType = 1;
+    private PayInfo payInfo;
+    private final static String RECHARGE_PAY = "recharge_pay";
+
 
     @Override
     public int getLayoutId() {
@@ -92,6 +96,7 @@ public class RechargeActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(PayInfo payInfo) {
+                        RechargeActivity.this.payInfo = payInfo;
                         if (payInfo.getPayType() == 1)
                             wxPay(payInfo);
                         else if (payInfo.getPayType() == 2)
@@ -112,16 +117,19 @@ public class RechargeActivity extends BaseActivity {
         WXPayUtil.pay(this, wxPayInfo, listener);
     }
 
+
     private OnAPIListener<Boolean> listener = new OnAPIListener<Boolean>() {
         @Override
         public void onError(Throwable ex) {
             onShowError(ex);
             payButton.setText("重新支付");
+            NetworkAPIFactory.getCommService().payLog(RECHARGE_PAY, payInfo, ex);
         }
 
         @Override
         public void onSuccess(Boolean aBoolean) {
             if (aBoolean) {
+                NetworkAPIFactory.getCommService().payLog(RECHARGE_PAY, payInfo, null);
                 closeLoader();
                 showToast("支付成功");
                 setResult(RESULT_OK);

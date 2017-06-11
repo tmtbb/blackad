@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:core_ptr="http://schemas.android.com/tools"
     android:background="@color/color_f8f8f8"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_layout" />
 
-    <com.yundian.blackcard.android.view.CusPtrFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:core_ptr="http://schemas.android.com/apk/res-auto"
+    <com.yundian.blackcard.android.view.CusPtrFrameLayout
         android:id="@+id/refreshFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -107,6 +107,7 @@
                     app:user_info_content="180"
                     app:user_info_edit_clickable="true"
                     app:user_info_show_icon="invisible"
+                    app:user_info_edit_hint="请输入昵称"
                     app:user_info_title="昵称" />
 
                 <com.yundian.blackcard.android.view.UserSetInfoCell
@@ -125,6 +126,7 @@
                     app:user_info_content="ywwl"
                     app:user_info_edit_clickable="true"
                     app:user_info_show_icon="invisible"
+                    app:user_info_edit_hint="请输入公司名称"
                     app:user_info_title="公司名称(选填)" />
 
                 <com.yundian.blackcard.android.view.UserSetInfoCell
@@ -134,6 +136,7 @@
                     app:user_info_content="码农"
                     app:user_info_edit_clickable="true"
                     app:user_info_show_icon="invisible"
+                    app:user_info_edit_hint="请输入公司职务"
                     app:user_info_title="公司职务(选填)" />
 
 
@@ -148,6 +151,7 @@
                     app:user_info_content="234543212******"
                     app:user_info_edit_clickable="false"
                     app:user_info_show_icon="invisible"
+                    app:user_info_edit_hint="请输入身份证号"
                     app:user_info_title="身份证号" />
 
                 <com.yundian.blackcard.android.view.UserSetInfoCell
@@ -166,6 +170,7 @@
                     app:user_info_content="yaobanglin@163.com"
                     app:user_info_edit_clickable="true"
                     app:user_info_show_icon="invisible"
+                    app:user_info_edit_hint="请输入邮箱"
                     app:user_info_title="邮箱" />
 
                 <com.yundian.blackcard.android.view.UserSetInfoCell

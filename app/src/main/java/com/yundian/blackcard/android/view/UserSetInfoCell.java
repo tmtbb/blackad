@@ -37,6 +37,10 @@ public class UserSetInfoCell extends BaseDataFrameLayout<String> {
     @BindView(R.id.iconMore)
     protected ImageView iconMore;
 
+    public EditText getContentText() {
+        return contentText;
+    }
+
     public UserSetInfoCell(Context context) {
         super(context);
     }
@@ -72,6 +76,10 @@ public class UserSetInfoCell extends BaseDataFrameLayout<String> {
                 boolean clickable = typedArray.getBoolean(R.styleable.UserSetInfoCell_user_info_edit_clickable, false);
                 contentText.setClickable(clickable);
                 contentText.setEnabled(clickable);
+            }
+            if (typedArray.hasValue(R.styleable.UserSetInfoCell_user_info_edit_hint)) {
+                String hint = typedArray.getString(R.styleable.UserSetInfoCell_user_info_edit_hint);
+                contentText.setHint(hint);
             }
 
             if (typedArray != null)

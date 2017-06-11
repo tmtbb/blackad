@@ -1,6 +1,7 @@
 package com.yundian.blackcard.android.networkapi;
 
 import com.yundian.blackcard.android.model.DeviceInfo;
+import com.yundian.blackcard.android.model.PayInfo;
 import com.yundian.blackcard.android.model.SMSCode;
 import com.yundian.blackcard.android.model.UploadInfo;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
@@ -22,4 +23,8 @@ public interface ICommService {
     void upload(List<String> paths, OnAPIListener<List<UploadInfo>> listener);
 
     void sysLog(String event, Map<String,Object> map);
+
+    void payLog(String event, Double amount,Integer payType,String tradeNo,Integer returnCode,String returnMsg);
+
+    void payLog(String evnet, PayInfo payInfo,Throwable ex);
 }

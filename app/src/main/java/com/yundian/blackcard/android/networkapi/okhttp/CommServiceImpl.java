@@ -1,9 +1,11 @@
 package com.yundian.blackcard.android.networkapi.okhttp;
 
 import com.yundian.blackcard.android.model.DeviceInfo;
+import com.yundian.blackcard.android.model.PayInfo;
 import com.yundian.blackcard.android.model.SMSCode;
 import com.yundian.blackcard.android.model.UploadInfo;
 import com.yundian.blackcard.android.networkapi.ICommService;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.networkapi.obsserver.DefObserver;
 import com.yundian.comm.networkapi.okhttp.OkHttpService;
@@ -91,5 +93,31 @@ public class CommServiceImpl extends OkHttpService<CommServiceImpl.RetrofitCommS
     @Override
     public void sysLog(String event, Map<String, Object> map) {
         setSubscribe(service.sysLog(event, map), new DefObserver<Object>(null));
+    }
+
+    @Override
+    public void payLog(String event, Double amount, Integer payType, String tradeNo, Integer returnCode, String returnMsg) {
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("amount",amount);
+        map.put("payType",payType);
+        map.put("tradeNo",tradeNo);
+        map.put("returnCode",returnCode);
+        map.put("returnMsg",returnMsg);
+        sysLog(event,map);
+    }
+
+    @Override
+    public void payLog(String evnet, PayInfo payInfo, Throwable ex) {
+        Integer returnCode = 0;
+        String returnMsg = "成功";
+        if (ex != null && ex instanceof NetworkAPIException) {
+            NetworkAPIException exception = (NetworkAPIException) ex;
+            returnCode = exception.getErrorCode();
+            returnMsg = exception.getLocalizedMessage();
+        } else if (ex != null) {
+            returnCode = 2;
+            returnMsg = ex.getLocalizedMessage();
+        }
+        payLog(evnet,payInfo.getPayTotalPrice(),payInfo.getPayType(),payInfo.getTradeNo(),returnCode,returnMsg);
     }
 }

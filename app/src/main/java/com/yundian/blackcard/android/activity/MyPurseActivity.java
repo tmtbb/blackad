@@ -61,7 +61,7 @@ public class MyPurseActivity extends BaseRefreshActivity {
 
                     @Override
                     public void onSuccess(BalanceModel balanceModel) {
-                        balanceText.setText(balanceModel.getBalance() + "");
+                        balanceText.setText(String.format("%.2f",balanceModel.getBalance()));
                         getRefreshController().refreshComplete();
                         getRefreshController().getContentView().setVisibility(View.VISIBLE);
                     }
