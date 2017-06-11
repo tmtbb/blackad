@@ -2,10 +2,7 @@ package com.yundian.blackcard.android.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.UserManager;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;

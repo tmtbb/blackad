@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yundian.blackcard.android.R;
@@ -42,6 +43,12 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
     @Nullable
     @BindView(R.id.toolbar_subtitle)
     protected TextView mToolbarSubTitle;
+    @Nullable
+    @BindView(R.id.toolbar_rightimage)
+    protected ImageView mToolbarRightImage;
+    @Nullable
+    @BindView(R.id.toolbar_lefttitle)
+    protected TextView mToolbarLeftTitle;
     protected LoaderLayout loaderLayout;
     protected View rootView;
     protected Context context;
@@ -73,6 +80,13 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
         if (mToolbarSubTitle != null) {
             mToolbarSubTitle.setText(subTitle);
             mToolbarSubTitle.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setLeftTitle(CharSequence subTitle) {
+        if (mToolbarLeftTitle != null) {
+            mToolbarLeftTitle.setText(subTitle);
+            mToolbarLeftTitle.setVisibility(View.VISIBLE);
         }
     }
 

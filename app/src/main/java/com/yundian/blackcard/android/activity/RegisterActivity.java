@@ -2,6 +2,7 @@ package com.yundian.blackcard.android.activity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -66,6 +67,7 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
 
     private static final int ITEM_COUNT_OF_PAGE = 8;
 
+
     @Override
     public void initData() {
         super.initData();
@@ -115,11 +117,16 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
         pageIndicator.setViewPager(viewPager, index);
     }
 
+
+
     @Override
     public void initView() {
         super.initView();
         yesCustomName.setSelected(true);
+        mToolbarRightImage.setVisibility(View.VISIBLE);
+        mToolbarRightImage.setBackgroundResource(R.mipmap.call_butler);
     }
+
 
     @Override
     protected boolean isShowBackButton() {
@@ -177,6 +184,16 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
                 bindPrivileges(viewPager.getCurrentItem());
                 registerInfo.setBlackcardInfo(blackcardInfo);
                 ((BaseAdapter) blackcardGridview.getAdapter()).notifyDataSetChanged();
+            }
+        });
+
+        mToolbarRightImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setData(Uri.parse("http://www.jingyingheika.com/"));
+                intent.setClass(RegisterActivity.this, WebViewActivity.class);
+                startActivity(intent);
             }
         });
     }

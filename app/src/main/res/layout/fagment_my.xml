@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="221dp"
             android:layout_margin="13dp"
-            android:background="@drawable/my_home_top_bg"
+            android:background="@mipmap/my_user_back"
             android:gravity="center"
             android:orientation="vertical">
 

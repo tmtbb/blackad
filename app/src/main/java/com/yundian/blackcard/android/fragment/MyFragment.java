@@ -101,8 +101,8 @@ public class MyFragment extends BaseFragment implements UserDetailManager.OnUser
                         break;
                     case 5:
                         Intent intent = new Intent();
-                        intent.putExtra("title", "关于我们");
-                        intent.putExtra("url", "http://app.jingyingheika.com/api/static/about.html");
+                        intent.putExtra(WebViewActivity.EXTRA_KEY_TITLE, "关于我们");
+                        intent.setData(Uri.parse("http://app.jingyingheika.com/static/about.html"));
                         intent.setClass(getActivity(), WebViewActivity.class);
                         startActivity(intent);
                         break;

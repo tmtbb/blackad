@@ -6,6 +6,7 @@ import com.yundian.blackcard.android.model.UploadInfo;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yaowang on 2017/5/11.
@@ -19,4 +20,6 @@ public interface ICommService {
     void validate(String phoneNum, String codeToken, String phoneCode, int codeType, OnAPIListener<Object> listener);
 
     void upload(List<String> paths, OnAPIListener<List<UploadInfo>> listener);
+
+    void sysLog(String event, Map<String,Object> map);
 }
