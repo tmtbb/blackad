@@ -53,6 +53,9 @@ public class CommServiceImpl extends OkHttpService<CommServiceImpl.RetrofitCommS
         @POST("/api/file/upload.json")
         Observable<DefResponse<List<UploadInfo>>> upload(@PartMap Map<String, RequestBody> map);
 
+        @FormUrlEncoded
+        @POST("/api/sys/log.josn")
+        Observable<DefResponse<Object>> sysLog(@Field("event") String event, @FieldMap Map<String, Object> map);
     }
 
     @Override
@@ -83,5 +86,10 @@ public class CommServiceImpl extends OkHttpService<CommServiceImpl.RetrofitCommS
             map.put("file\"; filename=", RequestBody.create(MediaType.parse("image/jpeg"), file));
         }
         setSubscribe(service.upload(map), new DefObserver<List<UploadInfo>>(listener));
+    }
+
+    @Override
+    public void sysLog(String event, Map<String, Object> map) {
+        setSubscribe(service.sysLog(event, map), new DefObserver<Object>(null));
     }
 }

@@ -86,13 +86,15 @@ public class MyPurseDetailAdapter extends BaseListViewAdapter<MyPurseDetailModel
         @Override
         protected void update(MyPurseDetailModel data) {
             if (data != null) {
+                String prefix ;
                 if (data.getAmount() > 0) {
                     amountText.setTextColor(context.getResources().getColor(R.color.color_1FCF55));
-                    amountText.setText("+￥" + data.getAmount());
+                    prefix = "+";
                 } else {
                     amountText.setTextColor(context.getResources().getColor(R.color.color_DB462E));
-                    amountText.setText("-￥" + data.getAmount() + "");
+                    prefix = "-";
                 }
+                amountText.setText(String.format(prefix +"￥%.2f",Math.abs(data.getAmount())));
                 tradeNameText.setText(data.getTradeName());
                 createTimeText.setText(TimeUtil.formatDate(data.getCreateTime()));
 

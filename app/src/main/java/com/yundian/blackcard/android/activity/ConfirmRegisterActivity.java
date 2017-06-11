@@ -2,6 +2,7 @@ package com.yundian.blackcard.android.activity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -126,10 +127,11 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
     @OnClick(R.id.show_agreement)
     protected void on(View view) {
         Intent intent = new Intent();
-        intent.putExtra("title", "精英黑卡会员协议");
-        intent.putExtra("url", "http://app.jingyingheika.com/api/static/UserAgreement.html");
+        intent.putExtra(WebViewActivity.EXTRA_KEY_TITLE, "精英黑卡会员协议");
+        intent.setData(Uri.parse("http://app.jingyingheika.com/static/UserAgreement.html"));
         intent.setClass(this, WebViewActivity.class);
         startActivity(intent);
+
     }
 
 }

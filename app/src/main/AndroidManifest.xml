@@ -116,7 +116,17 @@
 
         <activity
             android:name=".activity.ServiceMessageActivity"/>
-        <activity android:name=".activity.WebViewActivity"></activity>
+
+        <activity android:name=".activity.WebViewActivity" android:autoVerify="true"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http" android:host="*" />
+                <data android:scheme="https" android:host="*"/>
+            </intent-filter>
+        </activity>
 
 
         <activity

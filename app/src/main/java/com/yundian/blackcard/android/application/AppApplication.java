@@ -75,10 +75,16 @@ public class AppApplication extends Application {
             @Override
             public void onURLClicked(Context context, String url) {
 
-                //String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
-                String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170528185430788003/pay.html";
-                if (testUrl.startsWith("http://")) {
+// <<<<<<< HEAD
+                String testUrl = url;//"http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
+                if (testUrl.startsWith("http://app.jingyingheika.com/service/")) {
+// =======
+//                 //String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
+//                 String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170528185430788003/pay.html";
+//                 if (testUrl.startsWith("http://")) {
+// >>>>>>> 0f8aef0f63438fe0a79a502a8669fc86416703e0
                     testUrl = testUrl.substring(7, testUrl.length());
+                    testUrl =  "ydservice://" + testUrl;
                 }
                 Intent intent1 = new Intent(Intent.ACTION_VIEW);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

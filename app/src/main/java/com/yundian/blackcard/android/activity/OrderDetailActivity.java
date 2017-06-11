@@ -81,13 +81,14 @@ public class OrderDetailActivity extends BaseActivity {
         super.initView();
         setTitle("订单详情");
         contentView.setVisibility(View.INVISIBLE);
-        String dataString = getIntent().getDataString();
-        serviceNo = dataString.split("/")[dataString.split("/").length - 2];
+
     }
 
     @Override
     public void initData() {
         super.initData();
+        String dataString = getIntent().getDataString();
+        serviceNo = dataString.split("/")[dataString.split("/").length - 2];
         showLoader();
         NetworkAPIFactory.getTradeService().butlerserviceInfo(serviceNo, new OnAPIListener<ButlerserviceInfo>() {
             @Override
