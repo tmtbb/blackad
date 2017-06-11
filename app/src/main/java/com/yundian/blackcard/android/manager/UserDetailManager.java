@@ -44,8 +44,10 @@ public class UserDetailManager {
     }
 
     public void notifyUserDetailChanged(UserDetailModel userDetailModel) {
-        for (OnUserDetailUpdateListener listener : listenerList) {
-            listener.onUserDetailUpdate(userDetailModel);
+        if( userDetailModel != null ) {
+            for (OnUserDetailUpdateListener listener : listenerList) {
+                listener.onUserDetailUpdate(userDetailModel);
+            }
         }
     }
 
