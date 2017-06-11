@@ -35,6 +35,8 @@ public class AlertDialogFragment extends BaseDialogFragment {
     private boolean isHideCancel = false;
     private boolean isHideOk = false;
     private boolean isHideTitle = false;
+    private View.OnClickListener okClickListener;
+    private View.OnClickListener cancelClickListener;
 
 
     @Override
@@ -102,16 +104,29 @@ public class AlertDialogFragment extends BaseDialogFragment {
         return this;
     }
 
+    public AlertDialogFragment setOkClickListener(View.OnClickListener okClickListener) {
+        this.okClickListener = okClickListener;
+        return this;
+    }
+
+    public AlertDialogFragment setCancelClickListener(View.OnClickListener cancelClickListener) {
+        this.cancelClickListener = cancelClickListener;
+        return this;
+    }
 
     @OnClick({R.id.cancel, R.id.ok})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cancel:
                 dismiss();
+                if( cancelClickListener != null )
+                    cancelClickListener.onClick(view);
                 break;
             case R.id.ok:
                 dismiss();
-                break;
+                if( okClickListener != null )
+                    okClickListener.onClick(view);
+                    break;
         }
     }
 

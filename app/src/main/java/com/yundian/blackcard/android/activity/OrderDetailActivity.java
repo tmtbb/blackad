@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.constant.ActionConstant;
+import com.yundian.blackcard.android.fragment.AlertDialogFragment;
 import com.yundian.blackcard.android.model.AliPayInfo;
 import com.yundian.blackcard.android.model.BalanceModel;
 import com.yundian.blackcard.android.model.ButlerserviceInfo;
@@ -183,8 +184,9 @@ public class OrderDetailActivity extends BaseActivity {
                     if (((NetworkAPIException) ex).getErrorCode() == 10020) {
                         createAlertDialog();
                     }
+                } else {
+                    onShowError(ex);
                 }
-                onShowError(ex);
                 payInfo = new PayInfo();
                 payInfo.setPayType(payType);
                 payInfo.setTradeNo(serviceNo);
@@ -211,25 +213,38 @@ public class OrderDetailActivity extends BaseActivity {
 
 
     private void createAlertDialog() {
-        final AlertDialog alertDialog = new AlertDialog(context).builder()
+        AlertDialogFragment.AlertDialog()
                 .setTitle("提示")
-                .setCancelable(false)
-                .setMsg("你尚未设置支付密码，是否立即设置")
-                .setNegativeButton("取消", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                })
-                .setPositiveButton("确定", new View.OnClickListener() {
+                .setContent("你尚未设置支付密码，是否立即设置?")
+                .setOkClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(context, SetupPayPasswordActivity.class);
                         intent.putExtra(ActionConstant.IntentKey.PHONE, butlerserviceInfo.getServiceUserTel());
                         startActivity(intent);
                     }
-                });
-        alertDialog.show();
+                })
+                .show(getSupportFragmentManager());
+
+//        final AlertDialog alertDialog = new AlertDialog(context).builder()
+//                .setTitle("提示")
+//                .setCancelable(false)
+//                .setMsg("你尚未设置支付密码，是否立即设置")
+//                .setNegativeButton("取消", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                })
+//                .setPositiveButton("确定", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(context, SetupPayPasswordActivity.class);
+//                        intent.putExtra(ActionConstant.IntentKey.PHONE, butlerserviceInfo.getServiceUserTel());
+//                        startActivity(intent);
+//                    }
+//                });
+//        alertDialog.show();
     }
 
 

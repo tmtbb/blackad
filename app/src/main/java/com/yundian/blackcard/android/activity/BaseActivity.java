@@ -203,10 +203,16 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
         startActivityForResult(new Intent(context, clazz), requestCode);
     }
 
-    public void openSoftKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        view.requestFocus();
+    public void openSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        view.requestFocus();
         imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+    }
+
+    public void closeSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        view.requestFocus();
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
 

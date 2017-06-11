@@ -26,4 +26,9 @@
     <color name="actionsheet_blue">#037BFF</color>
     <color name="actionsheet_red">#FD4A2E</color>
     <color name="black">#000000</color>
+
+    <color name="pickerview_topbar_title">#000000</color><!--标题字体颜色-->
+    <color name="pickerview_timebtn_nor">#057dff</color><!--按钮未点击状态颜色-->
+    <color name="pickerview_timebtn_pre">#c2daf5</color><!--按钮点击状态颜色-->
+
 </resources>
