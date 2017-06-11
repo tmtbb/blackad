@@ -64,6 +64,9 @@ public class OrderDetailActivity extends BaseActivity {
     private String serviceNo;
     private ButlerserviceInfo butlerserviceInfo;
     private Dialog bottomDialog;
+    private PayInfo payInfo;
+    private BalanceModel balanceModel;
+    private final static String BUTLERSERVICE_PAY = "butlerservice_pay";
 
     @Override
     public int getLayoutId() {
@@ -134,9 +137,14 @@ public class OrderDetailActivity extends BaseActivity {
                         requestPayInfo(butlerserviceInfo.getServiceNo(), 1, "");
                         break;
                     case ActionConstant.Action.PAY_PURSE:
-                        Intent intent = new Intent(context, PursePayActivity.class);
-                        intent.putExtra(ActionConstant.IntentKey.PHONE,butlerserviceInfo.getServiceUserTel());
-                        startActivityForResult(intent, 0);
+                        if (butlerserviceInfo.getServiceAmount() > balanceModel.getBalance()) {
+                            showToast("你的账户余额不足，无法完成支付");
+                        } else {
+                            Intent intent = new Intent(context, PursePayActivity.class);
+                            intent.putExtra(ActionConstant.IntentKey.PHONE, butlerserviceInfo.getServiceUserTel());
+                            startActivityForResult(intent, 0);
+                        }
+
                         break;
                 }
             }
@@ -161,12 +169,13 @@ public class OrderDetailActivity extends BaseActivity {
 
             @Override
             public void onSuccess(BalanceModel balanceModel) {
+                OrderDetailActivity.this.balanceModel = balanceModel;
                 contentView.setCurrentAmount(balanceModel.getBalance());
             }
         });
     }
 
-    private void requestPayInfo(String serviceNo, int payType, String payPassword) {
+    private void requestPayInfo(final String serviceNo, final int payType, String payPassword) {
         NetworkAPIFactory.getTradeService().butlerservicePay(serviceNo, payType, payPassword, new OnAPIListener<PayInfo>() {
             @Override
             public void onError(Throwable ex) {
@@ -175,10 +184,18 @@ public class OrderDetailActivity extends BaseActivity {
                         createAlertDialog();
                     }
                 }
+                onShowError(ex);
+                payInfo = new PayInfo();
+                payInfo.setPayType(payType);
+                payInfo.setTradeNo(serviceNo);
+                payInfo.setPayTotalPrice(butlerserviceInfo.getServiceAmount());
+                NetworkAPIFactory.getCommService().payLog(BUTLERSERVICE_PAY, payInfo, ex);
+
             }
 
             @Override
             public void onSuccess(PayInfo payInfo) {
+                OrderDetailActivity.this.payInfo = payInfo;
                 if (payInfo.getPayType() == 1)
                     wxPay(payInfo);
                 else if (payInfo.getPayType() == 2)
@@ -215,6 +232,7 @@ public class OrderDetailActivity extends BaseActivity {
         alertDialog.show();
     }
 
+
     private void aliPay(PayInfo payInfo) {
         AliPayInfo aliPayInfo = payInfo.getAliPayInfo();
         AliPayUtil.pay(this, aliPayInfo, listener);
@@ -230,6 +248,7 @@ public class OrderDetailActivity extends BaseActivity {
         public void onError(Throwable ex) {
             onShowError(ex);
             payButton.setText("重新支付");
+            NetworkAPIFactory.getCommService().payLog(BUTLERSERVICE_PAY, payInfo, ex);
         }
 
         @Override
@@ -243,6 +262,7 @@ public class OrderDetailActivity extends BaseActivity {
     private void paySuccess() {
         if (bottomDialog.isShowing())
             bottomDialog.dismiss();
+        NetworkAPIFactory.getCommService().payLog(BUTLERSERVICE_PAY, payInfo, null);
         closeLoader();
         showToast("支付成功");
         initData();

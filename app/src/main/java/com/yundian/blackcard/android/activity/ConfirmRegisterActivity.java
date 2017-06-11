@@ -33,6 +33,7 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
     private PayInfo payInfo;
     @BindView(R.id.but_next)
     protected Button butNext;
+    private final static String REGISTER_PAY = "register_pay";
 
     @Override
     public void initData() {
@@ -108,12 +109,14 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
             @Override
             public void onError(Throwable ex) {
                 onShowError(ex);
+                NetworkAPIFactory.getCommService().payLog(REGISTER_PAY,payInfo,ex);
                 butNext.setText("重新支付");
             }
 
             @Override
             public void onSuccess(Boolean aBoolean) {
                 if (aBoolean) {
+                    NetworkAPIFactory.getCommService().payLog(REGISTER_PAY,payInfo,null);
                     closeLoader();
                     ToastUtils.show(ConfirmRegisterActivity.this, "注册成功");
                     setResult(RESULT_OK);

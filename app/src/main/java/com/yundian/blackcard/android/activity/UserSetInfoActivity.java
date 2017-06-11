@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
@@ -148,9 +149,15 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                         sexCell.update(userDetailModel.getSex());
                         companyCell.update(userDetailModel.getCompany());
                         positionCell.update(userDetailModel.getPosition());
-                        identityCardCell.update(StringUtils.replaceInfo(4, userDetailModel.getIdentityCard()));
+                        if (StringUtils.isNotEmpty(userDetailModel.getIdentityCard())) {
+                            identityCardCell.update(StringUtils.replaceInfo(4, userDetailModel.getIdentityCard()));
+                        } else {
+                            identityCardCell.getContentText().setText("");
+                            identityCardCell.getContentText().setEnabled(true);
+                        }
                         phoneNumCell.update(StringUtils.replaceInfo(3, userDetailModel.getPhoneNum()));
                         emailCell.update(userDetailModel.getEmail());
+                        getRefreshController().setPullDownRefreshEnabled(false);
                     }
                 });
             }
@@ -169,6 +176,12 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                 selectorHelper.pickImage(true, 1, true);
                 break;
             case R.id.toolbar_subtitle:
+                EditText editTexts[] = {nicknameCell.getContentText(), identityCardCell.getContentText()};
+                for (EditText editText : editTexts)
+                    if (StringUtils.isEmpty(editText.getText().toString())) {
+                        showToast(editText.getHint());
+                        return;
+                    }
                 showLoader();
                 NetworkAPIFactory.getUserService().userEdit(findModelByView(), new OnAPIListener<Object>() {
                     @Override

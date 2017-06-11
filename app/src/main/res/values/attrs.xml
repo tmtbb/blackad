@@ -16,6 +16,7 @@
             <enum name="visible" value="0" />
         </attr>
         <attr name="user_info_edit_clickable" format="boolean" />
+        <attr name="user_info_edit_hint" format="string|reference" />
 
     </declare-styleable>
 

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.yundian.blackcard.android.model.AliPayInfo;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
 import java.util.Map;
@@ -25,6 +26,7 @@ public class AliPayUtil {
     private static final int SDK_PAY_FLAG = 100;
     private static OnAPIListener<Boolean> onAPIListener;
     private static final String SDK_PAY_SUCCESS = "9000";
+    private static final String SDK_PAY_CANCEL = "6001";
 
     private static Handler handler = new Handler() {
         @Override
@@ -36,8 +38,11 @@ public class AliPayUtil {
                     String resultStatus = payResult.getResultStatus();
                     if (TextUtils.equals(resultStatus, SDK_PAY_SUCCESS)) {
                         onAPIListener.onSuccess(true);
+                    }
+                    if (TextUtils.equals(resultStatus, SDK_PAY_CANCEL)) {
+                        onAPIListener.onError(new NetworkAPIException(1, "支付取消"));
                     } else {
-                        onAPIListener.onError(new Throwable("支付失败"));
+                        onAPIListener.onError(new NetworkAPIException(Integer.parseInt(resultStatus), "支付失败"));
                     }
                     break;
                 }

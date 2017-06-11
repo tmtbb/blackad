@@ -59,6 +59,7 @@ public class ServiceMessageActivity extends BaseActivity {
         ysfUserInfo.data = "[\n" +
                 "        {\"key\":\"real_name\", \"value\":\"%s\"},\n" +
                 "        {\"key\":\"mobile_phone\", \"value\":\"%s\"},\n" +
+                "        {\"key\":\"avatar\", \"value\": \"%s\"},"  +
                 "        {\"key\":\"email\", \"hidden\":true},\n" +
                 "        {\"index\":0, \"key\":\"userID\", \"label\":\"用户ID\", \"value\":\"%s\"},\n" +
                 "        {\"index\":1, \"key\":\"blackCardNo\", \"label\":\"黑卡卡号\", \"value\":\"%s\"},\n" +
@@ -66,7 +67,7 @@ public class ServiceMessageActivity extends BaseActivity {
                 "        {\"index\":3, \"key\":\"privilegeName\", \"label\":\"服务类型\", \"value\":\"%s\"}\n" +
                 "]";
         ysfUserInfo.data = String.format(ysfUserInfo.data, userInfo.getName(),
-                userInfo.getPhoneNum(), userInfo.getUserId().toString(),
+                userInfo.getPhoneNum(),userInfo.getHeadUrl(), userInfo.getUserId().toString(),
                 userInfo.getBlackCardId().toString(), userInfo.getBlackCardName(), strTitle);
         Unicorn.setUserInfo(ysfUserInfo);
 

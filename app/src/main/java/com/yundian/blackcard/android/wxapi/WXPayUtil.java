@@ -64,9 +64,9 @@ public class WXPayUtil {
                         if (resp.errCode == 0) {
                             listener.onSuccess(true);
                         } else if (resp.errCode == -2) {
-                            listener.onError(new NetworkAPIException(-2, "取消支付"));
+                            listener.onError(new NetworkAPIException(1, "取消支付"));
                         } else if (resp.errCode == -1) {
-                            listener.onError(new NetworkAPIException(-1, "支付失败"));
+                            listener.onError(new NetworkAPIException(2, "支付失败"));
                         }
                     }
                 }
