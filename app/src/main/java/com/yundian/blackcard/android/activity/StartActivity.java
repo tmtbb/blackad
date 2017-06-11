@@ -5,17 +5,11 @@ import android.os.Handler;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.DeviceInfo;
+import com.yundian.blackcard.android.model.UpdateInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.DeviceUtils;
 import com.yundian.comm.util.SPUtils;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class StartActivity extends BaseActivity {
 
@@ -55,11 +49,12 @@ public class StartActivity extends BaseActivity {
 
             @Override
             public void onSuccess(DeviceInfo deviceInfo) {
-                if( deviceInfo.getDeviceKeyId() != null ) {
+                if (deviceInfo.getDeviceKeyId() != null) {
                     SPUtils.put(getApplicationContext(), "deviceKeyId", deviceInfo.getDeviceKeyId());
                     SPUtils.put(getApplicationContext(), "deviceKey", deviceInfo.getDeviceKey());
+                    NetworkAPIFactory.init(StartActivity.this);
                 }
-                NetworkAPIFactory.init(StartActivity.this);
+                checkAppVersion();
                 next(1000);
             }
         });
@@ -69,10 +64,24 @@ public class StartActivity extends BaseActivity {
     public void initData() {
         super.initData();
         NetworkAPIFactory.init(this);
-        if (!SPUtils.contains(this, "deviceKey")) {
-            deviceRegister();
-        } else {
-            next(1500);
-        }
+        deviceRegister();
+    }
+
+    private void checkAppVersion() {
+        Integer appVersionCode = Integer.parseInt(DeviceUtils.getVersionCode(context));
+        NetworkAPIFactory.getCommService().checkAppVersion(appVersionCode, new OnAPIListener<UpdateInfo>() {
+            @Override
+            public void onError(Throwable ex) {
+                ex.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(UpdateInfo updateInfo) {
+                if (updateInfo.getIsUpdate() == 1) {
+                    if (updateInfo.getIsForce() == 1) {
+                    }
+                }
+            }
+        });
     }
 }
