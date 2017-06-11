@@ -18,9 +18,11 @@ public class PayInfo {
     private String sign;
     private String tradeNo;
     private WXPayInfo wxPayInfo;
+    private AliPayInfo aliPayInfo;
     private int payType;
     private Double payTotalPrice;
     private String goodsName;
+    private String nonceStr;
 
     public String getSign() {
         return sign;
@@ -69,5 +71,22 @@ public class PayInfo {
     public PayInfo setWxPayInfo(WXPayInfo wxPayInfo) {
         this.wxPayInfo = wxPayInfo;
         return this;
+    }
+
+    public AliPayInfo getAliPayInfo() {
+        return aliPayInfo;
+    }
+
+    public PayInfo setAliPayInfo(AliPayInfo aliPayInfo) {
+        this.aliPayInfo = aliPayInfo;
+        return this;
+    }
+
+    public String getNonceStr() {
+        return nonceStr;
+    }
+
+    public void setNonceStr(String nonceStr) {
+        this.nonceStr = nonceStr;
     }
 }

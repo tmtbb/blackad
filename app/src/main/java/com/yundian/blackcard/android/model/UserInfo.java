@@ -20,21 +20,25 @@ public class UserInfo implements Serializable {
      * blackCardCustomName : YAO BANG
      */
 
-    private String blackCardNo;
+    private Long userId;
     private String phoneNum;
-    private Integer blackCardId;
-    private Integer userId;
     private String name;
+    private String fullName;
     private String blackCardName;
-    private Double blackcardCreditline;
+    private Integer blackCardId;
+    private String blackCardNo;
+    private String nickName;
+    private String headUrl;
     private String blackCardCustomName;
+    private Double blackcardCreditline;
+    private Double balance;
 
-    public String getBlackCardNo() {
-        return blackCardNo;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setBlackCardNo(String blackCardNo) {
-        this.blackCardNo = blackCardNo;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPhoneNum() {
@@ -45,28 +49,20 @@ public class UserInfo implements Serializable {
         this.phoneNum = phoneNum;
     }
 
-    public Integer getBlackCardId() {
-        return blackCardId;
-    }
-
-    public void setBlackCardId(Integer blackCardId) {
-        this.blackCardId = blackCardId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getBlackCardName() {
@@ -77,12 +73,36 @@ public class UserInfo implements Serializable {
         this.blackCardName = blackCardName;
     }
 
-    public Double getBlackcardCreditline() {
-        return blackcardCreditline;
+    public Integer getBlackCardId() {
+        return blackCardId;
     }
 
-    public void setBlackcardCreditline(Double blackcardCreditline) {
-        this.blackcardCreditline = blackcardCreditline;
+    public void setBlackCardId(Integer blackCardId) {
+        this.blackCardId = blackCardId;
+    }
+
+    public String getBlackCardNo() {
+        return blackCardNo;
+    }
+
+    public void setBlackCardNo(String blackCardNo) {
+        this.blackCardNo = blackCardNo;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 
     public String getBlackCardCustomName() {
@@ -91,5 +111,21 @@ public class UserInfo implements Serializable {
 
     public void setBlackCardCustomName(String blackCardCustomName) {
         this.blackCardCustomName = blackCardCustomName;
+    }
+
+    public Double getBlackcardCreditline() {
+        return blackcardCreditline;
+    }
+
+    public void setBlackcardCreditline(Double blackcardCreditline) {
+        this.blackcardCreditline = blackcardCreditline;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

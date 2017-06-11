@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/emptyView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/emptyIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/emptyContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emptyIcon"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="看来你撩妹的技术不咋的..."
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/emptyButton"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emptyContent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="添加好友"
+        android:visibility="gone" />
+
+    <!--android:background="@drawable/selector_yellow_btn"-->
+</RelativeLayout>

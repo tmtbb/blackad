@@ -1,11 +1,13 @@
 package com.yundian.blackcard.android.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.yundian.comm.listener.InitPageListener;
 import com.yundian.comm.listener.OnErrorListener;
@@ -19,7 +21,7 @@ import butterknife.Unbinder;
  * Created by yaowang on 2017/5/10.
  */
 
-public abstract class BaseFragment extends Fragment implements InitPageListener , OnErrorListener {
+public abstract class BaseFragment extends Fragment implements InitPageListener, OnErrorListener {
 
     protected View rootView;
     protected Unbinder unbinder;
@@ -69,5 +71,13 @@ public abstract class BaseFragment extends Fragment implements InitPageListener 
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    protected void next(Class clazz) {
+        startActivity(new Intent(getContext(), clazz));
+    }
+
+    protected void showToast(CharSequence toast) {
+        Toast.makeText(getContext(), toast, Toast.LENGTH_SHORT).show();
     }
 }

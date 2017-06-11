@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.yundian.blackcard.android.networkapi.okhttp.BlackcardServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.CommServiceImpl;
+import com.yundian.blackcard.android.networkapi.okhttp.TradeServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.UserServiceImpl;
 import com.yundian.comm.annotation.Service;
 import com.yundian.comm.networkapi.config.NetworkAPIConfig;
@@ -73,5 +74,8 @@ public class NetworkAPIFactory extends ServiceManage {
 
     public static IBlackcardService getBlackcardService() {
         return new BlackcardServiceImpl();
+    }
+    public static ITradeService getTradeService() {
+        return new TradeServiceImpl();
     }
 }

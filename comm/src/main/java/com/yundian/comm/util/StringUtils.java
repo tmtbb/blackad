@@ -1,5 +1,7 @@
 package com.yundian.comm.util;
 
+import android.text.TextUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -49,6 +51,19 @@ public class StringUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String replaceInfo(int count, String info) {
+        if (TextUtils.isEmpty(info))
+            return info;
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(info.substring(0, count));
+        for (int i = 0; i < info.length() - count; i++) {
+            stringBuffer.append("*");
+
+        }
+        return stringBuffer.toString();
+
     }
 
 
