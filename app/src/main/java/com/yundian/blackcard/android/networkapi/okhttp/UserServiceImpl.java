@@ -126,8 +126,7 @@ public class UserServiceImpl extends OkHttpService<UserServiceImpl.RetrofitUserS
     public void userEdit(UserDetailModel model, OnAPIListener<Object> listener) {
 
         Map<String, Object> map = new HashMap<String, Object>();
-        if (!TextUtils.isEmpty(model.getPosition()))
-            map.put("position", model.getPosition());
+        map.put("position", model.getPosition());
         map.put("company", model.getCompany());
         map.put("sex", model.getSex());
         map.put("identityCard", model.getIdentityCard());
