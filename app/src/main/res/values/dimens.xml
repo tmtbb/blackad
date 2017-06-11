@@ -15,4 +15,8 @@
     <dimen name="textsize_16">16sp</dimen>
     <dimen name="textsize_18">18sp</dimen>
     <dimen name="textsize_20">20sp</dimen>
+    <dimen name="pickerview_textsize">16sp</dimen><!--选择器的内容文字大小-->
+    <dimen name="pickerview_topbar_btn_textsize">16sp</dimen><!--选择器确定和取消按钮的文字大小-->
+    <dimen name="pickerview_topbar_height">44dp</dimen><!--选择器的标题栏高度-->
+    <dimen name="pickerview_topbar_title_textsize">18sp</dimen><!--标题字体大小-->
 </resources>

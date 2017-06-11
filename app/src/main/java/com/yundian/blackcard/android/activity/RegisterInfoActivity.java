@@ -245,6 +245,7 @@ public class RegisterInfoActivity extends BaseActivity {
 
     @OnClick(R.id.province_city)
     public void onViewClicked() {
+        closeSoftKeyboard();
         if( pickerView == null ) {
             pickerView = new OptionsPickerView(this);
             pickerView.setPicker(provinceInfos, cityList, districtList, true);
