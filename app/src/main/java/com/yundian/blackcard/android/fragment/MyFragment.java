@@ -121,9 +121,11 @@ public class MyFragment extends BaseFragment implements UserDetailManager.OnUser
 
     @Override
     public void onUserDetailUpdate(UserDetailModel model) {
-        if( model != null ) {
-            username.setText(model.getFullName());
-            Glide.with(this).load(model.getHeadUrl()).centerCrop().placeholder(R.mipmap.user_head_def).into(headerIcon);
+        if (model != null) {
+            if (username != null)
+                username.setText(model.getFullName());
+            if (headerIcon != null)
+                Glide.with(this).load(model.getHeadUrl()).centerCrop().placeholder(R.mipmap.user_head_def).into(headerIcon);
         }
     }
 }

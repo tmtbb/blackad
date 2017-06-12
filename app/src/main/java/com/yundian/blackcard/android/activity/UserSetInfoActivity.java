@@ -170,7 +170,9 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
         switch (view.getId()) {
             case R.id.logoutText:
                 SPUtils.remove(UserSetInfoActivity.this, "UserToken");
-                next(LoginActivity.class);
+                Intent intent = new Intent(context,LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.headerLayout:
                 selectorHelper.pickImage(true, 1, true);
