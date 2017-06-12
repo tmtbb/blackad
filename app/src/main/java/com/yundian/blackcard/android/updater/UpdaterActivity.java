@@ -84,7 +84,7 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
 
 
         // title
-        ((TextView) findViewById(R.id.content)).setText(
+        ((TextView) findViewById(R.id.title)).setText(
                 intent.getStringExtra(EXTRA_STRING_TITLE));
 
         // content
@@ -99,9 +99,6 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
 
         // ok button
         downloadBtn = (Button) findViewById(R.id.ok);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) downloadBtn.getLayoutParams();
-        layoutParams.setMargins(0, 0, 0, DisplayUtil.dip2px(5, this));
-        findViewById(R.id.buttonLayout).setLayoutParams(layoutParams);
         downloadBtn.setOnClickListener(this);
 
 

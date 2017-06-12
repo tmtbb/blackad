@@ -124,6 +124,6 @@
     <style name="Theme.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@null</item>
     </style>
 </resources>
