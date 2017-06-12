@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.yundian.blackcard.android.networkapi.okhttp.BlackcardServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.CommServiceImpl;
-import com.yundian.blackcard.android.networkapi.okhttp.TradeServiceImpl;
+import com.yundian.blackcard.android.networkapi.okhttp.RetrofitTradeService;
 import com.yundian.comm.networkapi.config.NetworkAPIConfig;
 import com.yundian.comm.networkapi.invocationhandler.RetrofitServiceProxy;
 import com.yundian.comm.networkapi.manage.ServiceManage;
@@ -25,6 +25,7 @@ import java.util.Map;
 public class NetworkAPIFactory extends ServiceManage {
 
     private static NetworkAPIFactory networkAPIFactory;
+
     public NetworkAPIFactory() {
         super(new RetrofitServiceProxy());
     }
@@ -74,7 +75,8 @@ public class NetworkAPIFactory extends ServiceManage {
     public static IBlackcardService getBlackcardService() {
         return new BlackcardServiceImpl();
     }
+
     public static ITradeService getTradeService() {
-        return new TradeServiceImpl();
+       return networkAPIFactory.getService(ITradeService.class);
     }
 }

@@ -10,7 +10,12 @@ import android.view.MenuItem;
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.fragment.HomeFragment;
 import com.yundian.blackcard.android.fragment.MyFragment;
+import com.yundian.blackcard.android.model.UpdateInfo;
 import com.yundian.blackcard.android.model.UserInfo;
+import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
+import com.yundian.blackcard.android.updater.AppUpdater;
+import com.yundian.comm.networkapi.listener.OnAPIListener;
+import com.yundian.comm.util.DeviceUtils;
 
 import butterknife.BindView;
 
@@ -40,7 +45,7 @@ public class MainActivity extends BaseActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(UserInfo.class.getName(), userInfo);
                     intent.putExtras(bundle);
-                    intent.putExtra("title","管家");
+                    intent.putExtra("title", "管家");
                     startActivity(intent);
                     break;
 
@@ -81,8 +86,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void replacenFragment(Fragment fragment) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment).commit();
     }
 
     @Override
@@ -94,6 +99,33 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initData() {
         super.initData();
+        checkAppVersion();
+    }
+
+
+    private void checkAppVersion() {
+        Integer appVersionCode = Integer.parseInt(DeviceUtils.getVersionCode(context));
+        NetworkAPIFactory.getCommService().checkAppVersion(appVersionCode, new OnAPIListener<UpdateInfo>() {
+            @Override
+            public void onError(Throwable ex) {
+                ex.printStackTrace();
+            }
+
+            @Override
+            public void onSuccess(UpdateInfo updateInfo) {
+                if (updateInfo.getIsUpdate() == 1) {
+                    new AppUpdater.Builder(context)
+                            .url(updateInfo.getUrl())
+                            .title("版本更新啦")
+                            .content(updateInfo.getDescription())
+                            .app(getString(R.string.app_name))
+                            .description(getString(R.string.app_name))
+                            .force(updateInfo.getIsForce() == 1)
+                            .build()
+                            .update();
+                }
+            }
+        });
     }
 
 }

@@ -97,6 +97,9 @@
             android:name=".activity.ShopDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
+            android:name=".activity.GuidActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
             android:name=".activity.PursePayActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
@@ -144,6 +147,29 @@
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
 
+        <activity
+            android:name=".updater.UpdaterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Dialog"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <receiver
+            android:name=".updater.UpdaterReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
