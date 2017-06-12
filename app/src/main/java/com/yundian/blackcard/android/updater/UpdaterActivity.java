@@ -1,17 +1,23 @@
 package com.yundian.blackcard.android.updater;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -23,7 +29,9 @@ import android.widget.Toast;
 
 
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.fragment.AlertDialogFragment;
 import com.yundian.comm.util.DisplayUtil;
+import com.yundian.comm.util.ToastUtils;
 
 import java.io.File;
 
@@ -40,6 +48,7 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
 
     public static final String EXTRA_STRING_APP_NAME = "extra_download_app_name";
     public static final String EXTRA_STRING_DESCRIPTION = "extra_download_description";
+    private static final int PERMISSION_REQUESTCODE = 100;
 
     // internal data
     private int status;
@@ -149,7 +158,7 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
             switch (status) {
                 case STATUS_RETRY:
                 case STATUS_DOWNLOAD:
-                    downloadApk();
+                    checkSelfPermission();
                     break;
                 case STATUS_INSTALL:
                     installApk(apkUri);
@@ -295,6 +304,28 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
             }
         }
         return null;
+    }
+
+    private void checkSelfPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUESTCODE);
+        }else {
+            downloadApk();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUESTCODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    downloadApk();
+                } else {
+                    ToastUtils.show(this, "需要提供写入文件权限才能更新应用");
+                }
+                break;
+        }
     }
 }
 

@@ -17,15 +17,9 @@
         android:textColor="@color/color_white"
         android:textSize="@dimen/textsize_14" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="288dp"
-        android:layout_height="230dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="260dp"
-        android:src="@mipmap/icon_guid1" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
@@ -76,4 +70,13 @@
             android:textSize="@dimen/textsize_18" />
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="288dp"
+        android:layout_height="230dp"
+        android:layout_above="@id/bottomView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@mipmap/icon_guid1" />
 </RelativeLayout>
