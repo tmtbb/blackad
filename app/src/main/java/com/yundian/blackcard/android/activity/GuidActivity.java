@@ -51,6 +51,7 @@ public class GuidActivity extends BaseActivity {
         views.add(inflater.inflate(R.layout.ly_guidview_1, null));
         views.add(inflater.inflate(R.layout.ly_guidview_2, null));
         views.add(inflater.inflate(R.layout.ly_guidview_3, null));
+        views.add(inflater.inflate(R.layout.ly_guidview_4, null));
         viewPager.setAdapter(new GuidAdapter());
         viewPager.setCurrentItem(0);
     }

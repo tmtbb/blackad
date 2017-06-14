@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -11,7 +11,8 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:layout_above="@+id/navigation"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -21,7 +22,8 @@
         android:background="@color/color_f8f8f8"
         app:itemIconTint="@color/selector_blue"
         app:itemTextColor="@color/selector_blue"
-
-        app:menu="@menu/navigation" />
-
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/navigation">
+        <include layout="@layout/ly_badge" android:id="@+id/service_message_badge" android:visibility="gone"/>
+    </android.support.design.widget.BottomNavigationView>
+</RelativeLayout>

@@ -16,21 +16,15 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.yundian.blackcard.android.R;
-import com.yundian.blackcard.android.fragment.AlertDialogFragment;
-import com.yundian.comm.util.DisplayUtil;
 import com.yundian.comm.util.ToastUtils;
 
 import java.io.File;
@@ -102,6 +96,7 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
 
         // cancel button
         cancelBtn = (Button) findViewById(R.id.cancel);
+        cancelBtn.setText(R.string.app_updater_download_later);
         cancelBtn.setVisibility(force ? View.GONE : View.VISIBLE);
         findViewById(R.id.button_line).setVisibility(force ? View.GONE : View.VISIBLE);
         cancelBtn.setOnClickListener(this);
@@ -109,6 +104,7 @@ public class UpdaterActivity extends Activity implements View.OnClickListener {
         // ok button
         downloadBtn = (Button) findViewById(R.id.ok);
         downloadBtn.setOnClickListener(this);
+        downloadBtn.setText(R.string.app_updater_download_now);
 
 
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);

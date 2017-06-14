@@ -58,7 +58,7 @@ public class FileUtils {
 
     public static Uri getFileUrl(Context context, File file) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
+            return FileProvider.getUriForFile(context, context.getPackageName(), file);
         } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT
                 && android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             return Uri.fromFile(file);

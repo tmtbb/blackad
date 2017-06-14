@@ -30,5 +30,5 @@
     <color name="pickerview_topbar_title">#000000</color><!--标题字体颜色-->
     <color name="pickerview_timebtn_nor">#057dff</color><!--按钮未点击状态颜色-->
     <color name="pickerview_timebtn_pre">#c2daf5</color><!--按钮点击状态颜色-->
-
+    <color name="checkupdatelibrary_update_button">#434343</color>
 </resources>

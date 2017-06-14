@@ -5,9 +5,7 @@ import android.os.Handler;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.DeviceInfo;
-import com.yundian.blackcard.android.model.UpdateInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
-import com.yundian.blackcard.android.updater.AppUpdater;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.DeviceUtils;
 import com.yundian.comm.util.SPUtils;

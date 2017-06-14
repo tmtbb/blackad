@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
@@ -7,9 +8,10 @@
         android:title="@string/title_home" />
 
     <item
+        app:actionLayout="@layout/ly_badge"
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/tab_icon_1_sel"
-        android:title="@string/title_housekeeper" />
+        android:title="@string/title_housekeeper" ></item>
 
     <item
         android:id="@+id/navigation_notifications"
