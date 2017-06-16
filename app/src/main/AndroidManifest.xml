@@ -152,15 +152,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Dialog"></activity>
 
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
 
         <receiver
             android:name=".updater.UpdaterReceiver"
@@ -170,6 +161,9 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+
+        <service android:name="com.qiangxi.checkupdatelibrary.service.DownloadService"/>
+
     </application>
 
 </manifest>

@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="会员额度"
+                android:text="信用额度"
                 android:textColor="#A6A6A6"
                 android:textSize="@dimen/textsize_14" />
 

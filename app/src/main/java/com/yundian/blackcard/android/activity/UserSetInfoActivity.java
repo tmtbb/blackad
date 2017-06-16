@@ -178,7 +178,7 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                 selectorHelper.pickImage(true, 1, true);
                 break;
             case R.id.toolbar_subtitle:
-                EditText editTexts[] = {nicknameCell.getContentText(), identityCardCell.getContentText()};
+                EditText editTexts[] = {nicknameCell.getContentText(), identityCardCell.getContentText(),emailCell.getContentText()};
                 for (EditText editText : editTexts)
                     if (StringUtils.isEmpty(editText.getText().toString())) {
                         showToast(editText.getHint());

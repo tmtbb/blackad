@@ -2,9 +2,9 @@ package com.yundian.blackcard.android.networkapi;
 
 import android.content.Context;
 
+import com.yundian.blackcard.android.BuildConfig;
 import com.yundian.blackcard.android.networkapi.okhttp.BlackcardServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.CommServiceImpl;
-import com.yundian.blackcard.android.networkapi.okhttp.RetrofitTradeService;
 import com.yundian.comm.networkapi.config.NetworkAPIConfig;
 import com.yundian.comm.networkapi.invocationhandler.RetrofitServiceProxy;
 import com.yundian.comm.networkapi.manage.ServiceManage;
@@ -49,7 +49,8 @@ public class NetworkAPIFactory extends ServiceManage {
 
         String deviceKey = SPUtils.get(context, "deviceKey", "24BFA1509B794899834AA9E24B447322").toString();
 
-        final NetworkAPIConfig networkAPIConfig = NetworkAPIConfig.Builder().setBaseUrl("http://101.37.82.111:9999/")
+        final NetworkAPIConfig networkAPIConfig = NetworkAPIConfig.Builder()
+                .setBaseUrl(BuildConfig.SERVER_HOST)
                 .setCommParameter(commParameter)
                 .setSignCalculate(new DefSignCalculateImpl(deviceKey)).build();
 
@@ -77,6 +78,6 @@ public class NetworkAPIFactory extends ServiceManage {
     }
 
     public static ITradeService getTradeService() {
-       return networkAPIFactory.getService(ITradeService.class);
+        return networkAPIFactory.getService(ITradeService.class);
     }
 }

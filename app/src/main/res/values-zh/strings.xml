@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">精英管家</string>
-    <string name="title_home">黑卡</string>
+    <string name="title_home">服务</string>
     <string name="title_housekeeper">管家</string>
     <string name="title_my">我的</string>
     <string name="title_activity_register">申请办理黑卡</string>
@@ -27,4 +27,15 @@
     <string name="pay_sure_text">确认充值</string>
     <string name="line_apply_text">在线申请</string>
     <string name="home_user_title" formatted="false">尊贵的 %s %s，您好。</string>
+
+
+    <string name="app_updater_download_later">暂不更新</string>
+    <string name="app_updater_download_now">马上更新</string>
+    <string name="app_updater_app_market">应用市场</string>
+    <string name="app_updater_downloading">正在下载…</string>
+    <string name="app_updater_download_failed">下载失败：%d</string>
+    <string name="app_updater_dir_not_found">找不到下载目录 - %s</string>
+    <string name="app_updater_install">安装</string>
+    <string name="app_updater_retry">重试下载</string>
+
 </resources>

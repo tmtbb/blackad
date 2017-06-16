@@ -35,65 +35,58 @@ public class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Unicorn.init(this, "9bcdb2182bde2835e2b0e7fc72a39e68", options(), new UnicornImageLoader() {
-
-            @Nullable
-            @Override
-            public Bitmap loadImageSync(String uri, int width, int height) {
-                return null;
-            }
-
-            @Override
-            public void loadImage(String uri, int width, int height, final ImageLoaderListener listener) {
-                Glide.with(AppApplication.this).load(uri).asBitmap().into(new SimpleTarget<Bitmap>(width, height) {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        if (listener != null) {
-                            listener.onLoadComplete(resource);
-                        }
-                    }
-
-                    @Override
-                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                        if (listener != null) {
-                            listener.onLoadFailed(e);
-                        }
-                    }
-                });
-            }
-        });
+//        Unicorn.init(this, "9bcdb2182bde2835e2b0e7fc72a39e68", options(), new UnicornImageLoader() {
+//
+//            @Nullable
+//            @Override
+//            public Bitmap loadImageSync(String uri, int width, int height) {
+//                return null;
+//            }
+//
+//            @Override
+//            public void loadImage(String uri, int width, int height, final ImageLoaderListener listener) {
+//                Glide.with(AppApplication.this).load(uri).asBitmap().into(new SimpleTarget<Bitmap>(width, height) {
+//                    @Override
+//                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                        if (listener != null) {
+//                            listener.onLoadComplete(resource);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+//                        if (listener != null) {
+//                            listener.onLoadFailed(e);
+//                        }
+//                    }
+//                });
+//            }
+//        });
     }
 
-    private YSFOptions options() {
-        YSFOptions options = new YSFOptions();
-        options.statusBarNotificationConfig = new StatusBarNotificationConfig();
-        options.savePowerConfig = new SavePowerConfig();
-        options.uiCustomization = new UICustomization();
-        options.uiCustomization.titleBarStyle = 1;
-        options.uiCustomization.titleBackgroundColor = getResources().getColor(R.color.colorPrimary);
-        options.onMessageItemClickListener = new OnMessageItemClickListener() {
-            @Override
-            public void onURLClicked(Context context, String url) {
-
-// <<<<<<< HEAD
-                String testUrl = url;//"http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
-                if (testUrl.startsWith("http://app.jingyingheika.com/service/")) {
-// =======
-//                 //String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170609131549180000/pay.html";
-//                 String testUrl = "http://ydservice://app.jingyingheika.com/service/0/20170528185430788003/pay.html";
-//                 if (testUrl.startsWith("http://")) {
-// >>>>>>> 0f8aef0f63438fe0a79a502a8669fc86416703e0
-                    testUrl = testUrl.substring(7, testUrl.length());
-                    testUrl =  "ydservice://" + testUrl;
-                }
-                Intent intent1 = new Intent(Intent.ACTION_VIEW);
-                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent1.setData(Uri.parse(testUrl));
-                startActivity(intent1);
-
-
-            }
-        };
-        return options;
-    }
+//    private YSFOptions options() {
+//        YSFOptions options = new YSFOptions();
+//        options.statusBarNotificationConfig = new StatusBarNotificationConfig();
+//        options.savePowerConfig = new SavePowerConfig();
+//        options.uiCustomization.rightAvatar = "";
+//        options.uiCustomization = new UICustomization();
+//        options.uiCustomization.titleBarStyle = 1;
+//        options.uiCustomization.titleBackgroundColor = getResources().getColor(R.color.colorPrimary);
+//        options.onMessageItemClickListener = new OnMessageItemClickListener() {
+//            @Override
+//            public void onURLClicked(Context context, String url) {
+//
+//                if (url.startsWith("http://app.jingyingheika.com/service/")) {
+//                    url = url.substring(7, url.length());
+//                    url = "ydservice://" + url;
+//                }
+//                Intent intent1 = new Intent(Intent.ACTION_VIEW);
+//                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent1.setData(Uri.parse(url));
+//                startActivity(intent1);
+//
+//            }
+//        };
+//        return options;
+//    }
 }
