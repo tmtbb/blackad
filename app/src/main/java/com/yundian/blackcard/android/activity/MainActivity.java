@@ -11,8 +11,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.internal.BottomNavigationPresenter;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -31,6 +35,7 @@ import com.qiyukf.unicorn.api.UnicornImageLoader;
 import com.qiyukf.unicorn.api.UnreadCountChangeListener;
 import com.qiyukf.unicorn.api.YSFOptions;
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.fragment.DynamicFragment;
 import com.yundian.blackcard.android.fragment.HomeFragment;
 import com.yundian.blackcard.android.fragment.MyFragment;
 import com.yundian.blackcard.android.model.UpdateInfo;
@@ -38,8 +43,10 @@ import com.yundian.blackcard.android.model.UserInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.DeviceUtils;
+import com.yundian.comm.util.LogUtils;
 
 import java.io.File;
+import java.lang.reflect.Field;
 
 import butterknife.BindView;
 
@@ -54,7 +61,7 @@ public class MainActivity extends BaseActivity {
     protected BottomNavigationView navigationView;
     @BindView(R.id.service_message_badge)
     protected View serviceMessageBadge;
-    private Fragment[] fragments = new Fragment[2];
+    private Fragment[] fragments = new Fragment[3];
     private ForceUpdateDialog forceupdatedialog;
     private UpdateDialog updateDialog;
 
@@ -80,8 +87,12 @@ public class MainActivity extends BaseActivity {
                     startActivity(intent);
                     break;
 
-                case com.yundian.blackcard.android.R.id.navigation_notifications: {
+                case R.id.navigation_dynamic: {
                     showFragment(1);
+                    return true;
+                }
+                case com.yundian.blackcard.android.R.id.navigation_notifications: {
+                    showFragment(2);
                     return true;
                 }
             }
@@ -132,9 +143,31 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         super.initView();
         showFragment(0);
-
-
+        disableShiftMode();
     }
+
+    public void disableShiftMode() {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigationView.getChildAt(0);
+        try {
+            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+            shiftingMode.setAccessible(true);
+            shiftingMode.setBoolean(menuView, false);
+            shiftingMode.setAccessible(false);
+            for (int i = 0; i < menuView.getChildCount(); i++) {
+                BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
+                //noinspection RestrictedApi
+                item.setShiftingMode(false);
+                // set once again checked value, so view will be updated
+                //noinspection RestrictedApi
+                item.setChecked(item.getItemData().isChecked());
+            }
+        } catch (NoSuchFieldException e) {
+            LogUtils.showException(e);
+        } catch (IllegalAccessException e) {
+            LogUtils.showException(e);
+        }
+    }
+
 
     private void showFragment(Integer index) {
         if (fragments[index] == null) {
@@ -143,6 +176,9 @@ public class MainActivity extends BaseActivity {
                     fragments[index] = new HomeFragment();
                     break;
                 case 1:
+                    fragments[index] = new DynamicFragment();
+                    break;
+                case 2:
                     fragments[index] = new MyFragment();
                     break;
             }

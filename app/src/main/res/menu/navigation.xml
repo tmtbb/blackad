@@ -8,10 +8,16 @@
         android:title="@string/title_home" />
 
     <item
-        app:actionLayout="@layout/ly_badge"
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/tab_icon_1_sel"
-        android:title="@string/title_housekeeper" ></item>
+        android:title="@string/title_housekeeper"
+        app:actionLayout="@layout/ly_badge"></item>
+
+    <item
+        android:id="@+id/navigation_dynamic"
+        android:icon="@drawable/tab_icon_3_sel"
+        android:title="@string/title_dynamic" />
+
 
     <item
         android:id="@+id/navigation_notifications"
