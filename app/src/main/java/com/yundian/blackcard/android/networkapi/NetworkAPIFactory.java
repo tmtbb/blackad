@@ -5,6 +5,8 @@ import android.content.Context;
 import com.yundian.blackcard.android.BuildConfig;
 import com.yundian.blackcard.android.networkapi.okhttp.BlackcardServiceImpl;
 import com.yundian.blackcard.android.networkapi.okhttp.CommServiceImpl;
+import com.yundian.blackcard.android.networkapi.okhttp.DynamicService;
+import com.yundian.blackcard.android.networkapi.okhttp.RetrofitTradeService;
 import com.yundian.comm.networkapi.config.NetworkAPIConfig;
 import com.yundian.comm.networkapi.invocationhandler.RetrofitServiceProxy;
 import com.yundian.comm.networkapi.manage.ServiceManage;
@@ -66,6 +68,9 @@ public class NetworkAPIFactory extends ServiceManage {
 
     public static ICommService getCommService() {
         return new CommServiceImpl();
+    }
+    public static IDynamicService getDynamicService() {
+        return networkAPIFactory.getService(IDynamicService.class);
     }
 
 

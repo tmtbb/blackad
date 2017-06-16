@@ -164,7 +164,7 @@ public class MainActivity extends BaseActivity {
             public void onUnreadCountChange(int count) {
                 serviceMessageBadge.setVisibility(View.VISIBLE);
             }
-        },true);
+        }, true);
     }
 
     @Override
@@ -172,7 +172,6 @@ public class MainActivity extends BaseActivity {
         super.initData();
         checkAppVersion();
     }
-
 
     private void checkAppVersion() {
         Integer appVersionCode = Integer.parseInt(DeviceUtils.getVersionCode(context));
@@ -242,7 +241,7 @@ public class MainActivity extends BaseActivity {
 
 
     private YSFOptions options() {
-        UserInfo userInfo =  (UserInfo)getIntent().getSerializableExtra(UserInfo.class.getName());
+        UserInfo userInfo = (UserInfo) getIntent().getSerializableExtra(UserInfo.class.getName());
         YSFOptions options = new YSFOptions();
         options.statusBarNotificationConfig = new StatusBarNotificationConfig();
         options.savePowerConfig = new SavePowerConfig();
