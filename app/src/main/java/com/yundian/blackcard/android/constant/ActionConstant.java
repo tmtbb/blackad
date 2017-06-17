@@ -17,6 +17,8 @@ public interface ActionConstant {
         int PAY_PURSE = PAY_CLOSE + 1;
         int PAY_ALI = PAY_PURSE + 1;
         int PAY_WEIXIN = PAY_ALI + 1;
+        int DYNAMIC_PIC = PAY_WEIXIN + 1;
+        int DYNAMIC_DETAIL = DYNAMIC_PIC + 1;
     }
 
     interface IntentKey {
@@ -25,5 +27,6 @@ public interface ActionConstant {
         String SHOP = "SHOP";
         String SMS_CODE = "SMS_CODE";
         String PAY_PASSWORD = "PAY_PASSWORD";
+        String DYNAMIC = "DYNAMIC";
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_img"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_12">
+
+    <ImageView
+        android:id="@+id/imv_img1"
+        style="@style/dynamic_content_img" />
+
+    <ImageView
+        android:id="@+id/imv_img2"
+        style="@style/dynamic_content_img"
+        android:layout_marginLeft="@dimen/space_4"
+        android:layout_toRightOf="@id/imv_img1" />
+
+    <ImageView
+        android:id="@+id/imv_img3"
+        style="@style/dynamic_content_img"
+        android:layout_marginLeft="@dimen/space_4"
+        android:layout_toRightOf="@id/imv_img2" />
+
+    <ImageView
+        android:id="@+id/imv_img4"
+        style="@style/dynamic_content_img"
+        android:layout_below="@id/imv_img1"
+        android:layout_marginTop="@dimen/space_4" />
+
+    <ImageView
+        android:id="@+id/imv_img5"
+        style="@style/dynamic_content_img"
+        android:layout_alignTop="@id/imv_img4"
+        android:layout_marginLeft="@dimen/space_4"
+        android:layout_toRightOf="@id/imv_img4" />
+
+    <ImageView
+        android:id="@+id/imv_img6"
+        style="@style/dynamic_content_img"
+        android:layout_alignTop="@id/imv_img4"
+        android:layout_marginLeft="@dimen/space_4"
+        android:layout_toRightOf="@id/imv_img5" />
+
+    <ImageView
+        android:id="@+id/imv_img7"
+        style="@style/dynamic_content_img"
+        android:layout_below="@id/imv_img4"
+        android:layout_marginTop="@dimen/space_4" />
+
+    <ImageView
+        android:id="@+id/imv_img8"
+        style="@style/dynamic_content_img"
+        android:layout_alignTop="@id/imv_img7"
+        android:layout_marginLeft="@dimen/space_4"
+        android:layout_toRightOf="@id/imv_img7" />
+
+    <ImageView
+        android:id="@+id/imv_img9"
+        style="@style/dynamic_content_img"
+        android:layout_alignTop="@id/imv_img7"
+        android:layout_marginLeft="@dimen/space_4"
+        android:layout_toRightOf="@id/imv_img8" />
+
+</RelativeLayout>

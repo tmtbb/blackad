@@ -47,16 +47,16 @@ public class TimeUtil {
         return format.format(new Date(time));
     }
 
-    public static String getFormatTime(long timesamp, boolean isDynamic) {
+    public static String getFormatTime(long timesamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd");
         Date today = new Date(System.currentTimeMillis());
         Date otherDay = new Date(timesamp);
         int temp = Integer.parseInt(sdf.format(today))
                 - Integer.parseInt(sdf.format(otherDay));
-        return getTime(temp, timesamp, isDynamic);
+        return getTime(temp, timesamp);
     }
 
-    private static String getTime(int temp, long timesamp, boolean isDynamic) {
+    private static String getTime(int temp, long timesamp) {
         String result = "";
         switch (temp) {
             case 0:
@@ -69,11 +69,7 @@ public class TimeUtil {
                 result = "前天 " + getHourAndMin(timesamp);
                 break;
             default:
-                if (isDynamic) {
-                    result = temp + "天前 ";
-                } else {
-                    result = getNewFormatTime(timesamp);
-                }
+                result = temp + "天前 ";
                 break;
         }
         return result;

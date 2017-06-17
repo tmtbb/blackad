@@ -5,6 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="space_12">12dp</dimen>
     <dimen name="space_18">18dp</dimen>
+    <dimen name="space_4">4dp</dimen>
     <dimen name="space_20">20dp</dimen>
     <dimen name="space_24">24dp</dimen>
     <dimen name="height_44">44dp</dimen>
@@ -19,4 +20,6 @@
     <dimen name="pickerview_topbar_btn_textsize">16sp</dimen><!--选择器确定和取消按钮的文字大小-->
     <dimen name="pickerview_topbar_height">44dp</dimen><!--选择器的标题栏高度-->
     <dimen name="pickerview_topbar_title_textsize">18sp</dimen><!--标题字体大小-->
+
+    <dimen name="dynamic_image_size">80dp</dimen>
 </resources>

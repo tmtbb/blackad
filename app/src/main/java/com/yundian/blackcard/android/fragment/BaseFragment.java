@@ -1,8 +1,10 @@
 package com.yundian.blackcard.android.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,13 +27,20 @@ public abstract class BaseFragment extends Fragment implements InitPageListener,
 
     protected View rootView;
     protected Unbinder unbinder;
+    protected Context context;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
-        unbinder = ButterKnife.bind(this, rootView);
+
+        onInit();
         initView();
         initListener();
         initData();
@@ -51,6 +60,9 @@ public abstract class BaseFragment extends Fragment implements InitPageListener,
         onShowError(ex);
     }
 
+    protected void onInit() {
+        unbinder = ButterKnife.bind(this, rootView);
+    }
 
     @Override
     public void initView() {

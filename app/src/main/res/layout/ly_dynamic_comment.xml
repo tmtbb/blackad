@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f8f8f8"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+
+        <com.yundian.blackcard.android.view.RoundImageView
+            android:id="@+id/userIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/space_12"
+            android:src="@mipmap/user_head_def"
+            app:roundHeight="16dp"
+            app:roundWidth="16dp" />
+
+        <android.support.v4.widget.Space
+            android:id="@+id/centerView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/userIcon" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/centerView"
+            android:layout_toRightOf="@id/userIcon"
+            android:text="用户名"
+            android:textColor="@color/color_070707"
+            android:textSize="@dimen/textsize_12" />
+
+        <TextView
+            android:id="@+id/createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/centerView"
+            android:layout_toRightOf="@id/userIcon"
+            android:text="2017-03-03  15:32"
+            android:textColor="@color/color_a6a6a6"
+            android:textSize="@dimen/textsize_10" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="31dp"
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/contentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="3"
+            android:text="这个世界会有一个人、不需要你等待和追逐、 你只要敢于跨出一小步、剩余的九十九步，他 会背着你走完——有上海的卡友一起的去北..."
+            android:textColor="@color/color_434343"
+            android:textSize="@dimen/textsize_14" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -74,7 +74,7 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
         @POST("/api/circle/message/like/list.json")
         @FormUrlEncoded
         @ServiceMethod("likeList")
-        Observable<DefResponse<Object>> likeList(@Field("page") int page, @Field("circleMessageId") String circleMessageId);
+        Observable<DefResponse<List<DynamicLikeModel>>> likeList(@Field("page") int page, @Field("circleMessageId") String circleMessageId);
 
         @POST("/api/circle/message/comment/add.json")
         @FormUrlEncoded
@@ -85,7 +85,7 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
         @POST("/api/circle/message/comment/list.json")
         @FormUrlEncoded
         @ServiceMethod("commentList")
-        Observable<DefResponse<Object>> commentList(@Field("page") int page, @Field("circleMessageId") String circleMessageId);
+        Observable<DefResponse<List<DynamicCommentModel>>> commentList(@Field("page") int page, @Field("circleMessageId") String circleMessageId);
 
 
         @POST("/api/circle/message/report.json")
@@ -141,7 +141,7 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
     }
 
     @Override
-    public void commentList(int page, String circleMessageId, OnAPIListener<DynamicCommentModel> listener) {
+    public void commentList(int page, String circleMessageId, OnAPIListener<List<DynamicCommentModel>> listener) {
         setSubscribe(service.commentList(page, circleMessageId), new DefObserver<>(listener));
     }
 

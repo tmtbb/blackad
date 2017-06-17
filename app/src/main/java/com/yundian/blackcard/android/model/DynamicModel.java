@@ -1,5 +1,6 @@
 package com.yundian.blackcard.android.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @for your attention : none
  * @revise : none
  */
-public class DynamicModel {
+public class DynamicModel extends BaseModel {
 
     private long createTime;
     private String nickName;
@@ -23,7 +24,7 @@ public class DynamicModel {
     private int isLike;
     private int likeNum;
     private int commentNum;
-    private List<CircleMessageImgs> circleMessageImgs;
+    private List<CircleMessageImgModel> circleMessageImgs;
 
 
     public long getCreateTime() {
@@ -106,32 +107,12 @@ public class DynamicModel {
         this.commentNum = commentNum;
     }
 
-    public List<CircleMessageImgs> getCircleMessageImgs() {
+    public List<CircleMessageImgModel> getCircleMessageImgs() {
         return circleMessageImgs;
     }
 
-    public void setCircleMessageImgs(List<CircleMessageImgs> circleMessageImgs) {
+    public void setCircleMessageImgs(List<CircleMessageImgModel> circleMessageImgs) {
         this.circleMessageImgs = circleMessageImgs;
     }
 
-    private class CircleMessageImgs {
-        private String img;
-        private String size;
-
-        public String getImg() {
-            return img;
-        }
-
-        public void setImg(String img) {
-            this.img = img;
-        }
-
-        public String getSize() {
-            return size;
-        }
-
-        public void setSize(String size) {
-            this.size = size;
-        }
-    }
 }

@@ -102,7 +102,7 @@ public interface IDynamicService {
      * @param listener
      */
     @ServiceMethod("commentList")
-    void commentList(int page, String circleMessageId, OnAPIListener<DynamicCommentModel> listener);
+    void commentList(int page, String circleMessageId, OnAPIListener<List<DynamicCommentModel>> listener);
 
 
     /**

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <TextView
+            android:id="@+id/topText"
+            android:layout_width="41dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_dynamic_top"
+            android:gravity="center"
+            android:text="置顶"
+            android:textColor="@color/color_e3a63f"
+            android:textSize="@dimen/textsize_12" />
+
+        <com.yundian.blackcard.android.view.RoundImageView
+            android:id="@+id/userIcon"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/space_12"
+            android:src="@mipmap/user_head_def"
+            app:roundHeight="21dp"
+            app:roundWidth="21dp" />
+
+        <android.support.v4.widget.Space
+            android:id="@+id/centerView"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/userIcon" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/centerView"
+            android:layout_toRightOf="@id/userIcon"
+            android:text="用户名"
+            android:textColor="@color/color_070707"
+            android:textSize="@dimen/textsize_14" />
+
+        <TextView
+            android:id="@+id/createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/centerView"
+            android:layout_toRightOf="@id/userIcon"
+            android:text="2017-03-03  15:32"
+            android:textColor="@color/color_a6a6a6"
+            android:textSize="@dimen/textsize_12" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="41dp"
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/contentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="3"
+            android:text="这个世界会有一个人、不需要你等待和追逐、 你只要敢于跨出一小步、剩余的九十九步，他 会背着你走完——有上海的卡友一起的去北..."
+            android:textColor="@color/color_434343"
+            android:textSize="@dimen/textsize_14" />
+
+        <android.support.v4.widget.Space
+            android:id="@+id/spaceView"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.yundian.blackcard.android.view.DynamicContentImgView
+            android:id="@+id/dynamicContentImgView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.yundian.blackcard.android.view.DrawableTextView
+                android:id="@+id/praiseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="3416"
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_12"
+                app:leftDrawable="@mipmap/icon_praise"
+                app:leftDrawableHeight="14dp"
+                app:leftDrawableWidth="14dp" />
+
+            <com.yundian.blackcard.android.view.DrawableTextView
+                android:id="@+id/commentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@id/praiseText"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="3416"
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_12"
+                app:leftDrawable="@mipmap/icon_comment"
+                app:leftDrawableHeight="14dp"
+                app:leftDrawableWidth="14dp" />
+
+            <com.yundian.blackcard.android.view.DrawableTextView
+                android:id="@+id/moreText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="18dp"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="更多"
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_12"
+                app:leftDrawable="@mipmap/icon_more"
+                app:leftDrawableHeight="14dp"
+                app:leftDrawableWidth="14dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
