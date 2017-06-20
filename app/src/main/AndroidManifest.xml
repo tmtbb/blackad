@@ -104,7 +104,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.DynamicDetailActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:configChanges="keyboardHidden|orientation|screenSize|fontScale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".activity.DynamicCommentActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -113,7 +115,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.ArticleDetailActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:configChanges="keyboardHidden|orientation|screenSize|fontScale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".activity.ArticleCommentActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />

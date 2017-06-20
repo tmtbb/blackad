@@ -59,6 +59,6 @@ public interface IArticleService {
      * @param comment
      * @param listener
      */
-    void articleComment(String articleId, String comment, OnAPIListener<Object> listener);
+    void articleComment(String articleId, String comment, OnAPIListener<DynamicCommentModel> listener);
 
 }

@@ -80,7 +80,7 @@
             android:textColor="@color/color_434343"
             android:textSize="@dimen/textsize_14" />
 
-        <android.support.v4.widget.Space
+        <View
             android:id="@+id/spaceView"
             android:layout_width="match_parent"
             android:layout_height="10dp" />

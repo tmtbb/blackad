@@ -103,8 +103,9 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
 
                     @Override
                     public void onSuccess(List<DynamicCommentModel> dynamicCommentModels) {
-                        dynamicCommentHeaderView.setVisibility(dynamicCommentModels.size() != 0 ? View.VISIBLE : View.GONE);
                         getRefreshController().refreshComplete(dynamicCommentModels);
+                        dynamicCommentHeaderView.setVisibility(dynamicDetailAdapter.getCount() != 0 ? View.VISIBLE : View.GONE);
+
                     }
                 });
             }
@@ -131,8 +132,9 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
             DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
             dynamicDetailController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
             DynamicCommentModel dynamicCommentModel = (DynamicCommentModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC_COMMENT);
-            dynamicDetailAdapter.getList().add(0, dynamicCommentModel);
+            dynamicDetailAdapter.getList().add(dynamicCommentModel);
             dynamicDetailAdapter.notifyDataSetChanged();
+            listView.setSelection(dynamicDetailAdapter.getCount());
         }
 
     }

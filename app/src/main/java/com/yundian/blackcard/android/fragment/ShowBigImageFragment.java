@@ -56,12 +56,6 @@ public class ShowBigImageFragment extends BaseFragment implements PhotoViewAttac
         imageIndex = getArguments().getInt(ActionConstant.IntentKey.IMG_BIG_INDEX);
         view_progress.setVisibility(View.VISIBLE);
         imv_big.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        String url = imageUrl.replace("small", "big");
-        if (url.indexOf("http://") == -1) {
-            url = "file://" + url;
-        }
-        final String bigUrl = url;
-
 
         Glide.with(context).load(imageUrl).placeholder(new ColorDrawable(getResources().getColor(R.color.black))).listener(new RequestListener<String, GlideDrawable>() {
             @Override
@@ -75,7 +69,7 @@ public class ShowBigImageFragment extends BaseFragment implements PhotoViewAttac
                 imv_big.setImageDrawable(resource);
                 return false;
             }
-        }).centerCrop().into(imv_big);
+        }).fitCenter().into(imv_big);
 
 
     }

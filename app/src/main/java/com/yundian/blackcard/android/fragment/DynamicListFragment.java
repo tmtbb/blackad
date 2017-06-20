@@ -99,9 +99,8 @@ public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<Dy
                 && resultCode == RESULT_OK) {
             DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
             if (dynamicModel != null) {
-//                dynamicListAdapter.getList().add(0, dynamicModel);
-//                dynamicListAdapter.notifyDataSetChanged();
-                getRefreshController().refreshBegin();
+                dynamicListAdapter.getList().add(0, dynamicModel);
+                dynamicListAdapter.notifyDataSetChanged();
             }
         }
     }

@@ -49,7 +49,7 @@ public class ArticleService extends OkHttpService<ArticleService.RetrofitArticle
         @POST("/api/article/comment/add.json")
         @FormUrlEncoded
         @ServiceMethod("articleComment")
-        Observable<DefResponse<Object>> articleComment(@Field("articleId") String articleId, @Field("comment") String comment);
+        Observable<DefResponse<DynamicCommentModel>> articleComment(@Field("articleId") String articleId, @Field("comment") String comment);
 
     }
 
@@ -69,7 +69,7 @@ public class ArticleService extends OkHttpService<ArticleService.RetrofitArticle
     }
 
     @Override
-    public void articleComment(String articleId, String comment, OnAPIListener<Object> listener) {
+    public void articleComment(String articleId, String comment, OnAPIListener<DynamicCommentModel> listener) {
         setSubscribe(service.articleComment(articleId, comment), new DefObserver<>(listener));
     }
 

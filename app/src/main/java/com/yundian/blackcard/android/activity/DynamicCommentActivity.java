@@ -73,13 +73,6 @@ public class DynamicCommentActivity extends BaseActivity {
                 Intent intent = new Intent();
                 dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
                 intent.putExtra(ActionConstant.IntentKey.DYNAMIC, dynamicModel);
-                //TODO
-                model.setComment(lengthEditText.getContent());
-                model.setCreateTime(new Date().getTime());
-                model.setHeadUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1497852122901&di=022955ac877b92ff0af24328b2a041d8&imgtype=0&src=http%3A%2F%2Fimg1c.xgo-img.com.cn%2Fpics%2F1563%2F1562268.jpg");
-                model.setNickName("chuang.Wu");
-                model.setUserId(123456);
-
                 intent.putExtra(ActionConstant.IntentKey.DYNAMIC_COMMENT, model);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -87,4 +80,9 @@ public class DynamicCommentActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void finish() {
+        closeSoftKeyboard();
+        super.finish();
+    }
 }

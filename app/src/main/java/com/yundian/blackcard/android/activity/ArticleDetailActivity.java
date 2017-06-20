@@ -65,8 +65,9 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
         webHeaderView = new ArticleWebHeaderView(context);
         listView.addHeaderView(webHeaderView);
         commentHeaderView = new DynamicCommentHeaderView(context);
+        commentHeaderView.setVisibility(View.GONE);
         listView.addHeaderView(commentHeaderView);
-
+        listView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -74,8 +75,7 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
         super.initData();
         articleModel = (ArticleModel) getIntent().getSerializableExtra(ActionConstant.IntentKey.ARTICLE);
         setTitle(articleModel.getTitle());
-        showLoader();
-        webHeaderView.update(articleModel.getDetailUrl());
+
     }
 
     @Override
@@ -85,23 +85,46 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
             @Override
             public void onCloseLoader() {
                 closeLoader();
+                listView.setVisibility(View.VISIBLE);
             }
         });
         setOnRefreshPageListener(new OnRefreshPageListener() {
             @Override
-            public void onRefresh(int pageIndex) {
-                NetworkAPIFactory.getArticleService().commentList(pageIndex, articleModel.getId(), new OnAPIListener<List<DynamicCommentModel>>() {
-                    @Override
-                    public void onError(Throwable ex) {
-                        getRefreshController().refreshError(ex);
-                    }
+            public void onRefresh(final int pageIndex) {
+                if (pageIndex == 1) {
+                    showLoader();
+                    NetworkAPIFactory.getArticleService().articleDetail(articleModel.getId(), new OnAPIListener<ArticleModel>() {
+                        @Override
+                        public void onError(Throwable ex) {
+                            onShowError(ex);
+                        }
 
-                    @Override
-                    public void onSuccess(List<DynamicCommentModel> dynamicCommentModels) {
-                        commentHeaderView.update(" (" + dynamicCommentModels.size() + "条) ");
-                        getRefreshController().refreshComplete(dynamicCommentModels);
-                    }
-                });
+                        @Override
+                        public void onSuccess(ArticleModel articleModel) {
+                            webHeaderView.update(articleModel.getDetailUrl());
+                            requestCommentList(pageIndex);
+                        }
+                    });
+                } else {
+                    requestCommentList(pageIndex);
+                }
+
+            }
+        });
+    }
+
+    public void requestCommentList(final int pageIndex) {
+        NetworkAPIFactory.getArticleService().commentList(pageIndex, articleModel.getId(), new OnAPIListener<List<DynamicCommentModel>>() {
+            @Override
+            public void onError(Throwable ex) {
+                getRefreshController().refreshError(ex);
+            }
+
+            @Override
+            public void onSuccess(List<DynamicCommentModel> dynamicCommentModels) {
+                getRefreshController().refreshComplete(dynamicCommentModels);
+                commentHeaderView.update(" (" + dynamicDetailAdapter.getCount() + "条) ");
+                commentHeaderView.setVisibility(dynamicDetailAdapter.getCount() != 0 ? View.VISIBLE : View.GONE);
             }
         });
     }
@@ -116,9 +139,13 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ActionConstant.Action.ARTICLE_COMMENT_REQUEST
                 && resultCode == RESULT_OK) {
-            String content = data.getStringExtra(ActionConstant.IntentKey.ARTICLE_COMMENT);
-            if (!TextUtils.isEmpty(content))
-                getRefreshController().refreshBegin();
+            DynamicCommentModel model = (DynamicCommentModel) data.getSerializableExtra(ActionConstant.IntentKey.ARTICLE_COMMENT);
+            if (model != null) {
+                dynamicDetailAdapter.getList().add(model);
+                dynamicDetailAdapter.notifyDataSetChanged();
+                listView.setSelection(dynamicDetailAdapter.getCount());
+            }
+
         }
     }
 }

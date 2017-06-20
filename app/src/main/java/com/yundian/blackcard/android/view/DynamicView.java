@@ -54,7 +54,7 @@ public class DynamicView extends BaseDataFrameLayout<DynamicModel> {
     @BindView(R.id.moreText)
     protected TextView moreText;
     @BindView(R.id.spaceView)
-    protected Space spaceView;
+    protected View spaceView;
 
     public DynamicView(Context context) {
         super(context);
@@ -84,6 +84,11 @@ public class DynamicView extends BaseDataFrameLayout<DynamicModel> {
             if (!TextUtils.isEmpty(data.getMessage())) {
                 contentText.setText(data.getMessage());
                 contentText.setVisibility(VISIBLE);
+                if(data.getCircleMessageImgs().size()==0){
+                    spaceView.setVisibility(VISIBLE);
+                }else {
+                    spaceView.setVisibility(GONE);
+                }
             } else {
                 contentText.setVisibility(GONE);
             }

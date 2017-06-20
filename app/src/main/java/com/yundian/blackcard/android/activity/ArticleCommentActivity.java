@@ -57,22 +57,27 @@ public class ArticleCommentActivity extends BaseActivity {
             showToast("请输入评论内容");
             return;
         }
-        NetworkAPIFactory.getArticleService().articleComment(articleModel.getId(), lengthEditText.getContent(), new OnAPIListener<Object>() {
+        NetworkAPIFactory.getArticleService().articleComment(articleModel.getId(), lengthEditText.getContent(), new OnAPIListener<DynamicCommentModel>() {
             @Override
             public void onError(Throwable ex) {
                 onShowError(ex);
             }
 
             @Override
-            public void onSuccess(Object model) {
+            public void onSuccess(DynamicCommentModel model) {
                 closeSoftKeyboard();
                 Intent intent = new Intent();
 
-                intent.putExtra(ActionConstant.IntentKey.ARTICLE_COMMENT, lengthEditText.getContent());
+                intent.putExtra(ActionConstant.IntentKey.ARTICLE_COMMENT, model);
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
     }
 
+    @Override
+    public void finish() {
+        closeSoftKeyboard();
+        super.finish();
+    }
 }
