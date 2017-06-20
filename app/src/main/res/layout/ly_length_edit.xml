@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/commentEdit"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="写下您的评论..."
+        android:maxLength="300"
+        android:paddingBottom="13dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="20dp"
+        android:textColor="@color/color_434343"
+        android:textColorHint="@color/color_a6a6a6"
+        android:textSize="@dimen/textsize_14" />
+
+    <TextView
+        android:id="@+id/countText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="13dp"
+        android:gravity="right"
+        android:text="0/300"
+        android:textColor="@color/color_E4A63F"
+        android:textSize="@dimen/textsize_12" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_d7d7d7" />
+
+</LinearLayout>

@@ -23,8 +23,8 @@ import butterknife.BindView;
  * @for your attention : none
  * @revise : none
  */
-public class DynamicAdapter extends BaseListViewAdapter<DynamicModel> {
-    public DynamicAdapter(Context context) {
+public class DynamicListAdapter extends MicroUpdateListViewAdapter<DynamicModel> {
+    public DynamicListAdapter(Context context) {
         super(context);
     }
 
@@ -54,7 +54,7 @@ public class DynamicAdapter extends BaseListViewAdapter<DynamicModel> {
             dynamicView.setOnChildViewClickListener(new OnChildViewClickListener() {
                 @Override
                 public void onChildViewClick(View childView, int action, Object obj) {
-                    onItemChildViewClick(childView, action);
+                    onItemChildViewClick(childView, action, obj);
                 }
             });
         }
@@ -64,5 +64,13 @@ public class DynamicAdapter extends BaseListViewAdapter<DynamicModel> {
             if (data != null)
                 dynamicView.update(data);
         }
+    }
+
+    @Override
+    protected boolean compareEqual(DynamicModel t1, DynamicModel t2) {
+        if (t1 != null && t2 != null) {
+            return t1.getId().equals(t2.getId());
+        }
+        return false;
     }
 }

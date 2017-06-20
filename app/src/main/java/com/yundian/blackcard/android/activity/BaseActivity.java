@@ -89,6 +89,12 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
             mToolbarLeftTitle.setVisibility(View.VISIBLE);
         }
     }
+    public void setRightImage(int resId) {
+        if (mToolbarRightImage != null) {
+            mToolbarRightImage.setImageResource(resId);
+            mToolbarRightImage.setVisibility(View.VISIBLE);
+        }
+    }
 
     protected boolean isShowBackButton() {
         return false;

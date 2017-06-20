@@ -79,7 +79,7 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
         @POST("/api/circle/message/comment/add.json")
         @FormUrlEncoded
         @ServiceMethod("commentAdd")
-        Observable<DefResponse<Object>> commentAdd(@Field("circleMessageId") String circleMessageId, @Field("comment") String comment);
+        Observable<DefResponse<DynamicCommentModel>> commentAdd(@Field("circleMessageId") String circleMessageId, @Field("comment") String comment);
 
 
         @POST("/api/circle/message/comment/list.json")
@@ -104,7 +104,7 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
         } else {
             for (int i = 0; i < file.size(); i++) {
                 File f = new File(file.get(i));
-                map.put("file\"; filename=\"" + f.getAbsolutePath(), RequestBody.create(MediaType.parse("image/*"), f));
+                map.put("file\"; filename=" + i, RequestBody.create(MediaType.parse("image/jpeg"), f));
             }
             setSubscribe(service.dynamicAdd(circleId, message, map), new DefObserver<>(listener));
         }
@@ -136,7 +136,7 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
     }
 
     @Override
-    public void commentAdd(String circleMessageId, String comment, OnAPIListener<Object> listener) {
+    public void commentAdd(String circleMessageId, String comment, OnAPIListener<DynamicCommentModel> listener) {
         setSubscribe(service.commentAdd(circleMessageId, comment), new DefObserver<>(listener));
     }
 

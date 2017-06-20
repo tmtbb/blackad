@@ -69,6 +69,7 @@ public class NetworkAPIFactory extends ServiceManage {
     public static ICommService getCommService() {
         return new CommServiceImpl();
     }
+
     public static IDynamicService getDynamicService() {
         return networkAPIFactory.getService(IDynamicService.class);
     }
@@ -84,5 +85,9 @@ public class NetworkAPIFactory extends ServiceManage {
 
     public static ITradeService getTradeService() {
         return networkAPIFactory.getService(ITradeService.class);
+    }
+
+    public static IArticleService getArticleService() {
+        return networkAPIFactory.getService(IArticleService.class);
     }
 }

@@ -105,6 +105,24 @@
         <activity
             android:name=".activity.DynamicDetailActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.DynamicCommentActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.DynamicAddActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ArticleDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ArticleCommentActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".activity.ShowBigImageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|fontScale"
+            android:screenOrientation="portrait" />
+
 
         <activity
             android:name=".activity.OrderDetailActivity"
@@ -120,17 +138,24 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activity.ServiceMessageActivity"/>
+        <activity android:name=".activity.ServiceMessageActivity" />
 
-        <activity android:name=".activity.WebViewActivity" android:autoVerify="true"
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:autoVerify="true"
             android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="http" android:host="*" />
-                <data android:scheme="https" android:host="*"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:scheme="http" />
+                <data
+                    android:host="*"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 
@@ -140,15 +165,13 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
 
         <activity
             android:name=".updater.UpdaterActivity"
@@ -165,7 +188,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.qiangxi.checkupdatelibrary.service.DownloadService"/>
+        <service android:name="com.qiangxi.checkupdatelibrary.service.DownloadService" />
 
     </application>
 

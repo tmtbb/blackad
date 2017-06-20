@@ -9,7 +9,7 @@ package com.yundian.blackcard.android.model;
  * @for your attention : none
  * @revise : none
  */
-public class DynamicCommentModel {
+public class DynamicCommentModel extends BaseModel{
 
     private long createTime;
     private String nickName;

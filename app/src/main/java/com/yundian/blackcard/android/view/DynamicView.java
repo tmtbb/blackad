@@ -16,6 +16,7 @@ import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.DynamicModel;
 import com.yundian.blackcard.android.util.TimeUtil;
+import com.yundian.comm.listener.OnChildViewClickListener;
 import com.yundian.comm.ui.view.BaseDataFrameLayout;
 import com.yundian.comm.util.DisplayUtil;
 import com.yundian.comm.util.ToastUtils;
@@ -71,7 +72,7 @@ public class DynamicView extends BaseDataFrameLayout<DynamicModel> {
             Glide.with(context).load(data.getHeadUrl()).placeholder(R.mipmap.user_head_def).centerCrop().into(userIcon);
 
             //is top
-            topText.setVisibility("1".equals(data.getIsTop()) ? VISIBLE : GONE);
+            topText.setVisibility(1 == data.getIsTop() ? VISIBLE : GONE);
 
             //username
             userName.setText(data.getNickName());
@@ -120,22 +121,33 @@ public class DynamicView extends BaseDataFrameLayout<DynamicModel> {
         return R.layout.ly_dynamic;
     }
 
-    @OnClick(value = {R.id.praiseText, R.id.commentText, R.id.moreText,R.id.rootLayout})
+    @Override
+    protected void initListener() {
+        super.initListener();
+        dynamicContentImgView.setOnChildViewClickListener(new OnChildViewClickListener() {
+            @Override
+            public void onChildViewClick(View childView, int action, Object obj) {
+                DynamicView.this.onChildViewClick(childView, action, obj);
+            }
+        });
+    }
+
+    @OnClick(value = {R.id.praiseText, R.id.commentText, R.id.moreText, R.id.rootLayout})
     protected void onClick(View view) {
         switch (view.getId()) {
             case R.id.rootLayout:
-               onChildViewClick(view, ActionConstant.Action.DYNAMIC_DETAIL);
+                onChildViewClick(view, ActionConstant.Action.DYNAMIC_DETAIL);
                 break;
             case R.id.praiseText:
-                ToastUtils.show(context, "点赞");
+                onChildViewClick(view, ActionConstant.Action.DYNAMIC_PRAISE);
                 break;
 
             case R.id.commentText:
-                ToastUtils.show(context, "评论");
+                onChildViewClick(view, ActionConstant.Action.DYNAMIC_COMMENT);
                 break;
 
             case R.id.moreText:
-                ToastUtils.show(context, "更多");
+                onChildViewClick(view, ActionConstant.Action.DYNAMIC_MORE);
                 break;
         }
     }

@@ -3,6 +3,7 @@
         android:layout_width="301dp"
         android:layout_height="wrap_content"
         android:background="@drawable/alert_bg"
+        android:minWidth="301dp"
         android:layout_gravity="center"
         android:orientation="vertical">
 

@@ -92,7 +92,7 @@ public interface IDynamicService {
      * @param listener
      */
     @ServiceMethod("commentAdd")
-    void commentAdd(String circleMessageId, String comment, OnAPIListener<Object> listener);
+    void commentAdd(String circleMessageId, String comment, OnAPIListener<DynamicCommentModel> listener);
 
     /**
      * 评论列表

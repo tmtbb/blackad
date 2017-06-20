@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/rootLayout"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_12"
+        android:orientation="vertical"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="13dp">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="掏出来，才有戏"
+                android:textColor="@color/color_434343"
+                android:textSize="@dimen/textsize_16" />
+
+            <TextView
+                android:id="@+id/createTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_12"
+                android:layout_marginTop="3dp"
+                android:text="2017-04-19 12:32"
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_12" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="@dimen/space_12"
+                android:background="@color/color_a6a6a6"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/contentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="3dp"
+                android:maxLines="3"
+                android:text="好莱坞流行着这样一句话：“当你不知道穿什么的时 候，穿ARMANI肯定没错。”这群身处时尚界塔尖的 人们都是ARMANI的追随者，那么其他人有什么理..."
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginBottom="@dimen/space_12"
+                android:layout_marginTop="@dimen/space_12"
+                android:background="#d7d7d7" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="阅读全文"
+                    android:textColor="@color/color_434343"
+                    android:textSize="@dimen/textsize_14" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_more" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

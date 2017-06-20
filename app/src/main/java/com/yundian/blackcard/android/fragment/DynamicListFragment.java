@@ -2,11 +2,12 @@ package com.yundian.blackcard.android.fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.ListView;
 
 import com.yundian.blackcard.android.R;
-import com.yundian.blackcard.android.activity.DynamicDetailActivity;
-import com.yundian.blackcard.android.adapter.DynamicAdapter;
+import com.yundian.blackcard.android.adapter.DynamicListAdapter;
 import com.yundian.blackcard.android.constant.ActionConstant;
+import com.yundian.blackcard.android.controller.DynamicListController;
 import com.yundian.blackcard.android.fragment.base.BaseRefreshAbsListControllerFragment;
 import com.yundian.blackcard.android.model.DynamicModel;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
@@ -16,6 +17,10 @@ import com.yundian.comm.listener.OnRefreshPageListener;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
 import java.util.List;
+
+import butterknife.BindView;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * @author : created by chuangWu
@@ -28,7 +33,10 @@ import java.util.List;
  */
 public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<DynamicModel> {
 
-    private DynamicAdapter dynamicAdapter;
+    private DynamicListAdapter dynamicListAdapter;
+    private DynamicListController dynamicListController;
+    @BindView(R.id.contentView)
+    protected ListView contentView;
 
     @Override
     public int getLayoutId() {
@@ -36,8 +44,15 @@ public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<Dy
     }
 
     @Override
+    protected void onRegisterController() {
+        super.onRegisterController();
+        dynamicListController = new DynamicListController(context, contentView, dynamicListAdapter);
+        registerController(DynamicListFragment.class.getSimpleName(), dynamicListController, false);
+    }
+
+    @Override
     protected IListAdapter<DynamicModel> createAdapter() {
-        return dynamicAdapter = new DynamicAdapter(context);
+        return dynamicListAdapter = new DynamicListAdapter(context);
     }
 
 
@@ -61,16 +76,33 @@ public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<Dy
             }
         });
 
-        dynamicAdapter.setOnItemChildViewClickListener(new OnItemChildViewClickListener() {
+        dynamicListAdapter.setOnItemChildViewClickListener(new OnItemChildViewClickListener() {
             @Override
             public void onItemChildViewClick(View childView, int position, int action, Object obj) {
-                DynamicModel dynamicModel = dynamicAdapter.getItem(position);
+                DynamicModel dynamicModel = dynamicListAdapter.getItem(position);
                 if (dynamicModel != null) {
-                    Intent intent = new Intent(context, DynamicDetailActivity.class);
-                    intent.putExtra(ActionConstant.IntentKey.DYNAMIC, dynamicModel);
-                    startActivity(intent);
+                    dynamicListController.onItemChildViewClick(childView, action, dynamicModel, obj);
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ActionConstant.Action.DYNAMIC_COMMENT_REQUEST
+                && resultCode == RESULT_OK) {
+            DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
+            if (dynamicModel != null)
+                dynamicListController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
+        } else if (requestCode == ActionConstant.Action.DYNAMIC_RELEASE_REQUEST
+                && resultCode == RESULT_OK) {
+            DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
+            if (dynamicModel != null) {
+//                dynamicListAdapter.getList().add(0, dynamicModel);
+//                dynamicListAdapter.notifyDataSetChanged();
+                getRefreshController().refreshBegin();
+            }
+        }
     }
 }

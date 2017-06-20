@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.yundian.blackcard.android.view.LengthEditView
+                android:id="@+id/lengthEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.yundian.blackcard.android.view.GridViewInScrollView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="5dp"
+                android:numColumns="3"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:verticalSpacing="5dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

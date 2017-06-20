@@ -2,9 +2,13 @@ package com.yundian.blackcard.android.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import com.yundian.blackcard.android.R;
+import com.yundian.comm.ui.view.BaseDataFrameLayout;
 import com.yundian.comm.ui.view.BaseFrameLayout;
+
+import butterknife.BindView;
 
 /**
  * @author : created by chuangWu
@@ -15,13 +19,23 @@ import com.yundian.comm.ui.view.BaseFrameLayout;
  * @for your attention : none
  * @revise : none
  */
-public class DynamicCommentHeaderView extends BaseFrameLayout {
+public class DynamicCommentHeaderView extends BaseDataFrameLayout<String> {
+
+    @BindView(R.id.countText)
+    protected TextView countText;
+
     public DynamicCommentHeaderView(Context context) {
         super(context);
     }
 
     public DynamicCommentHeaderView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    public void update(String data) {
+        countText.setText(data);
+        countText.setVisibility(VISIBLE);
     }
 
     @Override

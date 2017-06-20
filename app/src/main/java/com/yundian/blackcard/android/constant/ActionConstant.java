@@ -19,6 +19,17 @@ public interface ActionConstant {
         int PAY_WEIXIN = PAY_ALI + 1;
         int DYNAMIC_PIC = PAY_WEIXIN + 1;
         int DYNAMIC_DETAIL = DYNAMIC_PIC + 1;
+        int DYNAMIC_NAME = DYNAMIC_DETAIL + 1;
+        int DYNAMIC_PRAISE = DYNAMIC_NAME + 1;
+        int DYNAMIC_COMMENT = DYNAMIC_PRAISE + 1;
+        int DYNAMIC_MORE = DYNAMIC_COMMENT + 1;
+        int DYNAMIC_COMMENT_REQUEST = DYNAMIC_MORE + 1;
+        int DYNAMIC_RELEASE_ICON = DYNAMIC_COMMENT_REQUEST + 1;
+        int DYNAMIC_RELEASE_DELETE = DYNAMIC_RELEASE_ICON + 1;
+        int DYNAMIC_RELEASE_REQUEST = DYNAMIC_RELEASE_DELETE + 1;
+        int ARTICLE_DETAIL = DYNAMIC_RELEASE_REQUEST + 1;
+        int BIG_IMAGE = ARTICLE_DETAIL + 1;
+        int ARTICLE_COMMENT_REQUEST = BIG_IMAGE + 1;
     }
 
     interface IntentKey {
@@ -28,5 +39,12 @@ public interface ActionConstant {
         String SMS_CODE = "SMS_CODE";
         String PAY_PASSWORD = "PAY_PASSWORD";
         String DYNAMIC = "DYNAMIC";
+        String DYNAMIC_COMMENT = "DYNAMIC_COMMENT";
+        String ARTICLE_COMMENT = "ARTICLE_COMMENT";
+        String ARTICLE = "ARTICLE";
+        String IMGS_LIST = "IMGS_LIST";
+        String IMGS_POSITION = "IMGS_POSITION";
+        String IMGS_BIG = "IMGS_BIG";
+        String IMG_BIG_INDEX = "IMG_BIG_INDEX";
     }
 }

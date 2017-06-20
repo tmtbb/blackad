@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity {
     private Fragment[] fragments = new Fragment[3];
     private ForceUpdateDialog forceupdatedialog;
     private UpdateDialog updateDialog;
+    private DynamicFragment dynamicFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -176,7 +177,7 @@ public class MainActivity extends BaseActivity {
                     fragments[index] = new HomeFragment();
                     break;
                 case 1:
-                    fragments[index] = new DynamicFragment();
+                    fragments[index] = dynamicFragment = new DynamicFragment();
                     break;
                 case 2:
                     fragments[index] = new MyFragment();
@@ -303,4 +304,11 @@ public class MainActivity extends BaseActivity {
         return options;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (dynamicFragment != null) {
+            dynamicFragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
