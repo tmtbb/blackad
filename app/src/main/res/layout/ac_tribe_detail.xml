@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/dynamicAddLayout"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_white"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/icon_camera"
+            android:drawablePadding="@dimen/space_12"
+            android:text="有什么新鲜事情和大家分享吗？"
+            android:textColor="@color/color_434343"
+            android:textSize="@dimen/textsize_14" />
+    </RelativeLayout>
+
+    <com.yundian.blackcard.android.view.CusPtrFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:core_ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/refreshFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/dynamicAddLayout"
+        core_ptr:ptr_duration_to_close="100"
+        core_ptr:ptr_duration_to_close_header="100"
+        core_ptr:ptr_keep_header_when_refresh="true"
+        core_ptr:ptr_pull_to_fresh="false"
+        core_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
+        core_ptr:ptr_resistance="1.7">
+
+        <ListView
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_f8f8f8"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"
+            android:visibility="visible" />
+
+
+    </com.yundian.blackcard.android.view.CusPtrFrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/toolBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_434343"
+        android:paddingTop="@dimen/space_18">
+
+        <ImageView
+            android:id="@+id/leftIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="@dimen/space_12"
+            android:src="@mipmap/back_icon" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/space_12"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/textsize_16"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/userAddIcon"
+            android:padding="6dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_12"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_tribe_user"
+            android:src="@mipmap/icon_tribe_user" />
+    </RelativeLayout>
+
+</RelativeLayout>

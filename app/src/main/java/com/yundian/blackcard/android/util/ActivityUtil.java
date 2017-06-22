@@ -11,6 +11,10 @@ import com.yundian.blackcard.android.activity.DynamicAddActivity;
 import com.yundian.blackcard.android.activity.DynamicCommentActivity;
 import com.yundian.blackcard.android.activity.DynamicDetailActivity;
 import com.yundian.blackcard.android.activity.ShowBigImageActivity;
+import com.yundian.blackcard.android.activity.TribeAddActivity;
+import com.yundian.blackcard.android.activity.TribeApplyActivity;
+import com.yundian.blackcard.android.activity.TribeDetailActivity;
+import com.yundian.blackcard.android.activity.TribeInviteActivity;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.ArticleModel;
 import com.yundian.blackcard.android.model.DynamicModel;
@@ -41,8 +45,9 @@ public class ActivityUtil {
         context.startActivity(intent);
     }
 
-    public static void nextDynamicAdd(Activity activity) {
+    public static void nextDynamicAdd(Activity activity,String circleId) {
         Intent intent = new Intent(activity, DynamicAddActivity.class);
+        intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID,circleId);
         activity.startActivityForResult(intent, ActionConstant.Action.DYNAMIC_RELEASE_REQUEST);
     }
 
@@ -71,5 +76,26 @@ public class ActivityUtil {
         Intent intent = new Intent(activity, DynamicCommentActivity.class);
         intent.putExtra(ActionConstant.IntentKey.DYNAMIC, dynamicModel);
         activity.startActivityForResult(intent, ActionConstant.Action.DYNAMIC_COMMENT_REQUEST);
+    }
+
+    public static void nextTribeAdd(Context context) {
+        next(context, TribeAddActivity.class);
+    }
+
+    public static void nextTribeInvite(Context context) {
+        next(context, TribeInviteActivity.class);
+    }
+
+    public static void nextTribeDetail(Context context, String tribeId) {
+        Intent intent = new Intent(context, TribeDetailActivity.class);
+        intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID, tribeId);
+        context.startActivity(intent);
+    }
+
+    public static void nextTribeApplay(Activity context, String tribeId,int identity) {
+        Intent intent = new Intent(context, TribeApplyActivity.class);
+        intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID, tribeId);
+        intent.putExtra(ActionConstant.IntentKey.TRIBEID_IDENTITY, identity);
+        context.startActivityForResult(intent,ActionConstant.Action.TRIBE_APPLY_REQUEST);
     }
 }

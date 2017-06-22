@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="225dp"
+    android:orientation="vertical">
+
+    <com.yundian.blackcard.android.view.DimImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_a6a6a6" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tribeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/space_12"
+            android:layout_marginRight="@dimen/space_12"
+            android:text="超哥创业俱乐部"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/textsize_18"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tribeInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tribeName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/space_12"
+            android:text="领域 电商  |  成员 100"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/textsize_12" />
+
+        <TextView
+            android:id="@+id/addressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tribeInfo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/space_4"
+            android:drawableLeft="@mipmap/icon_tribe_address"
+            android:drawablePadding="@dimen/space_4"
+            android:text="浙江省杭州市"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/textsize_10" />
+
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="41dp"
+            android:layout_height="23dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/addressText"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/shape_exit_add"
+            android:gravity="center"
+            android:text="退出"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/textsize_12" />
+    </RelativeLayout>
+
+</RelativeLayout>

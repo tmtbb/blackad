@@ -1,1 +1,1 @@
-include ':app', ':viewpagerindicator', ':viewpagerindicator', ':comm', ':yw_comm_img_selector'
+include ':app', ':viewpagerindicator', ':viewpagerindicator', ':comm', ':yw_comm_img_selector', ':citypickerview'

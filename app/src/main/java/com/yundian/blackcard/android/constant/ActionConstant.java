@@ -30,6 +30,12 @@ public interface ActionConstant {
         int ARTICLE_DETAIL = DYNAMIC_RELEASE_REQUEST + 1;
         int BIG_IMAGE = ARTICLE_DETAIL + 1;
         int ARTICLE_COMMENT_REQUEST = BIG_IMAGE + 1;
+        int TRIBE_FLOAT = ARTICLE_COMMENT_REQUEST + 1;
+        int TRIBE_AGREE = TRIBE_FLOAT + 1;
+        int TRIBE_REFUSE = TRIBE_AGREE + 1;
+        int TRIBE_APPLY_REQUEST = TRIBE_REFUSE + 1;
+        int TRIBE_ADD = TRIBE_APPLY_REQUEST + 1;
+        int TRIBE_DELETE = TRIBE_ADD + 1;
     }
 
     interface IntentKey {
@@ -39,6 +45,9 @@ public interface ActionConstant {
         String SMS_CODE = "SMS_CODE";
         String PAY_PASSWORD = "PAY_PASSWORD";
         String DYNAMIC = "DYNAMIC";
+        String TRIBEID_ID = "TRIBEID_ID";
+        String TRIBEID_IDENTITY = "TRIBEID_IDENTITY";
+        String TRIBEID_STATUS = "TRIBEID_STATUS";
         String DYNAMIC_COMMENT = "DYNAMIC_COMMENT";
         String ARTICLE_COMMENT = "ARTICLE_COMMENT";
         String ARTICLE = "ARTICLE";

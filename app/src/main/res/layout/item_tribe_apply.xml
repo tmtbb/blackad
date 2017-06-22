@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:paddingLeft="@dimen/space_12"
+        android:paddingRight="@dimen/space_12">
+
+        <RelativeLayout
+            android:id="@+id/userIconLayout"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true">
+
+            <com.yundian.blackcard.android.view.RoundImageView
+                android:id="@+id/userIcon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@mipmap/user_head_def"
+                app:roundHeight="21dp"
+                app:roundWidth="21dp" />
+
+            <ImageView
+                android:id="@+id/iconId"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/icon_tribe_unok" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/agreeText"
+                android:layout_width="51dp"
+                android:layout_height="29dp"
+                android:background="@drawable/shape_apply"
+                android:gravity="center"
+                android:text="同意"
+                android:textColor="@color/color_E4A63F"
+                android:textSize="@dimen/textsize_12"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/refuseText"
+                android:layout_width="51dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="@dimen/space_18"
+                android:background="@drawable/shape_apply"
+                android:gravity="center"
+                android:text="拒绝"
+                android:textColor="@color/color_E4A63F"
+                android:textSize="@dimen/textsize_12"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/otherText"
+                android:layout_width="51dp"
+                android:layout_height="29dp"
+                android:layout_marginLeft="@dimen/space_18"
+                android:gravity="center"
+                android:text="已拒绝"
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_12"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/userIconLayout"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/nickNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="效能办放"
+                android:textColor="@color/color_434343"
+                android:textSize="@dimen/textsize_14" />
+
+            <TextView
+                android:id="@+id/createTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:text="效能办放"
+                android:textColor="@color/color_a6a6a6"
+                android:textSize="@dimen/textsize_12" />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <include layout="@layout/comm_line_12dp"/>
+
+</LinearLayout>

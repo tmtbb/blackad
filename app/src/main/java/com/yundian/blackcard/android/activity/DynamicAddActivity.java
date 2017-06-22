@@ -47,6 +47,7 @@ public class DynamicAddActivity extends BaseActivity {
     private ArrayList<String> selectedList = new ArrayList<>();
     private MultiImageSelectorHelper selectorHelper;
     private static final int MAX_NUM = 9;
+    private String cirleId = "0";
 
 
     @Override
@@ -68,6 +69,7 @@ public class DynamicAddActivity extends BaseActivity {
         dynamicAddAdapter = new DynamicAddAdapter(context);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridView.setAdapter(dynamicAddAdapter);
+        cirleId = getIntent().getStringExtra(ActionConstant.IntentKey.TRIBEID_ID);
     }
 
     @Override
@@ -135,7 +137,7 @@ public class DynamicAddActivity extends BaseActivity {
         }
 
         showLoader();
-        NetworkAPIFactory.getDynamicService().dynamicAdd("0", lengthEditText.getContent(), removeEmptyIfNeed(selectedList), new OnAPIListener<DynamicModel>() {
+        NetworkAPIFactory.getDynamicService().dynamicAdd(cirleId, lengthEditText.getContent(), removeEmptyIfNeed(selectedList), new OnAPIListener<DynamicModel>() {
             @Override
             public void onError(Throwable ex) {
                 onShowError(ex);

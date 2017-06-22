@@ -23,6 +23,7 @@
     <string name="login_text">登录</string>
     <string name="next_text">下一步</string>
     <string name="pay_text">充值</string>
+    <string name="tribe_add">新增部落</string>
     <string name="pay_sure">确认</string>
     <string name="pay_atonce">立即支付</string>
     <string name="pay_sure_text">确认充值</string>

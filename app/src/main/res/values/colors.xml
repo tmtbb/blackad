@@ -21,7 +21,7 @@
     <color name="color_DB462E">#DB462E</color>
     <color name="color_E4A63F">#E4A63F</color>
     <color name="color_070707">#070707</color>
-
+    <color name="color_dim">#30000000</color>
 
     <color name="alertdialog_line">#c6c6c6</color>
     <color name="actionsheet_blue">#037BFF</color>
@@ -32,4 +32,6 @@
     <color name="pickerview_timebtn_nor">#057dff</color><!--按钮未点击状态颜色-->
     <color name="pickerview_timebtn_pre">#c2daf5</color><!--按钮点击状态颜色-->
     <color name="checkupdatelibrary_update_button">#434343</color>
+
+
 </resources>

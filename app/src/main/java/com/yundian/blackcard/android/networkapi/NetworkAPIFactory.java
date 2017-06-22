@@ -90,4 +90,8 @@ public class NetworkAPIFactory extends ServiceManage {
     public static IArticleService getArticleService() {
         return networkAPIFactory.getService(IArticleService.class);
     }
+
+    public static ITribeService getTribeService() {
+        return networkAPIFactory.getService(ITribeService.class);
+    }
 }

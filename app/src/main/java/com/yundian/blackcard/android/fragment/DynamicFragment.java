@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.activity.DynamicAddActivity;
@@ -32,12 +33,14 @@ public class DynamicFragment extends BaseFragment {
 
     @BindView(R.id.tabLayout)
     protected TabLayout tabLayout;
+    @BindView(R.id.iconCamera)
+    protected ImageView iconCamera;
 
     @BindView(R.id.viewPager)
     protected ViewPager viewPager;
 
     private List<BaseFragment> fragmentList = new ArrayList<>();
-    private String[] titles = new String[]{"卡友部落", "精英生活", "邀请函"};
+    private String[] titles = new String[]{"精英生活", "邀请函", "卡友部落"};
 
     private DynamicListFragment dynamicListFragment;
 
@@ -52,12 +55,37 @@ public class DynamicFragment extends BaseFragment {
         fragmentList.clear();
         fragmentList.add(dynamicListFragment = new DynamicListFragment());
         fragmentList.add(new ArticleFragment());
-        fragmentList.add(new DynamicListFragment());
+        fragmentList.add(new TribeFragment());
         viewPager.setOffscreenPageLimit(fragmentList.size());
         viewPager.setAdapter(new SimpleFragmentPagerAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    public void initListener() {
+        super.initListener();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    iconCamera.setImageResource(R.mipmap.icon_camera);
+                } else if (position == 2) {
+                    iconCamera.setImageResource(R.mipmap.icon_tribe_add);
+                }
+                iconCamera.setVisibility(position == 0 || position == 2 ? View.VISIBLE : View.INVISIBLE);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
 
     private class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -94,6 +122,11 @@ public class DynamicFragment extends BaseFragment {
 
     @OnClick(R.id.iconCamera)
     protected void onClick(View view) {
-        ActivityUtil.nextDynamicAdd(getActivity());
+        if (viewPager.getCurrentItem() == 0) {
+            ActivityUtil.nextDynamicAdd(getActivity(),"0");
+        } else if (viewPager.getCurrentItem() == 2) {
+            showToast("敬请期待");
+        }
+
     }
 }

@@ -30,4 +30,8 @@
         <attr name="topDrawableWidth" format="dimension" />
         <attr name="topDrawableHeight" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="DimImageView">
+        <attr name="dim_color" format="color" />
+    </declare-styleable>
 </resources>
