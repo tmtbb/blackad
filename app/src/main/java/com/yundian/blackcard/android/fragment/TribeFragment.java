@@ -1,10 +1,11 @@
 package com.yundian.blackcard.android.fragment;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.adapter.TribeAdapter;
+import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.fragment.base.BaseRefreshAbsListControllerFragment;
 import com.yundian.blackcard.android.model.CreatorTribeModel;
 import com.yundian.blackcard.android.model.TribeListModel;
@@ -81,12 +82,12 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
             @Override
             public void onChildViewClick(View childView, int action, Object obj) {
                 if (ownStatus == 0) {
-                    ActivityUtil.nextTribeAdd(context);
+                    ActivityUtil.nextTribeAdd(getActivity());
                 } else if (ownStatus == 2) {
                     tribeFloatView.update(tribeModel.setOwnTribe(tribeModel.getOwnTribe().setVerifyNum(0)));
                     ActivityUtil.nextTribeApplay(getActivity(), tribeModel.getOwnTribe().getId(), 1);
                 } else if (ownStatus == 1) {
-                    showToast("当前部落正在审核"); ActivityUtil.nextTribeAdd(context);
+                    showToast("当前部落正在审核");
                 }
             }
         });
@@ -133,5 +134,20 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
         }
 
         return resultModels;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ActionConstant.Action.TRIBE_ADD_REQUEST) {
+            //TODO
+            getRefreshController().refreshBegin();
+//            TribeListModel model = (TribeListModel) data.getSerializableExtra(ActionConstant.IntentKey.TRIBEID_LIST_MODEL);
+//            model.setType(0);
+//            tribeAdapter.getList().add(0, model);
+//            tribeAdapter.notifyDataSetChanged();
+//            tribeModel.setOwnTribe(tribeModel.getOwnTribe().setVerifyNum(0).setStatus(1));
+//            tribeFloatView.update(tribeModel);
+        }
     }
 }

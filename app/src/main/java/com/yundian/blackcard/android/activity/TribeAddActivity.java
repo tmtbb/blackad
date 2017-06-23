@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.helper.CityPickerHelper;
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.TribeAddModel;
@@ -115,6 +116,7 @@ public class TribeAddActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Object o) {
                         showToast("创建成功");
+                        setResult(RESULT_OK);
                         finish();
                     }
                 });

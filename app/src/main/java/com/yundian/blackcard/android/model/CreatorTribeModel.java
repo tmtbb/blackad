@@ -18,8 +18,9 @@ public class CreatorTribeModel extends BaseModel {
         return status;
     }
 
-    public void setStatus(int status) {
+    public CreatorTribeModel setStatus(int status) {
         this.status = status;
+        return this;
     }
 
     public String getId() {

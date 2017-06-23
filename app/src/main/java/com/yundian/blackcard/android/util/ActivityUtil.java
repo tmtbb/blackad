@@ -45,9 +45,9 @@ public class ActivityUtil {
         context.startActivity(intent);
     }
 
-    public static void nextDynamicAdd(Activity activity,String circleId) {
+    public static void nextDynamicAdd(Activity activity, String circleId) {
         Intent intent = new Intent(activity, DynamicAddActivity.class);
-        intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID,circleId);
+        intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID, circleId);
         activity.startActivityForResult(intent, ActionConstant.Action.DYNAMIC_RELEASE_REQUEST);
     }
 
@@ -78,8 +78,10 @@ public class ActivityUtil {
         activity.startActivityForResult(intent, ActionConstant.Action.DYNAMIC_COMMENT_REQUEST);
     }
 
-    public static void nextTribeAdd(Context context) {
+    public static void nextTribeAdd(Activity context) {
         next(context, TribeAddActivity.class);
+        Intent intent = new Intent(context, TribeAddActivity.class);
+        context.startActivityForResult(intent, ActionConstant.Action.TRIBE_ADD_REQUEST);
     }
 
     public static void nextTribeInvite(Context context) {
@@ -92,10 +94,10 @@ public class ActivityUtil {
         context.startActivity(intent);
     }
 
-    public static void nextTribeApplay(Activity context, String tribeId,int identity) {
+    public static void nextTribeApplay(Activity context, String tribeId, int identity) {
         Intent intent = new Intent(context, TribeApplyActivity.class);
         intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID, tribeId);
         intent.putExtra(ActionConstant.IntentKey.TRIBEID_IDENTITY, identity);
-        context.startActivityForResult(intent,ActionConstant.Action.TRIBE_APPLY_REQUEST);
+        context.startActivityForResult(intent, ActionConstant.Action.TRIBE_APPLY_REQUEST);
     }
 }

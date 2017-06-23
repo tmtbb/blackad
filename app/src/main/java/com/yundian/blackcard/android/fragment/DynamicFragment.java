@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.activity.DynamicAddActivity;
+import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.util.ActivityUtil;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class DynamicFragment extends BaseFragment {
     private String[] titles = new String[]{"精英生活", "邀请函", "卡友部落"};
 
     private DynamicListFragment dynamicListFragment;
+    private TribeFragment tribeFragment;
 
     @Override
     public int getLayoutId() {
@@ -55,7 +57,7 @@ public class DynamicFragment extends BaseFragment {
         fragmentList.clear();
         fragmentList.add(dynamicListFragment = new DynamicListFragment());
         fragmentList.add(new ArticleFragment());
-        fragmentList.add(new TribeFragment());
+        fragmentList.add(tribeFragment = new TribeFragment());
         viewPager.setOffscreenPageLimit(fragmentList.size());
         viewPager.setAdapter(new SimpleFragmentPagerAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
@@ -115,15 +117,25 @@ public class DynamicFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (dynamicListFragment != null) {
-            dynamicListFragment.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ActionConstant.Action.TRIBE_ADD_REQUEST:
+                if (tribeFragment != null) {
+                    tribeFragment.onActivityResult(requestCode, resultCode, data);
+                }
+                break;
+            case ActionConstant.Action.DYNAMIC_COMMENT_REQUEST:
+            case ActionConstant.Action.DYNAMIC_RELEASE_REQUEST:
+                if (dynamicListFragment != null) {
+                    dynamicListFragment.onActivityResult(requestCode, resultCode, data);
+                }
+                break;
         }
     }
 
     @OnClick(R.id.iconCamera)
     protected void onClick(View view) {
         if (viewPager.getCurrentItem() == 0) {
-            ActivityUtil.nextDynamicAdd(getActivity(),"0");
+            ActivityUtil.nextDynamicAdd(getActivity(), "0");
         } else if (viewPager.getCurrentItem() == 2) {
             showToast("敬请期待");
         }

@@ -36,6 +36,7 @@ public interface ActionConstant {
         int TRIBE_APPLY_REQUEST = TRIBE_REFUSE + 1;
         int TRIBE_ADD = TRIBE_APPLY_REQUEST + 1;
         int TRIBE_DELETE = TRIBE_ADD + 1;
+        int TRIBE_ADD_REQUEST = TRIBE_DELETE + 1;
     }
 
     interface IntentKey {
@@ -55,5 +56,6 @@ public interface ActionConstant {
         String IMGS_POSITION = "IMGS_POSITION";
         String IMGS_BIG = "IMGS_BIG";
         String IMG_BIG_INDEX = "IMG_BIG_INDEX";
+        String TRIBEID_LIST_MODEL = "TRIBEID_LIST_MODEL";
     }
 }
