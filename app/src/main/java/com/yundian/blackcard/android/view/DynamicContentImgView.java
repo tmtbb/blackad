@@ -142,9 +142,8 @@ public class DynamicContentImgView extends BaseFrameLayout {
      * @param view
      */
     private void resizeSingleImg(View view) {
-        Matcher matcher = pattern.matcher(dynamicImageEntities.get(0).getImgUrl());
-        if (matcher.find()) {
-            String size[] = matcher.group().replace("_", "").split("X");
+        try {
+            String size[] = dynamicImageEntities.get(0).getSize().split("x");
             int width = Integer.parseInt(size[0]);
             int height = Integer.parseInt(size[1]);
             if (width < height) {
@@ -160,9 +159,10 @@ public class DynamicContentImgView extends BaseFrameLayout {
             width = width > maxImageHeight ? maxImageHeight : width;
             height = height > maxImageHeight ? maxImageHeight : height;
             setViewLayoutParams(view, width, height);
-        } else {
+        } catch (Exception e) {
             setViewLayoutParams(view, 300, 300);
         }
+
     }
 
     /**

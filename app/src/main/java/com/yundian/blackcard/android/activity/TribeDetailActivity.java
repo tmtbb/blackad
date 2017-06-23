@@ -102,22 +102,26 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
             public void onChildViewClick(View childView, int action, Object obj) {
                 switch (action) {
                     case ActionConstant.Action.TRIBE_ADD:
-                        NetworkAPIFactory.getTribeService().memberAdd(tribeId, new OnAPIListener<Object>() {
-                            @Override
-                            public void onError(Throwable ex) {
-                                ToastUtils.show(context, ex.getMessage());
-                            }
+                        if (tribeInfosModel.getTribeInfo().getStatus() == 1) {
+                            showToast("当前部落正在审核，无法加入");
+                        } else if (tribeInfosModel.getTribeInfo().getStatus() == 2) {
+                            NetworkAPIFactory.getTribeService().memberAdd(tribeId, new OnAPIListener<Object>() {
+                                @Override
+                                public void onError(Throwable ex) {
+                                    ToastUtils.show(context, ex.getMessage());
+                                }
 
-                            @Override
-                            public void onSuccess(Object o) {
-                                sendBroadcast(new Intent(ActionConstant.Broadcast.TRIBE_UPDATE));
-                                tribeInfosModel.getTribeInfo().setStatus(2);
-                                headerView.update(tribeInfosModel);
-                                ToastUtils.show(context, "加入成功");
-                                getRefreshController().refreshBegin();
+                                @Override
+                                public void onSuccess(Object o) {
+                                    sendBroadcast(new Intent(ActionConstant.Broadcast.TRIBE_UPDATE));
+                                    tribeInfosModel.getTribeInfo().setStatus(2);
+                                    headerView.update(tribeInfosModel);
+                                    ToastUtils.show(context, "加入成功");
+                                    getRefreshController().refreshBegin();
 
-                            }
-                        });
+                                }
+                            });
+                        }
                         break;
                     case ActionConstant.Action.TRIBE_DELETE:
                         NetworkAPIFactory.getTribeService().memberDelete(tribeId, new OnAPIListener<Object>() {
@@ -132,6 +136,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
                                 tribeInfosModel.getMemberInfo().setStatus(0);
                                 headerView.update(tribeInfosModel);
                                 updateBottomStatus(0);
+                                dynamicListController.setHasPermission(false);
                                 ToastUtils.show(context, "退出成功");
                             }
                         });
@@ -174,6 +179,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
                             closeLoader();
                             TribeDetailActivity.this.tribeInfosModel = tribeInfosModel;
                             updateBottomStatus(tribeInfosModel.getMemberInfo().getStatus());
+                            dynamicListController.setHasPermission(tribeInfosModel.getMemberInfo().getStatus() == 2);
                             headerView.setVisibility(View.VISIBLE);
                             headerView.update(tribeInfosModel);
                         }

@@ -32,6 +32,12 @@ import java.util.ArrayList;
  */
 public abstract class BaseDynamicController extends BaseController {
 
+    protected boolean hasPermission = true;
+
+    public void setHasPermission(boolean hasPermission) {
+        this.hasPermission = hasPermission;
+    }
+
     protected SparseArray<DynamicAction> actionMap = new SparseArray<>();
 
     public abstract void onUpdateDynamic(int action, DynamicModel dynamicModel);
@@ -122,6 +128,10 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, int action, final DynamicModel dynamicModel, Object obj) {
+            if (!hasPermission) {
+                showNoPermission();
+                return;
+            }
             new ActionSheetDialog(context)
                     .builder()
                     .setTitle("请选择类型")
@@ -150,6 +160,10 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, final int action, final DynamicModel dynamicModel, Object obj) {
+            if (!hasPermission) {
+                showNoPermission();
+                return;
+            }
             NetworkAPIFactory.getDynamicService().likeAdd(dynamicModel.getId(), new OnAPIListener<Object>() {
                 @Override
                 public void onError(Throwable ex) {
@@ -175,6 +189,10 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, int action, DynamicModel dynamicModel, Object obj) {
+            if (!hasPermission) {
+                showNoPermission();
+                return;
+            }
             if (context instanceof Activity)
                 ActivityUtil.nextDynamicComment((Activity) context, dynamicModel);
         }
@@ -190,5 +208,9 @@ public abstract class BaseDynamicController extends BaseController {
     public void onDestroy() {
         DynamicActionObservable.getInstance().unregisterUpdateListener(onDynamicUpdateListenerImpl);
         super.onDestroy();
+    }
+
+    public void  showNoPermission(){
+        showToast("暂无权限");
     }
 }

@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
     signingConfigs {
         release {
             keyAlias 'blackcard'
@@ -29,12 +33,15 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
             buildConfigField "String", "SERVER_HOST", "\"http://app.jingyingheika.com\""
         }
         debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            minifyEnabled true
             signingConfig signingConfigs.debug
             buildConfigField "String", "SERVER_HOST", "\"http://101.37.82.111:9999\""
         }

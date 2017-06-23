@@ -24,6 +24,7 @@ public class DynamicListController extends BaseDynamicController {
     private DynamicListAdapter dynamicListAdapter;
     private ListView contentView;
 
+
     public DynamicListController(Context context, ListView contentView, DynamicListAdapter dynamicListAdapter) {
         super(context);
         this.contentView = contentView;
@@ -40,7 +41,12 @@ public class DynamicListController extends BaseDynamicController {
 
         @Override
         public void doAction(View view, int action, DynamicModel dynamicModel, Object obj) {
+            if (!hasPermission) {
+                showNoPermission();
+                return;
+            }
             ActivityUtil.nextDynamicDetail(context, dynamicModel);
+
         }
     }
 
