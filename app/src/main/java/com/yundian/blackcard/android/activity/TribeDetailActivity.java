@@ -53,6 +53,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
     private DynamicListController dynamicListController;
     private DynamicListAdapter dynamicListAdapter;
     private TribeInfosModel tribeInfosModel;
+    private int clickedPosition;
 
     @Override
     protected void onRegisterController() {
@@ -91,6 +92,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
             public void onItemChildViewClick(View childView, int position, int action, Object obj) {
                 DynamicModel dynamicModel = dynamicListAdapter.getItem(position);
                 if (dynamicModel != null) {
+                    clickedPosition = position;
                     dynamicListController.onItemChildViewClick(childView, action, dynamicModel, obj);
                 }
             }
@@ -221,9 +223,11 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ActionConstant.Action.DYNAMIC_COMMENT_REQUEST
                 && resultCode == RESULT_OK) {
-            DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
-            if (dynamicModel != null)
+            DynamicModel dynamicModel = dynamicListAdapter.getItem(clickedPosition);
+            if (dynamicModel != null) {
+                dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
                 dynamicListController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
+            }
         } else if (requestCode == ActionConstant.Action.DYNAMIC_RELEASE_REQUEST
                 && resultCode == RESULT_OK) {
             DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);

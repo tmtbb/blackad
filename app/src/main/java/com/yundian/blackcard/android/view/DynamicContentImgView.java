@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -121,7 +120,7 @@ public class DynamicContentImgView extends BaseFrameLayout {
             resizeSingleImg(view);
         }
         final ImageView imageView = (ImageView) view;
-        String url = dynamicImageEntities.get(position).getImg();
+        String url = dynamicImageEntities.get(position).getImgUrl();
         if (url.indexOf("http") != 0) {
             url = "file://" + url;
         }
@@ -143,7 +142,7 @@ public class DynamicContentImgView extends BaseFrameLayout {
      * @param view
      */
     private void resizeSingleImg(View view) {
-        Matcher matcher = pattern.matcher(dynamicImageEntities.get(0).getImg());
+        Matcher matcher = pattern.matcher(dynamicImageEntities.get(0).getImgUrl());
         if (matcher.find()) {
             String size[] = matcher.group().replace("_", "").split("X");
             int width = Integer.parseInt(size[0]);

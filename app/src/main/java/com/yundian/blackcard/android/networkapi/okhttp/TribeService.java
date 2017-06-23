@@ -2,6 +2,7 @@ package com.yundian.blackcard.android.networkapi.okhttp;
 
 import com.yundian.blackcard.android.model.TribeAddModel;
 import com.yundian.blackcard.android.model.TribeInfosModel;
+import com.yundian.blackcard.android.model.TribeListModel;
 import com.yundian.blackcard.android.model.TribeMemberModel;
 import com.yundian.blackcard.android.model.TribeModel;
 import com.yundian.blackcard.android.networkapi.ITribeService;
@@ -53,7 +54,7 @@ public class TribeService extends OkHttpService<TribeService.RetrofitTribeServic
         @POST("/api/tribe/add.json")
         @Multipart
         @ServiceMethod("tribeAdd")
-        Observable<DefResponse<Object>> tribeAdd(@QueryMap Map<String, Object> map, @PartMap Map<String, RequestBody> fileMap);
+        Observable<DefResponse<TribeListModel>> tribeAdd(@QueryMap Map<String, Object> map, @PartMap Map<String, RequestBody> fileMap);
 
 
         @FormUrlEncoded
@@ -92,7 +93,7 @@ public class TribeService extends OkHttpService<TribeService.RetrofitTribeServic
 
 
     @Override
-    public void tribeAdd(TribeAddModel tribeAddModel, OnAPIListener<Object> listener) {
+    public void tribeAdd(TribeAddModel tribeAddModel, OnAPIListener<TribeListModel> listener) {
         Map<String, Object> map = new HashMap<>();
         map.put("name", tribeAddModel.getName());
         map.put("industry", tribeAddModel.getIndustry());

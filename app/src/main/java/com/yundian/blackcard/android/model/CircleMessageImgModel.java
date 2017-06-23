@@ -10,15 +10,15 @@ package com.yundian.blackcard.android.model;
  * @revise : none
  */
 public class CircleMessageImgModel extends BaseModel {
-    private String img;
+    private String imgUrl;
     private String size;
 
-    public String getImg() {
-        return img;
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImgUrl(String img) {
+        this.imgUrl = img;
     }
 
     public String getSize() {

@@ -106,7 +106,7 @@ public abstract class BaseDynamicController extends BaseController {
             if (dynamicModel.getCircleMessageImgs() != null) {
                 ArrayList<String> images = new ArrayList<>();
                 for (CircleMessageImgModel image : dynamicModel.getCircleMessageImgs()) {
-                    String imageUrl = image.getImg();
+                    String imageUrl = image.getImgUrl();
                     if (imageUrl.contains("_thumb")) {
                         String[] imgs = imageUrl.split("_thumb");
                         imageUrl = imgs[0] + imgs[1];

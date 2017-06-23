@@ -12,6 +12,7 @@ import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.helper.CityPickerHelper;
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.TribeAddModel;
+import com.yundian.blackcard.android.model.TribeListModel;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
@@ -90,7 +91,7 @@ public class TribeAddActivity extends BaseActivity {
                     showToast(tribeAddressText.getHint());
                     return;
                 }
-                String industry = tribeIndustryText.getText().toString().trim();
+                final String industry = tribeIndustryText.getText().toString().trim();
                 if (TextUtils.isEmpty(industry)) {
                     showToast(tribeIndustryText.getHint());
                     return;
@@ -107,16 +108,18 @@ public class TribeAddActivity extends BaseActivity {
                 model.setCity(city);
                 model.setDescription(description);
                 model.setIndustry(industry);
-                NetworkAPIFactory.getTribeService().tribeAdd(model, new OnAPIListener<Object>() {
+                NetworkAPIFactory.getTribeService().tribeAdd(model, new OnAPIListener<TribeListModel>() {
                     @Override
                     public void onError(Throwable ex) {
                         onShowError(ex);
                     }
 
                     @Override
-                    public void onSuccess(Object o) {
+                    public void onSuccess(TribeListModel tribeListModel) {
                         showToast("创建成功");
-                        setResult(RESULT_OK);
+                        Intent intent = new Intent();
+                        intent.putExtra(ActionConstant.IntentKey.TRIBEID_LIST_MODEL, tribeListModel);
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
                 });

@@ -79,7 +79,6 @@ public class ActivityUtil {
     }
 
     public static void nextTribeAdd(Activity context) {
-        next(context, TribeAddActivity.class);
         Intent intent = new Intent(context, TribeAddActivity.class);
         context.startActivityForResult(intent, ActionConstant.Action.TRIBE_ADD_REQUEST);
     }

@@ -24,6 +24,8 @@ import java.util.List;
 
 import butterknife.BindView;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * @author : created by chuangWu
  * @version : 0.01
@@ -70,7 +72,7 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
 
                         getRefreshController().refreshComplete();
                         TribeFragment.this.tribeModel = tribeModel;
-                        tribeAdapter.setHasTribe(tribeModel.getOwnTribe().getStatus() != 0);
+                        tribeAdapter.setHasTribe(tribeModel.getUserTribes().size() != 0);
                         tribeAdapter.setList(convertTribeList(tribeModel));
                         tribeFloatView.update(tribeModel);
                         tribeAdapter.notifyDataSetChanged();
@@ -139,15 +141,13 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ActionConstant.Action.TRIBE_ADD_REQUEST) {
-            //TODO
-            getRefreshController().refreshBegin();
-//            TribeListModel model = (TribeListModel) data.getSerializableExtra(ActionConstant.IntentKey.TRIBEID_LIST_MODEL);
-//            model.setType(0);
-//            tribeAdapter.getList().add(0, model);
-//            tribeAdapter.notifyDataSetChanged();
-//            tribeModel.setOwnTribe(tribeModel.getOwnTribe().setVerifyNum(0).setStatus(1));
-//            tribeFloatView.update(tribeModel);
+        if (requestCode == ActionConstant.Action.TRIBE_ADD_REQUEST && resultCode == RESULT_OK && data != null) {
+            TribeListModel model = (TribeListModel) data.getSerializableExtra(ActionConstant.IntentKey.TRIBEID_LIST_MODEL);
+            model.setType(0);
+            tribeAdapter.getList().add(0, model);
+            tribeAdapter.notifyDataSetChanged();
+            tribeModel.setOwnTribe(tribeModel.getOwnTribe().setVerifyNum(0).setStatus(1));
+            tribeFloatView.update(tribeModel);
         }
     }
 }

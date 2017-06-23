@@ -71,8 +71,6 @@ public class DynamicCommentActivity extends BaseActivity {
             public void onSuccess(DynamicCommentModel model) {
                 closeSoftKeyboard();
                 Intent intent = new Intent();
-                dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
-                intent.putExtra(ActionConstant.IntentKey.DYNAMIC, dynamicModel);
                 intent.putExtra(ActionConstant.IntentKey.DYNAMIC_COMMENT, model);
                 setResult(RESULT_OK, intent);
                 finish();

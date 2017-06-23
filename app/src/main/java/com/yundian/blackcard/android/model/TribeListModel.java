@@ -9,7 +9,7 @@ package com.yundian.blackcard.android.model;
  * @for your attention : none
  * @revise : none
  */
-public class TribeListModel {
+public class TribeListModel extends BaseModel{
 
     private String id;
     private String name;

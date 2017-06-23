@@ -2,6 +2,7 @@ package com.yundian.blackcard.android.networkapi;
 
 import com.yundian.blackcard.android.model.TribeAddModel;
 import com.yundian.blackcard.android.model.TribeInfosModel;
+import com.yundian.blackcard.android.model.TribeListModel;
 import com.yundian.blackcard.android.model.TribeMemberModel;
 import com.yundian.blackcard.android.model.TribeModel;
 import com.yundian.blackcard.android.networkapi.okhttp.TribeService;
@@ -50,7 +51,7 @@ public interface ITribeService {
      * @param listener
      */
     @ServiceMethod("tribeAdd")
-    void tribeAdd(TribeAddModel tribeAddModel, OnAPIListener<Object> listener);
+    void tribeAdd(TribeAddModel tribeAddModel, OnAPIListener<TribeListModel> listener);
 
 
     /**

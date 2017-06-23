@@ -129,7 +129,7 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ActionConstant.Action.DYNAMIC_COMMENT_REQUEST
                 && resultCode == RESULT_OK) {
-            DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
+            dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
             dynamicDetailController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
             DynamicCommentModel dynamicCommentModel = (DynamicCommentModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC_COMMENT);
             dynamicDetailAdapter.getList().add(dynamicCommentModel);

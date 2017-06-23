@@ -37,6 +37,7 @@ public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<Dy
     private DynamicListController dynamicListController;
     @BindView(R.id.contentView)
     protected ListView contentView;
+    private int clickedPosition;
 
     @Override
     public int getLayoutId() {
@@ -81,6 +82,7 @@ public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<Dy
             public void onItemChildViewClick(View childView, int position, int action, Object obj) {
                 DynamicModel dynamicModel = dynamicListAdapter.getItem(position);
                 if (dynamicModel != null) {
+                    clickedPosition = position;
                     dynamicListController.onItemChildViewClick(childView, action, dynamicModel, obj);
                 }
             }
@@ -91,12 +93,13 @@ public class DynamicListFragment extends BaseRefreshAbsListControllerFragment<Dy
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ActionConstant.Action.DYNAMIC_COMMENT_REQUEST
-                && resultCode == RESULT_OK) {
-            DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
+                && resultCode == RESULT_OK && data != null) {
+            DynamicModel dynamicModel = dynamicListAdapter.getItem(clickedPosition);
+            dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
             if (dynamicModel != null)
                 dynamicListController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
         } else if (requestCode == ActionConstant.Action.DYNAMIC_RELEASE_REQUEST
-                && resultCode == RESULT_OK) {
+                && resultCode == RESULT_OK && data != null) {
             DynamicModel dynamicModel = (DynamicModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC);
             if (dynamicModel != null) {
                 dynamicListAdapter.getList().add(0, dynamicModel);
