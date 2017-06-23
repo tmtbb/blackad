@@ -1,5 +1,6 @@
 package com.yundian.blackcard.android.activity;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.yundian.blackcard.android.R;
@@ -91,6 +92,7 @@ public class TribeApplyActivity extends BaseRefreshAbsListControllerActivity<Tri
                                 model.setStatus(2);
                                 tribeApplyAdapter.notifyDataSetChanged(model);
                                 showToast("已同意");
+                                context.sendBroadcast(new Intent(ActionConstant.Broadcast.TRIBE_UPDATE));
                             }
                         });
                         break;
@@ -106,6 +108,7 @@ public class TribeApplyActivity extends BaseRefreshAbsListControllerActivity<Tri
                                 model.setStatus(3);
                                 tribeApplyAdapter.notifyDataSetChanged(model);
                                 showToast("已拒绝");
+                                context.sendBroadcast(new Intent(ActionConstant.Broadcast.TRIBE_UPDATE));
                             }
                         });
                         break;

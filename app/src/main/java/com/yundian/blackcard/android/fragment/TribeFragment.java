@@ -1,6 +1,9 @@
 package com.yundian.blackcard.android.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View;
 
 import com.yundian.blackcard.android.R;
@@ -41,9 +44,19 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
     @BindView(R.id.tribeFloatView)
     protected TribeFloatView tribeFloatView;
     private TribeAdapter tribeAdapter;
-
     private int ownStatus;
     private TribeModel tribeModel;
+
+    private RefreshBroadcastReceiver refreshBroadcastReceiver;
+    private boolean isRefreshPage = false;
+
+    private class RefreshBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            isRefreshPage = true;
+        }
+    }
 
     @Override
     public int getLayoutId() {
@@ -53,6 +66,15 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
     @Override
     protected IListAdapter<TribeListModel> createAdapter() {
         return tribeAdapter = new TribeAdapter(context);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        refreshBroadcastReceiver = new RefreshBroadcastReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ActionConstant.Broadcast.TRIBE_UPDATE);
+        getActivity().registerReceiver(refreshBroadcastReceiver, intentFilter);
     }
 
     @Override
@@ -149,5 +171,20 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
             tribeModel.setOwnTribe(tribeModel.getOwnTribe().setVerifyNum(0).setStatus(1));
             tribeFloatView.update(tribeModel);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(isRefreshPage){
+            isRefreshPage = false;
+            getRefreshController().refreshBegin();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        getActivity().unregisterReceiver(refreshBroadcastReceiver);
+        super.onDestroyView();
     }
 }

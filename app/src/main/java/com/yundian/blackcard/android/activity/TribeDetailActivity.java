@@ -53,7 +53,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
     private DynamicListController dynamicListController;
     private DynamicListAdapter dynamicListAdapter;
     private TribeInfosModel tribeInfosModel;
-    private int clickedPosition;
+    private int dynamicPosition;
 
     @Override
     protected void onRegisterController() {
@@ -92,7 +92,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
             public void onItemChildViewClick(View childView, int position, int action, Object obj) {
                 DynamicModel dynamicModel = dynamicListAdapter.getItem(position);
                 if (dynamicModel != null) {
-                    clickedPosition = position;
+                    dynamicPosition = position;
                     dynamicListController.onItemChildViewClick(childView, action, dynamicModel, obj);
                 }
             }
@@ -110,10 +110,12 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
 
                             @Override
                             public void onSuccess(Object o) {
+                                sendBroadcast(new Intent(ActionConstant.Broadcast.TRIBE_UPDATE));
                                 tribeInfosModel.getTribeInfo().setStatus(2);
                                 headerView.update(tribeInfosModel);
                                 ToastUtils.show(context, "加入成功");
                                 getRefreshController().refreshBegin();
+
                             }
                         });
                         break;
@@ -126,6 +128,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
 
                             @Override
                             public void onSuccess(Object o) {
+                                sendBroadcast(new Intent(ActionConstant.Broadcast.TRIBE_UPDATE));
                                 tribeInfosModel.getMemberInfo().setStatus(0);
                                 headerView.update(tribeInfosModel);
                                 updateBottomStatus(0);
@@ -223,7 +226,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ActionConstant.Action.DYNAMIC_COMMENT_REQUEST
                 && resultCode == RESULT_OK) {
-            DynamicModel dynamicModel = dynamicListAdapter.getItem(clickedPosition);
+            DynamicModel dynamicModel = dynamicListAdapter.getItem(dynamicPosition);
             if (dynamicModel != null) {
                 dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
                 dynamicListController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);

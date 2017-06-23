@@ -58,4 +58,8 @@ public interface ActionConstant {
         String IMG_BIG_INDEX = "IMG_BIG_INDEX";
         String TRIBEID_LIST_MODEL = "TRIBEID_LIST_MODEL";
     }
+
+    interface Broadcast {
+        String TRIBE_UPDATE = "TRIBE_UPDATE";
+    }
 }
