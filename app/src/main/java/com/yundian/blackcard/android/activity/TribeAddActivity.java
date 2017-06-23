@@ -68,6 +68,7 @@ public class TribeAddActivity extends BaseActivity {
         super.initData();
         cityPickerHelper = new CityPickerHelper();
         selectorHelper = new MultiImageSelectorHelper(this);
+        selectorHelper.setClip(false);
     }
 
     @OnClick(value = {R.id.tribeAdd, R.id.tribeAddressLayout, R.id.picLayout})
@@ -123,7 +124,7 @@ public class TribeAddActivity extends BaseActivity {
                 cityPickerHelper.selectCity(context, new CityPickerHelper.OnCitySelectedListener() {
                     @Override
                     public void onCitySelected(String... citySelected) {
-                        tribeAddressText.setText(citySelected[0] + citySelected[1] + citySelected[2]);
+                        tribeAddressText.setText(citySelected[0] + citySelected[1]);
                         province = citySelected[0];
                         city = citySelected[1];
                     }

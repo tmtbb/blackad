@@ -25,6 +25,7 @@ public class MultiImageSelectorHelper {
     public static final int REQUEST_IMAGE = 2;
     public static final int REQUEST_IMAGE_CLIP = 3;
     public static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
+    private boolean isClip = true;
     private ArrayList<String> mSelectPath = new ArrayList<>();
 
     public void pickImage(boolean isSingle, int maxNum) {
@@ -33,6 +34,11 @@ public class MultiImageSelectorHelper {
 
     public void pickImage(boolean isSingle, int maxNum, boolean isInit) {
         pickImage(isSingle, maxNum, isInit, 200, 200);
+    }
+
+
+    public void setClip(boolean clip) {
+        isClip = clip;
     }
 
     public void pickImage(boolean isSingle, int maxNum, boolean isInit, int clipWidth, int clipHeight) {
@@ -51,6 +57,7 @@ public class MultiImageSelectorHelper {
             selector.count(maxNum);
             selector.clipHeight(clipHeight);
             selector.clipWidth(clipWidth);
+            selector.isClip(isClip);
             if (isSingle) {
                 selector.single();
             } else {

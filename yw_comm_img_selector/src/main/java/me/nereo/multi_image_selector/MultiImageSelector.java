@@ -27,6 +27,7 @@ public class MultiImageSelector {
     private int mMode = MultiImageSelectorActivity.MODE_MULTI;
     private ArrayList<String> mOriginData;
     private static MultiImageSelector sSelector;
+    private boolean isClip = true;
 
     @Deprecated
     private MultiImageSelector(Context context) {
@@ -55,6 +56,11 @@ public class MultiImageSelector {
         mShowCamera = show;
         return sSelector;
     }
+    public MultiImageSelector isClip(boolean isClip) {
+        this.isClip = isClip;
+        return sSelector;
+    }
+
 
     public MultiImageSelector count(int count) {
         mMaxCount = count;
@@ -119,6 +125,7 @@ public class MultiImageSelector {
         intent.putExtra(MultiImageSelectorActivity.EXTRA_SELECT_COUNT, mMaxCount);
         intent.putExtra(MultiImageSelectorActivity.EXTRA_CLIP_WIDTH, mClipWidth);
         intent.putExtra(MultiImageSelectorActivity.EXTRA_CLIP_HEIGHT, mClipHeight);
+        intent.putExtra(MultiImageSelectorActivity.EXTRA_IS_CLIP, isClip);
 
         if (mOriginData != null) {
             intent.putStringArrayListExtra(MultiImageSelectorActivity.EXTRA_DEFAULT_SELECTED_LIST, mOriginData);

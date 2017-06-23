@@ -86,7 +86,7 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
                     tribeFloatView.update(tribeModel.setOwnTribe(tribeModel.getOwnTribe().setVerifyNum(0)));
                     ActivityUtil.nextTribeApplay(getActivity(), tribeModel.getOwnTribe().getId(), 1);
                 } else if (ownStatus == 1) {
-                    showToast("当前部落正在审核");
+                    showToast("当前部落正在审核"); ActivityUtil.nextTribeAdd(context);
                 }
             }
         });

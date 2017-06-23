@@ -70,7 +70,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:1.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.qiyukf.unicorn:unicorn:3.5.0'
-    compile 'com.bigkoo:pickerview:2.1.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'in.srain.cube:ultra-ptr:1.0.11'

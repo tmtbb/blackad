@@ -31,6 +31,7 @@ public class CityPickerHelper {
                 .district("西湖区")
                 .textColor(Color.parseColor("#434343"))
                 .provinceCyclic(true)
+                .onlyShowProvinceAndCity(true)
                 .cityCyclic(false)
                 .districtCyclic(false)
                 .visibleItemsCount(7)

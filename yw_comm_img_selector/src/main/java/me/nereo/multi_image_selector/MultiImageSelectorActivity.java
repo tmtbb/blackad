@@ -51,6 +51,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
      * Whether show camera，true by default
      */
     public static final String EXTRA_SHOW_CAMERA = "show_camera";
+    public static final String EXTRA_IS_CLIP = "is_clip";
     /**
      * Result data set，ArrayList&lt;String&gt;
      */
@@ -72,6 +73,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
     private int mClipWidth = 200;
     private int mClipHeight = 200;
     private File imageCropFile;
+    private boolean isClip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         mDefaultCount = intent.getIntExtra(EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
         mClipHeight = intent.getIntExtra(EXTRA_CLIP_HEIGHT, 400);
         mClipWidth = intent.getIntExtra(EXTRA_CLIP_WIDTH, 400);
+        isClip = intent.getBooleanExtra(EXTRA_IS_CLIP, true);
         final int mode = intent.getIntExtra(EXTRA_SELECT_MODE, MODE_MULTI);
         final boolean isShow = intent.getBooleanExtra(EXTRA_SHOW_CAMERA, true);
         if (mode == MODE_MULTI && intent.hasExtra(EXTRA_DEFAULT_SELECTED_LIST)) {
@@ -170,7 +173,20 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     @Override
     public void onSingleImageSelected(String path) {
-        startPhotoZoom(path);
+        if (isClip) {
+            startPhotoZoom(path);
+        } else {
+            if (resultList != null) {
+                resultList.add(path);
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra(EXTRA_RESULT, resultList);
+                setResult(RESULT_OK, intent);
+            } else {
+                setResult(RESULT_CANCELED);
+            }
+            finish();
+        }
+
     }
 
     @Override
