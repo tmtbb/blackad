@@ -170,7 +170,7 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
         switch (view.getId()) {
             case R.id.logoutText:
                 SPUtils.remove(UserSetInfoActivity.this, "UserToken");
-                Intent intent = new Intent(context,LoginActivity.class);
+                Intent intent = new Intent(context, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
@@ -178,7 +178,7 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                 selectorHelper.pickImage(true, 1, true);
                 break;
             case R.id.toolbar_subtitle:
-                EditText editTexts[] = {nicknameCell.getContentText(), identityCardCell.getContentText(),emailCell.getContentText()};
+                EditText editTexts[] = {nicknameCell.getContentText(), identityCardCell.getContentText(), emailCell.getContentText()};
                 for (EditText editText : editTexts)
                     if (StringUtils.isEmpty(editText.getText().toString())) {
                         showToast(editText.getHint());
@@ -209,7 +209,13 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
         model.setPosition(positionCell.getContent());
         model.setCompany(companyCell.getContent());
         model.setSex(sexCell.getContent());
-        model.setIdentityCard(userDetailModel.getIdentityCard());
+
+        if (StringUtils.isEmpty(userDetailModel.getIdentityCard())) {
+            model.setIdentityCard(identityCardCell.getContent());
+        } else {
+            model.setIdentityCard(userDetailModel.getIdentityCard());
+        }
+
         model.setEmail(emailCell.getContent());
         model.setNickName(nicknameCell.getContent());
         if (selectorHelper.getmSelectPath().size() > 0) {
