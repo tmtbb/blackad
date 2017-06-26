@@ -92,7 +92,7 @@ public class CommServiceImpl extends OkHttpService<CommServiceImpl.RetrofitCommS
         Map<String, RequestBody> map = new HashMap<>();
         for (int i = 0; i < paths.size(); i++) {
             File file = new File(paths.get(i));
-            map.put("file\"; filename=", RequestBody.create(MediaType.parse("image/jpeg"), file));
+            map.put("file\"; filename=\""+file.getName(), RequestBody.create(MediaType.parse("image/jpeg"), file));
         }
         setSubscribe(service.upload(map), new DefObserver<List<UploadInfo>>(listener));
     }
