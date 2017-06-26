@@ -72,8 +72,14 @@ public class SignInterceptor implements Interceptor {
         }
 
         RequestBody requestBody = oldRequest.body();
+        long contentLength = 0 ;
+        try {
+            contentLength = requestBody.contentLength();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         HttpUrl.Builder builder = oldRequest.url().newBuilder();
-        if( oldRequest.method().equals("POST") && requestBody instanceof FormBody) {
+        if( oldRequest.method().equals("POST") && (requestBody instanceof FormBody || contentLength == 0 ) ) {
             FormBody.Builder builder1 = new FormBody.Builder();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 builder1.add(entry.getKey(), entry.getValue().toString());

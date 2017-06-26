@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.yundian.comm.BuildConfig;
 import com.yundian.comm.networkapi.interceptor.LoggingInterceptor;
 import com.yundian.comm.networkapi.config.NetworkAPIConfig;
 import com.yundian.comm.networkapi.interceptor.SignInterceptor;
@@ -49,7 +50,9 @@ public class OkHttpUtils {
         builder.readTimeout(config.getReadTimeout(), TimeUnit.SECONDS);
         SignInterceptor signInterceptor = new SignInterceptor(config.getSignCalculate(), config.getCommParameter());
         builder.addInterceptor(signInterceptor);
-//        builder.addInterceptor(new LoggingInterceptor());
+        if(BuildConfig.DEBUG) {
+            builder.addInterceptor(new LoggingInterceptor());
+        }
         okHttpClient = builder.build();
         createRetrofit();
     }
