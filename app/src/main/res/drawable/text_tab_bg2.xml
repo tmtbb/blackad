@@ -3,9 +3,11 @@
     <item>
         <shape>
             <solid android:color="@color/color_E4A63F" />
+            <corners android:topLeftRadius="@dimen/space_4"
+                android:bottomLeftRadius="@dimen/space_4"/>
         </shape>
     </item>
-    <item android:left="3dp">
+    <item android:left="5dp">
         <shape>
             <solid android:color="@color/color_white" />
         </shape>

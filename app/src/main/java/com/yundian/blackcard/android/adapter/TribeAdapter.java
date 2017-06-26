@@ -10,6 +10,7 @@ import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.TribeListModel;
 import com.yundian.comm.adapter.base.BaseListViewAdapter;
 import com.yundian.comm.adapter.viewholder.BaseViewHolder;
+import com.yundian.comm.util.DisplayUtil;
 
 import butterknife.BindView;
 
@@ -108,6 +109,7 @@ public class TribeAdapter extends BaseListViewAdapter<TribeListModel> {
 
         public void setShapeBackground(int resId) {
             shapeLayout.setBackgroundResource(resId);
+            shapeLayout.setPadding(DisplayUtil.dip2px(12, context), DisplayUtil.dip2px(12, context), DisplayUtil.dip2px(12, context), DisplayUtil.dip2px(12, context));
         }
     }
 

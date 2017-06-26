@@ -41,6 +41,7 @@ import com.yundian.blackcard.android.fragment.MyFragment;
 import com.yundian.blackcard.android.model.UpdateInfo;
 import com.yundian.blackcard.android.model.UserInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
+import com.yundian.blackcard.android.util.StatusBarCompat;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.DeviceUtils;
 import com.yundian.comm.util.LogUtils;
@@ -105,7 +106,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        StatusBarCompat.compat(this);
         Unicorn.init(this, "9bcdb2182bde2835e2b0e7fc72a39e68", options(), new UnicornImageLoader() {
 
             @Nullable

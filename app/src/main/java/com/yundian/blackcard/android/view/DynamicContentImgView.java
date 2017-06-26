@@ -125,7 +125,7 @@ public class DynamicContentImgView extends BaseFrameLayout {
             url = "file://" + url;
         }
 
-        Glide.with(context).load(url).placeholder(new ColorDrawable(getResources().getColor(R.color.color_f8f8f8))).centerCrop().into(imageView);
+        Glide.with(context).load(url).dontAnimate().placeholder(new ColorDrawable(getResources().getColor(R.color.color_f8f8f8))).centerCrop().into(imageView);
         view.setVisibility(View.VISIBLE);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
