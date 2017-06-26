@@ -54,6 +54,9 @@ public class NetworkAPIFactory extends ServiceManage {
         final NetworkAPIConfig networkAPIConfig = NetworkAPIConfig.Builder()
                 .setBaseUrl(BuildConfig.SERVER_HOST)
                 .setCommParameter(commParameter)
+                .setConnectTimeout(30)
+                .setReadTimeout(30)
+                .setWriteTimeout(30)
                 .setSignCalculate(new DefSignCalculateImpl(deviceKey)).build();
 
         OkHttpUtils.getInstance().initConfig(networkAPIConfig);

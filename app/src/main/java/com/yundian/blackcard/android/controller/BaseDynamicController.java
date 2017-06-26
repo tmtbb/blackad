@@ -80,7 +80,7 @@ public abstract class BaseDynamicController extends BaseController {
     public void onItemChildViewClick(View view, int action, DynamicModel dynamicModel, Object obj) {
 
         if (checkLogin(action)) {
-            if (dynamicModel != null) {
+            if (dynamicModel != null && checkPermisstion(action)) {
                 DynamicAction dynamicAction = actionMap.get(action);
                 if (dynamicAction != null) {
                     dynamicAction.doAction(view, action, dynamicModel, obj);
@@ -94,7 +94,18 @@ public abstract class BaseDynamicController extends BaseController {
     public boolean checkLogin(int action) {
 
         return true;
+    }
 
+    public boolean checkPermisstion(int action) {
+        if (action == ActionConstant.Action.DYNAMIC_COMMENT
+                || action == ActionConstant.Action.DYNAMIC_PRAISE
+                || action == ActionConstant.Action.DYNAMIC_MORE){
+            if (!hasPermission) {
+                showNoPermission();
+                return false;
+            }
+        }
+        return true;
     }
 
     class DynamicUserNameAction implements DynamicAction {
@@ -128,10 +139,6 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, int action, final DynamicModel dynamicModel, Object obj) {
-            if (!hasPermission) {
-                showNoPermission();
-                return;
-            }
             new ActionSheetDialog(context)
                     .builder()
                     .setTitle("请选择类型")
@@ -160,10 +167,6 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, final int action, final DynamicModel dynamicModel, Object obj) {
-            if (!hasPermission) {
-                showNoPermission();
-                return;
-            }
             NetworkAPIFactory.getDynamicService().likeAdd(dynamicModel.getId(), new OnAPIListener<Object>() {
                 @Override
                 public void onError(Throwable ex) {
@@ -189,10 +192,6 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, int action, DynamicModel dynamicModel, Object obj) {
-            if (!hasPermission) {
-                showNoPermission();
-                return;
-            }
             if (context instanceof Activity)
                 ActivityUtil.nextDynamicComment((Activity) context, dynamicModel);
         }
@@ -210,7 +209,7 @@ public abstract class BaseDynamicController extends BaseController {
         super.onDestroy();
     }
 
-    public void  showNoPermission(){
+    public void showNoPermission() {
         showToast("暂无权限");
     }
 }

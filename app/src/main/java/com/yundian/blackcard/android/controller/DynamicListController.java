@@ -41,11 +41,8 @@ public class DynamicListController extends BaseDynamicController {
 
         @Override
         public void doAction(View view, int action, DynamicModel dynamicModel, Object obj) {
-            if (!hasPermission) {
-                showNoPermission();
-                return;
-            }
-            ActivityUtil.nextDynamicDetail(context, dynamicModel);
+            if (checkPermisstion(action))
+                ActivityUtil.nextDynamicDetail(context, dynamicModel);
 
         }
     }
