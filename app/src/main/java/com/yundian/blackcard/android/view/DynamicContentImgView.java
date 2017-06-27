@@ -114,19 +114,17 @@ public class DynamicContentImgView extends BaseFrameLayout {
      * @param position
      */
     private void showView(View view, boolean isSingleImg, final int position) {
-        if (!isSingleImg) {
-            setViewLayoutParams(view, childWidth, childWidth);
-        } else {
-            resizeSingleImg(view);
-        }
         final ImageView imageView = (ImageView) view;
         String url = dynamicImageEntities.get(position).getImgUrl();
-        if (url.indexOf("http") != 0) {
-            url = "file://" + url;
+
+        if (!isSingleImg) {
+            setViewLayoutParams(view, childWidth, childWidth);
+            Glide.with(context).load(url).dontAnimate().placeholder(new ColorDrawable(getResources().getColor(R.color.color_f8f8f8))).centerCrop().into(imageView);
+        } else {
+            resizeSingleImg(imageView,url);
         }
 
-        Glide.with(context).load(url).dontAnimate().placeholder(new ColorDrawable(getResources().getColor(R.color.color_f8f8f8))).centerCrop().into(imageView);
-        view.setVisibility(View.VISIBLE);
+         view.setVisibility(View.VISIBLE);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +139,7 @@ public class DynamicContentImgView extends BaseFrameLayout {
      *
      * @param view
      */
-    private void resizeSingleImg(View view) {
+    private void resizeSingleImg(ImageView view,String url) {
         try {
             String size[] = dynamicImageEntities.get(0).getSize().split("x");
             int width = Integer.parseInt(size[0]);
@@ -159,8 +157,14 @@ public class DynamicContentImgView extends BaseFrameLayout {
             width = width > maxImageHeight ? maxImageHeight : width;
             height = height > maxImageHeight ? maxImageHeight : height;
             setViewLayoutParams(view, width, height);
+            Glide.with(context).load(url).dontAnimate()
+                    .placeholder(new ColorDrawable(getResources().getColor(R.color.color_f8f8f8)))
+                    .override(width,height).centerCrop().into(view);
         } catch (Exception e) {
             setViewLayoutParams(view, 300, 300);
+            Glide.with(context).load(url).dontAnimate()
+                    .placeholder(new ColorDrawable(getResources().getColor(R.color.color_f8f8f8)))
+                    .override(300,300).centerCrop().into(view);
         }
 
     }

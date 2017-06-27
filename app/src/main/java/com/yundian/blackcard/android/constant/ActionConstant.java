@@ -23,7 +23,8 @@ public interface ActionConstant {
         int DYNAMIC_PRAISE = DYNAMIC_NAME + 1;
         int DYNAMIC_COMMENT = DYNAMIC_PRAISE + 1;
         int DYNAMIC_MORE = DYNAMIC_COMMENT + 1;
-        int DYNAMIC_COMMENT_REQUEST = DYNAMIC_MORE + 1;
+        int DYNAMIC_DELETE = DYNAMIC_MORE + 1;
+        int DYNAMIC_COMMENT_REQUEST = DYNAMIC_DELETE + 1;
         int DYNAMIC_RELEASE_ICON = DYNAMIC_COMMENT_REQUEST + 1;
         int DYNAMIC_RELEASE_DELETE = DYNAMIC_RELEASE_ICON + 1;
         int DYNAMIC_RELEASE_REQUEST = DYNAMIC_RELEASE_DELETE + 1;
@@ -57,6 +58,7 @@ public interface ActionConstant {
         String IMGS_BIG = "IMGS_BIG";
         String IMG_BIG_INDEX = "IMG_BIG_INDEX";
         String TRIBEID_LIST_MODEL = "TRIBEID_LIST_MODEL";
+        String USER_ID = "USER_ID";
     }
 
     interface Broadcast {

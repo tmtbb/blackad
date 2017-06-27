@@ -3,9 +3,11 @@ package com.yundian.blackcard.android.controller;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.View;
 
+import com.yundian.blackcard.android.activity.DynamicDetailActivity;
 import com.yundian.blackcard.android.activity.LoginActivity;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.listener.DynamicAction;
@@ -18,6 +20,7 @@ import com.yundian.blackcard.android.util.DynamicActionObservable;
 import com.yundian.blackcard.android.view.ActionSheetDialog;
 import com.yundian.comm.controller.BaseController;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
+import com.yundian.comm.util.SPUtils;
 
 import java.util.ArrayList;
 
@@ -69,6 +72,7 @@ public abstract class BaseDynamicController extends BaseController {
         registerAction(ActionConstant.Action.DYNAMIC_PRAISE, new DynamicPraiseAction());
         registerAction(ActionConstant.Action.DYNAMIC_COMMENT, new DynamicCommentAction());
         registerAction(ActionConstant.Action.DYNAMIC_MORE, new DynamicMoreAction());
+        registerAction(ActionConstant.Action.DYNAMIC_DELETE, new DynamicMoreAction());
         registerAction(ActionConstant.Action.DYNAMIC_PIC, new DynamicPicsAction());
 
     }
@@ -99,7 +103,7 @@ public abstract class BaseDynamicController extends BaseController {
     public boolean checkPermisstion(int action) {
         if (action == ActionConstant.Action.DYNAMIC_COMMENT
                 || action == ActionConstant.Action.DYNAMIC_PRAISE
-                || action == ActionConstant.Action.DYNAMIC_MORE){
+                || action == ActionConstant.Action.DYNAMIC_MORE) {
             if (!hasPermission) {
                 showNoPermission();
                 return false;
@@ -138,28 +142,56 @@ public abstract class BaseDynamicController extends BaseController {
     class DynamicMoreAction implements DynamicAction {
 
         @Override
-        public void doAction(View view, int action, final DynamicModel dynamicModel, Object obj) {
-            new ActionSheetDialog(context)
+        public void doAction(View view, final int action, final DynamicModel dynamicModel, Object obj) {
+            ActionSheetDialog sheetDialog = new ActionSheetDialog(context)
                     .builder()
                     .setTitle("请选择类型")
                     .setCancelable(true)
-                    .setCanceledOnTouchOutside(true)
-                    .addSheetItem("举报", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
-                        @Override
-                        public void onClick(int which) {
-                            NetworkAPIFactory.getDynamicService().dynamicReport(dynamicModel.getId(), new OnAPIListener<Object>() {
-                                @Override
-                                public void onError(Throwable ex) {
-                                    showToast(ex.getMessage());
-                                }
+                    .setCanceledOnTouchOutside(true);
+            Long userId = (Long) SPUtils.get(context, ActionConstant.IntentKey.USER_ID, -1l);
+            if (userId != -1l && userId == dynamicModel.getUserId()) {
 
-                                @Override
-                                public void onSuccess(Object o) {
-                                    showToast("举报成功");
-                                }
-                            });
+                sheetDialog.addSheetItem("删除", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        if (context instanceof DynamicDetailActivity) {
+                            ((DynamicDetailActivity) context).showLoader();
                         }
-                    }).show();
+                        NetworkAPIFactory.getDynamicService().dynamicDelete(dynamicModel.getId(), new OnAPIListener<Object>() {
+                            @Override
+                            public void onError(Throwable ex) {
+                                if (context instanceof DynamicDetailActivity)
+                                    ((DynamicDetailActivity) context).closeLoader();
+                                showToast(ex.getMessage());
+                            }
+
+                            @Override
+                            public void onSuccess(Object o) {
+                                showToast("删除成功");
+                                notifyDynamicChanged(ActionConstant.Action.DYNAMIC_DELETE, dynamicModel);
+                            }
+                        });
+                    }
+                });
+            } else {
+                sheetDialog.addSheetItem("举报", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which) {
+                        NetworkAPIFactory.getDynamicService().dynamicReport(dynamicModel.getId(), new OnAPIListener<Object>() {
+                            @Override
+                            public void onError(Throwable ex) {
+                                showToast(ex.getMessage());
+                            }
+
+                            @Override
+                            public void onSuccess(Object o) {
+                                showToast("举报成功");
+                            }
+                        });
+                    }
+                });
+            }
+            sheetDialog.show();
         }
     }
 

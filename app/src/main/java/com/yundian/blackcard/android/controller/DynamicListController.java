@@ -49,15 +49,22 @@ public class DynamicListController extends BaseDynamicController {
 
     @Override
     public void onUpdateDynamic(int action, DynamicModel dynamicModel) {
+        int position = -1;
         for (int i = 0; i < dynamicListAdapter.getList().size(); i++) {
             DynamicModel item = dynamicListAdapter.getItem(i);
             if (item.getId().equals(dynamicModel.getId())) {
                 item.setLikeNum(dynamicModel.getLikeNum());
                 item.setIsLike(dynamicModel.getIsLike());
                 item.setCommentNum(dynamicModel.getCommentNum());
+                position = i;
                 break;
             }
         }
-        dynamicListAdapter.notifyDataSetChanged(dynamicModel);
+        if (action == ActionConstant.Action.DYNAMIC_DELETE) {
+            dynamicListAdapter.remove(position);
+            dynamicListAdapter.notifyDataSetChanged();
+        } else
+            dynamicListAdapter.notifyDataSetChanged(dynamicModel);
     }
+
 }

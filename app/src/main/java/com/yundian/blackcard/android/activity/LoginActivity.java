@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.AccountInfo;
 import com.yundian.blackcard.android.model.UserInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
@@ -91,6 +92,7 @@ public class LoginActivity extends BaseActivity {
         {
             @Override
             protected void onSuccess(UserInfo userInfo) {
+                SPUtils.put(LoginActivity.this, ActionConstant.IntentKey.USER_ID, userInfo.getUserId());
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();

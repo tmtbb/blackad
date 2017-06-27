@@ -3,6 +3,9 @@ package com.yundian.blackcard.android.controller;
 import android.content.Context;
 
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.activity.DynamicDetailActivity;
+import com.yundian.blackcard.android.constant.ActionConstant;
+import com.yundian.blackcard.android.listener.DynamicAction;
 import com.yundian.blackcard.android.model.DynamicModel;
 import com.yundian.blackcard.android.view.DrawableTextView;
 import com.yundian.blackcard.android.view.DynamicView;
@@ -29,8 +32,16 @@ public class DynamicDetailController extends BaseDynamicController {
 
     @Override
     public void onUpdateDynamic(int action, DynamicModel dynamicModel) {
+        if (action == ActionConstant.Action.DYNAMIC_DELETE) {
+            if (context instanceof DynamicDetailActivity) {
+                ((DynamicDetailActivity) context).closeLoader();
+                ((DynamicDetailActivity) context).finish();
+            }
+            return;
+        }
         dynamicView.update(dynamicModel);
         updatePraise(dynamicModel);
+
     }
 
     public void updatePraise(DynamicModel dynamicModel) {

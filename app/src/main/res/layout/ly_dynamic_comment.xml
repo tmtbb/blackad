@@ -64,7 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="3dp"
-            android:maxLines="3"
             android:text="这个世界会有一个人、不需要你等待和追逐、 你只要敢于跨出一小步、剩余的九十九步，他 会背着你走完——有上海的卡友一起的去北..."
             android:textColor="@color/color_434343"
             android:textSize="@dimen/textsize_14" />
