@@ -113,4 +113,13 @@ public interface IDynamicService {
      */
     @ServiceMethod("dynamicReport")
     void dynamicReport(String circleMessageId, OnAPIListener<Object> listener);
+
+
+    /**
+     * 评论删除
+     * @param commentId
+     * @param listener
+     */
+    @ServiceMethod("commentDelete")
+    void commentDelete(String commentId,OnAPIListener<Object> listener);
 }

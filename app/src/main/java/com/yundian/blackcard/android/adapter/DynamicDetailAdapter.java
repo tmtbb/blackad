@@ -1,12 +1,14 @@
 package com.yundian.blackcard.android.adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.DynamicCommentModel;
 import com.yundian.blackcard.android.view.DynamicCommentView;
 import com.yundian.comm.adapter.base.BaseListViewAdapter;
 import com.yundian.comm.adapter.viewholder.BaseViewHolder;
+import com.yundian.comm.listener.OnChildViewClickListener;
 
 import butterknife.BindView;
 
@@ -44,6 +46,17 @@ public class DynamicDetailAdapter extends BaseListViewAdapter<DynamicCommentMode
         @Override
         protected int layoutId() {
             return R.layout.item_dynamic_comment;
+        }
+
+        @Override
+        protected void initListener() {
+            super.initListener();
+            dynamicCommentView.setOnChildViewClickListener(new OnChildViewClickListener() {
+                @Override
+                public void onChildViewClick(View childView, int action, Object obj) {
+                    onItemChildViewClick(childView, action, obj);
+                }
+            });
         }
 
         @Override

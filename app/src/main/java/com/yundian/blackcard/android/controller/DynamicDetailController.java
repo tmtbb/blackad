@@ -1,14 +1,20 @@
 package com.yundian.blackcard.android.controller;
 
 import android.content.Context;
+import android.view.View;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.activity.DynamicDetailActivity;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.listener.DynamicAction;
+import com.yundian.blackcard.android.manager.CurrentUserManager;
 import com.yundian.blackcard.android.model.DynamicModel;
+import com.yundian.blackcard.android.model.UserInfo;
+import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
+import com.yundian.blackcard.android.view.ActionSheetDialog;
 import com.yundian.blackcard.android.view.DrawableTextView;
 import com.yundian.blackcard.android.view.DynamicView;
+import com.yundian.comm.networkapi.listener.OnAPIListener;
 
 /**
  * @author : created by chuangWu
@@ -53,4 +59,5 @@ public class DynamicDetailController extends BaseDynamicController {
             praiseText.setText("赞");
         }
     }
+
 }

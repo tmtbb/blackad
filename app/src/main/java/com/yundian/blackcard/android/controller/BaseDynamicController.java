@@ -141,17 +141,26 @@ public abstract class BaseDynamicController extends BaseController {
         }
     }
 
+    protected boolean isCurrentUser(DynamicModel dynamicModel) {
+        UserInfo userInfo = CurrentUserManager.getInstance().getUserInfo();
+        return userInfo != null && userInfo.getUserId() == dynamicModel.getUserId();
+    }
+
+    protected ActionSheetDialog createActionSheetDialog(){
+        ActionSheetDialog sheetDialog = new ActionSheetDialog(context)
+                .builder()
+                .setTitle("请选择类型")
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true);
+        return sheetDialog;
+    }
+
     class DynamicMoreAction implements DynamicAction {
 
         @Override
         public void doAction(View view, final int action, final DynamicModel dynamicModel, Object obj) {
-            ActionSheetDialog sheetDialog = new ActionSheetDialog(context)
-                    .builder()
-                    .setTitle("请选择类型")
-                    .setCancelable(true)
-                    .setCanceledOnTouchOutside(true);
-            UserInfo userInfo = CurrentUserManager.getInstance().getUserInfo();
-            if (userInfo != null && userInfo.getUserId() == dynamicModel.getUserId()) {
+          ActionSheetDialog sheetDialog = createActionSheetDialog();
+            if (isCurrentUser(dynamicModel)) {
                 sheetDialog.addSheetItem("删除", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {

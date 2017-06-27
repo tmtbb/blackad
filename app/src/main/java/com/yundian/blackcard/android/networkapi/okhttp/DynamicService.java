@@ -94,6 +94,12 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
         Observable<DefResponse<Object>> dynamicReport(@Field("circleMessageId") String circleMessageId);
 
 
+        @POST("/api/circle/message/comment/delete.json")
+        @FormUrlEncoded
+        @ServiceMethod("commentDelete")
+        Observable<DefResponse<Object>> commentDelete(@Field("commentId") String commentId);
+
+
     }
 
     @Override
@@ -148,6 +154,11 @@ public class DynamicService extends OkHttpService<DynamicService.RetrofitDynamic
     @Override
     public void dynamicReport(String circleMessageId, OnAPIListener<Object> listener) {
         setSubscribe(service.dynamicReport(circleMessageId), new DefObserver<>(listener));
+    }
+
+    @Override
+    public void commentDelete(String commentId, OnAPIListener<Object> listener) {
+        setSubscribe(service.commentDelete(commentId), new DefObserver<>(listener));
     }
 
 

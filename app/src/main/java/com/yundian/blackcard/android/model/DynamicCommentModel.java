@@ -14,6 +14,7 @@ public class DynamicCommentModel extends BaseModel{
     private long createTime;
     private String nickName;
     private long userId;
+    private String id;
     private String headUrl;
     private String comment;
 
@@ -55,5 +56,13 @@ public class DynamicCommentModel extends BaseModel{
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

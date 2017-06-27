@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.DynamicCommentModel;
 import com.yundian.blackcard.android.model.DynamicModel;
 import com.yundian.blackcard.android.util.TimeUtil;
@@ -45,6 +46,17 @@ public class DynamicCommentView extends BaseDataFrameLayout<DynamicCommentModel>
 
     public DynamicCommentView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    protected void initListener() {
+        super.initListener();
+        contentText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onChildViewClick(v, ActionConstant.Action.DYNAMIC_COMMENT_CONTENT);
+            }
+        });
     }
 
     @Override
