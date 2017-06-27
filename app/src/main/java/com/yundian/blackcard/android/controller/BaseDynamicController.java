@@ -12,8 +12,10 @@ import com.yundian.blackcard.android.activity.LoginActivity;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.listener.DynamicAction;
 import com.yundian.blackcard.android.listener.OnDynamicUpdateListener;
+import com.yundian.blackcard.android.manager.CurrentUserManager;
 import com.yundian.blackcard.android.model.CircleMessageImgModel;
 import com.yundian.blackcard.android.model.DynamicModel;
+import com.yundian.blackcard.android.model.UserInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.blackcard.android.util.ActivityUtil;
 import com.yundian.blackcard.android.util.DynamicActionObservable;
@@ -148,9 +150,8 @@ public abstract class BaseDynamicController extends BaseController {
                     .setTitle("请选择类型")
                     .setCancelable(true)
                     .setCanceledOnTouchOutside(true);
-            Long userId = (Long) SPUtils.get(context, ActionConstant.IntentKey.USER_ID, -1l);
-            if (userId != -1l && userId == dynamicModel.getUserId()) {
-
+            UserInfo userInfo = CurrentUserManager.getInstance().getUserInfo();
+            if (userInfo != null && userInfo.getUserId() == dynamicModel.getUserId()) {
                 sheetDialog.addSheetItem("删除", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
                     public void onClick(int which) {

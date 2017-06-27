@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.constant.ActionConstant;
+import com.yundian.blackcard.android.manager.CurrentUserManager;
 import com.yundian.blackcard.android.model.AccountInfo;
 import com.yundian.blackcard.android.model.UserInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
@@ -42,7 +43,7 @@ public class LoginActivity extends BaseActivity {
         super.initData();
 
         if (SPUtils.contains(this, UserToken)) {
-            reqeust( NetworkAPIFactory.getUserService().refreshToken());
+            reqeust(NetworkAPIFactory.getUserService().refreshToken());
         }
     }
 
@@ -75,24 +76,23 @@ public class LoginActivity extends BaseActivity {
         } else if (StringUtils.isEmpty(strPassword)) {
             showToast(password.getHint());
         } else {
-            reqeust(NetworkAPIFactory.getUserService().login(strPhone,strPassword));
+            reqeust(NetworkAPIFactory.getUserService().login(strPhone, strPassword));
         }
     }
 
 
     private void reqeust(Observable<AccountInfo> observable) {
-        observable.flatMap(new Function<AccountInfo,Observable<UserInfo>>() {
+        observable.flatMap(new Function<AccountInfo, Observable<UserInfo>>() {
             @Override
             public Observable<UserInfo> apply(AccountInfo accountInfo) throws Exception {
                 NetworkAPIFactory.addCommParameter("token", accountInfo.getToken());
                 SPUtils.put(LoginActivity.this, UserToken, accountInfo.getToken());
                 return NetworkAPIFactory.getUserService().userinfo();
             }
-        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new BaseObserver<UserInfo>()
-        {
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new BaseObserver<UserInfo>() {
             @Override
             protected void onSuccess(UserInfo userInfo) {
-                SPUtils.put(LoginActivity.this, ActionConstant.IntentKey.USER_ID, userInfo.getUserId());
+                CurrentUserManager.getInstance().setUserInfo(userInfo);
                 Intent intent = new Intent();
                 intent.setClass(LoginActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
@@ -118,7 +118,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onShowError(Throwable ex) {
         super.onShowError(ex);
-        SPUtils.remove(LoginActivity.this,UserToken);
+        SPUtils.remove(LoginActivity.this, UserToken);
     }
 
 }
