@@ -39,6 +39,7 @@ public interface ActionConstant {
         int TRIBE_DELETE = TRIBE_ADD + 1;
         int TRIBE_ADD_REQUEST = TRIBE_DELETE + 1;
         int DYNAMIC_COMMENT_CONTENT = TRIBE_ADD_REQUEST + 1;
+        int DYNAMIC_COMMENT_DELETE = DYNAMIC_COMMENT_CONTENT + 1;
     }
 
     interface IntentKey {

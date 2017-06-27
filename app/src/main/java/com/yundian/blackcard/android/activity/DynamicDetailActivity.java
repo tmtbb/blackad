@@ -112,6 +112,9 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
                                         showToast("删除成功");
                                         dynamicDetailAdapter.remove(position);
                                         dynamicDetailAdapter.notifyDataSetChanged();
+                                        dynamicModel.setCommentNum(dynamicModel.getCommentNum() - 1);
+                                        dynamicDetailController.notifyDynamicChanged(ActionConstant.Action.DYNAMIC_COMMENT_DELETE, dynamicModel);
+                                        updateCommentHeaderView();
                                     }
                                 });
                             }
@@ -138,8 +141,7 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
                     @Override
                     public void onSuccess(List<DynamicCommentModel> dynamicCommentModels) {
                         getRefreshController().refreshComplete(dynamicCommentModels);
-                        dynamicCommentHeaderView.setVisibility(dynamicDetailAdapter.getCount() != 0 ? View.VISIBLE : View.GONE);
-
+                        updateCommentHeaderView();
                     }
                 });
             }
@@ -164,11 +166,12 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
         if (requestCode == ActionConstant.Action.DYNAMIC_COMMENT_REQUEST
                 && resultCode == RESULT_OK) {
             dynamicModel.setCommentNum(dynamicModel.getCommentNum() + 1);
-            dynamicDetailController.onUpdateDynamic(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
+            dynamicDetailController.notifyDynamicChanged(ActionConstant.Action.DYNAMIC_COMMENT, dynamicModel);
             DynamicCommentModel dynamicCommentModel = (DynamicCommentModel) data.getSerializableExtra(ActionConstant.IntentKey.DYNAMIC_COMMENT);
             dynamicDetailAdapter.getList().add(dynamicCommentModel);
             dynamicDetailAdapter.notifyDataSetChanged();
             listView.setSelection(dynamicDetailAdapter.getCount());
+            updateCommentHeaderView();
         }
 
     }
@@ -180,5 +183,10 @@ public class DynamicDetailActivity extends BaseRefreshAbsListControllerActivity<
                 .setCancelable(true)
                 .setCanceledOnTouchOutside(true);
         return sheetDialog;
+    }
+
+    public void updateCommentHeaderView() {
+        dynamicCommentHeaderView.setVisibility(dynamicDetailAdapter.getCount() != 0 ? View.VISIBLE : View.GONE);
+
     }
 }

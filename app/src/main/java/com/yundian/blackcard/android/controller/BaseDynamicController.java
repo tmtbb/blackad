@@ -146,7 +146,7 @@ public abstract class BaseDynamicController extends BaseController {
         return userInfo != null && userInfo.getUserId() == dynamicModel.getUserId();
     }
 
-    protected ActionSheetDialog createActionSheetDialog(){
+    protected ActionSheetDialog createActionSheetDialog() {
         ActionSheetDialog sheetDialog = new ActionSheetDialog(context)
                 .builder()
                 .setTitle("请选择类型")
@@ -159,7 +159,7 @@ public abstract class BaseDynamicController extends BaseController {
 
         @Override
         public void doAction(View view, final int action, final DynamicModel dynamicModel, Object obj) {
-          ActionSheetDialog sheetDialog = createActionSheetDialog();
+            ActionSheetDialog sheetDialog = createActionSheetDialog();
             if (isCurrentUser(dynamicModel)) {
                 sheetDialog.addSheetItem("删除", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
                     @Override
@@ -241,8 +241,7 @@ public abstract class BaseDynamicController extends BaseController {
 
 
     public void notifyDynamicChanged(int action, DynamicModel dynamicModel) {
-        if (actionMap.get(action) != null && dynamicModel != null)
-            DynamicActionObservable.getInstance().notifyUpdate(action, dynamicModel);
+        DynamicActionObservable.getInstance().notifyUpdate(action, dynamicModel);
     }
 
     @Override
