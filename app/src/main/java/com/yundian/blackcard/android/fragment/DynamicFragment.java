@@ -1,6 +1,7 @@
 package com.yundian.blackcard.android.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -57,10 +58,19 @@ public class DynamicFragment extends BaseFragment {
         fragmentList.clear();
         fragmentList.add(dynamicListFragment = new DynamicListFragment());
         fragmentList.add(new ArticleFragment());
-        fragmentList.add(tribeFragment = new TribeFragment());
+        fragmentList.add(tribeFragment = TribeFragment.newInstance(0));
         viewPager.setOffscreenPageLimit(fragmentList.size());
         viewPager.setAdapter(new SimpleFragmentPagerAdapter(getChildFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            viewPager.setCurrentItem(fragmentList.size() - 1);
+        }
     }
 
     @Override

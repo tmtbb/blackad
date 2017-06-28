@@ -41,9 +41,10 @@ public class TribeService extends OkHttpService<TribeService.RetrofitTribeServic
 
     interface RetrofitTribeService {
 
+        @FormUrlEncoded
         @POST("/api/tribe/user/index.json")
         @ServiceMethod("tribeIndex")
-        Observable<DefResponse<TribeModel>> tribeIndex();
+        Observable<DefResponse<TribeModel>> tribeIndex(@Field("type") int type);
 
         @FormUrlEncoded
         @POST("/api/tribe/member/list.json")
@@ -82,8 +83,8 @@ public class TribeService extends OkHttpService<TribeService.RetrofitTribeServic
 
 
     @Override
-    public void tribeIndex(OnAPIListener<TribeModel> listener) {
-        setSubscribe(service.tribeIndex(), new DefObserver<>(listener));
+    public void tribeIndex(int type,OnAPIListener<TribeModel> listener) {
+        setSubscribe(service.tribeIndex(type), new DefObserver<>(listener));
     }
 
     @Override

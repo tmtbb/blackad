@@ -13,10 +13,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.internal.BottomNavigationPresenter;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -66,6 +64,7 @@ public class MainActivity extends BaseActivity {
     private ForceUpdateDialog forceupdatedialog;
     private UpdateDialog updateDialog;
     private DynamicFragment dynamicFragment;
+    private MyFragment myFragment;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -181,7 +180,19 @@ public class MainActivity extends BaseActivity {
                     fragments[index] = dynamicFragment = new DynamicFragment();
                     break;
                 case 2:
-                    fragments[index] = new MyFragment();
+                    fragments[index] = myFragment = new MyFragment();
+                    myFragment.setOnTribeSelectedListener(new MyFragment.OnTribeSelectedListener() {
+                        @Override
+                        public void onTribeSelected() {
+                            if(fragments[1]==null){
+                                fragments[1] = dynamicFragment = new DynamicFragment();
+                            }
+                            Bundle bundle = new Bundle();
+                            fragments[1].setArguments(bundle);
+                            replacenFragment(fragments[1]);
+                            navigationView.setSelectedItemId(R.id.navigation_dynamic);
+                        }
+                    });
                     break;
             }
         }

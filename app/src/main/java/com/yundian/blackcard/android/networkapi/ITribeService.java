@@ -31,7 +31,7 @@ public interface ITribeService {
      * @param listener
      */
     @ServiceMethod("tribeIndex")
-    void tribeIndex(OnAPIListener<TribeModel> listener);
+    void tribeIndex(int type,OnAPIListener<TribeModel> listener);
 
 
     /**

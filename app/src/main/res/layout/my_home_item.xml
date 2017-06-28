@@ -7,15 +7,25 @@
     android:paddingLeft="24dp">
 
     <TextView
+        android:text="我的部落"
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="5dp"
         android:lines="1"
         android:gravity="center_vertical"
         android:textColor="#434343"
         android:textSize="@dimen/textsize_14" />
+
+    <View
+        android:visibility="invisible"
+        android:id="@+id/badgeView"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/textView"
+        android:background="@drawable/badge_bg"
+        android:layout_width="8dp"
+        android:layout_height="8dp"/>
 
     <ImageView
         android:layout_width="wrap_content"

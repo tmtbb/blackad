@@ -49,6 +49,7 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
 
     private RefreshBroadcastReceiver refreshBroadcastReceiver;
     private boolean isRefreshPage = false;
+    private static int requestType = 0;
 
     private class RefreshBroadcastReceiver extends BroadcastReceiver {
 
@@ -68,6 +69,11 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
         return tribeAdapter = new TribeAdapter(context);
     }
 
+    public static TribeFragment newInstance(int type) {
+        requestType = type;
+        return new TribeFragment();
+    }
+
     @Override
     public void initData() {
         super.initData();
@@ -83,7 +89,7 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
         setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                NetworkAPIFactory.getTribeService().tribeIndex(new OnAPIListener<TribeModel>() {
+                NetworkAPIFactory.getTribeService().tribeIndex(requestType, new OnAPIListener<TribeModel>() {
                     @Override
                     public void onError(Throwable ex) {
                         getRefreshController().refreshError(ex);
@@ -176,7 +182,7 @@ public class TribeFragment extends BaseRefreshAbsListControllerFragment<TribeLis
     @Override
     public void onResume() {
         super.onResume();
-        if(isRefreshPage){
+        if (isRefreshPage) {
             isRefreshPage = false;
             getRefreshController().refreshBegin();
         }
