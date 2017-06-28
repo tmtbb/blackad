@@ -69,9 +69,17 @@ public class DynamicFragment extends BaseFragment {
         super.initData();
         Bundle bundle = getArguments();
         if (bundle != null) {
-            viewPager.setCurrentItem(fragmentList.size() - 1);
+            viewPager.post(new Runnable() {
+                @Override
+                public void run() {
+                    viewPager.setCurrentItem(fragmentList.size() - 1);
+                }
+            });
         }
     }
+
+
+
 
     @Override
     public void initListener() {

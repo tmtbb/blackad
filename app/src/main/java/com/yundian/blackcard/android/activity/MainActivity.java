@@ -190,7 +190,7 @@ public class MainActivity extends BaseActivity {
                             Bundle bundle = new Bundle();
                             fragments[1].setArguments(bundle);
                             replacenFragment(fragments[1]);
-                            navigationView.setSelectedItemId(R.id.navigation_dynamic);
+                            navigationView.getMenu().getItem(2).setChecked(true);
                         }
                     });
                     break;
