@@ -16,7 +16,7 @@
             android:layout_height="133dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="88dp"
-            android:src="@mipmap/login_icon" />
+            android:src="@mipmap/icon_login_user" />
 
         <LinearLayout
             style="@style/login_item_layout"

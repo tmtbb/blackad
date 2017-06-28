@@ -45,7 +45,6 @@ public class RegisterInfoActivity extends BaseActivity {
     ScrollView scrollView;
 
 
-
     @Override
     public void initData() {
         super.initData();
@@ -119,12 +118,15 @@ public class RegisterInfoActivity extends BaseActivity {
             return;
         }
 
-        if (StringUtils.isEmpty(identityCard.getText().toString())) {
-            showToast("请输入身份证号!");
-            return;
-        } else if (!ValidateUtils.isValidatedAllIdcard(registerInfo.getIdentityCard())) {
-            showToast("请输入正确的身份证号!");
-            return;
+//        if (StringUtils.isEmpty(identityCard.getText().toString())) {
+//            showToast("请输入身份证号!");
+//            return;
+//        } else
+        if (!StringUtils.isEmpty(identityCard.getText().toString())) {
+            if (!ValidateUtils.isValidatedAllIdcard(registerInfo.getIdentityCard())) {
+                showToast("请输入正确的身份证号!");
+                return;
+            }
         }
 
 
@@ -146,7 +148,6 @@ public class RegisterInfoActivity extends BaseActivity {
     }
 
 
-
     @OnClick(R.id.province_city)
     public void onViewClicked() {
         closeSoftKeyboard();
@@ -155,7 +156,7 @@ public class RegisterInfoActivity extends BaseActivity {
             public void onCitySelected(String... citySelected) {
                 registerInfo.setProvince(citySelected[0]);
                 registerInfo.setCity(citySelected[1]);
-                provinceCity.setText(citySelected[0]+citySelected[1]);
+                provinceCity.setText(citySelected[0] + citySelected[1]);
             }
         });
     }

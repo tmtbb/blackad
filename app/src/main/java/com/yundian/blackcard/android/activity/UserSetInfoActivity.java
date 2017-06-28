@@ -22,6 +22,7 @@ import com.yundian.comm.listener.OnRefreshListener;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.util.SPUtils;
 import com.yundian.comm.util.StringUtils;
+import com.yundian.comm.util.ValidateUtils;
 
 import java.util.List;
 
@@ -126,7 +127,6 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
             }
         });
 
-
         setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -151,9 +151,12 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                         positionCell.update(userDetailModel.getPosition());
                         if (StringUtils.isNotEmpty(userDetailModel.getIdentityCard())) {
                             identityCardCell.update(StringUtils.replaceInfo(4, userDetailModel.getIdentityCard()));
+                            identityCardCell.getContentText().setEnabled(false);
+                            identityCardCell.getContentText().setClickable(false);
                         } else {
                             identityCardCell.getContentText().setText("");
                             identityCardCell.getContentText().setEnabled(true);
+                            identityCardCell.getContentText().setClickable(true);
                         }
                         phoneNumCell.update(StringUtils.replaceInfo(3, userDetailModel.getPhoneNum()));
                         emailCell.update(userDetailModel.getEmail());
@@ -184,20 +187,24 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                         showToast(editText.getHint());
                         return;
                     }
-                showLoader();
-                NetworkAPIFactory.getUserService().userEdit(findModelByView(), new OnAPIListener<Object>() {
-                    @Override
-                    public void onError(Throwable ex) {
-                        onShowError(ex);
-                    }
 
-                    @Override
-                    public void onSuccess(Object o) {
-                        closeLoader();
-                        showToast("修改完成");
-                        getRefreshController().refreshBegin();
-                    }
-                });
+                UserDetailModel model = findModelByView();
+                if (model != null) {
+                    showLoader();
+                    NetworkAPIFactory.getUserService().userEdit(model, new OnAPIListener<Object>() {
+                        @Override
+                        public void onError(Throwable ex) {
+                            onShowError(ex);
+                        }
+
+                        @Override
+                        public void onSuccess(Object o) {
+                            closeLoader();
+                            showToast("修改完成");
+                            getRefreshController().refreshBegin();
+                        }
+                    });
+                }
                 break;
         }
 
@@ -211,7 +218,12 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
         model.setSex(sexCell.getContent());
 
         if (StringUtils.isEmpty(userDetailModel.getIdentityCard())) {
-            model.setIdentityCard(identityCardCell.getContent());
+            String idCard = identityCardCell.getContent();
+            if (!ValidateUtils.isValidatedAllIdcard(idCard)) {
+                showToast("请输入正确的身份证号码");
+                return null;
+            }
+            model.setIdentityCard(idCard);
         } else {
             model.setIdentityCard(userDetailModel.getIdentityCard());
         }
