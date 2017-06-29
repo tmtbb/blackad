@@ -13,6 +13,7 @@ import com.yundian.comm.networkapi.listener.OnAPIListener;
 import com.yundian.comm.networkapi.obsserver.DefObserver;
 import com.yundian.comm.networkapi.okhttp.OkHttpService;
 import com.yundian.comm.networkapi.response.DefResponse;
+import com.yundian.comm.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -129,7 +130,9 @@ public class UserServiceImpl extends OkHttpService<UserServiceImpl.RetrofitUserS
         map.put("position", model.getPosition());
         map.put("company", model.getCompany());
         map.put("sex", model.getSex());
-        map.put("identityCard", model.getIdentityCard());
+        if (StringUtils.isNotEmpty(model.getIdentityCard())) {
+            map.put("identityCard", model.getIdentityCard());
+        }
         map.put("email", model.getEmail());
         map.put("nickName", model.getNickName());
         if (!TextUtils.isEmpty(model.getHeadUrl()))

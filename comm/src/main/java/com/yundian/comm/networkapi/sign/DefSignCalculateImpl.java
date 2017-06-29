@@ -1,6 +1,6 @@
 package com.yundian.comm.networkapi.sign;
 
-import com.yundian.comm.util.LogUtils;
+//import com.yundian.comm.util.LogUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -58,7 +58,7 @@ public  class DefSignCalculateImpl implements SignCalculate {
     @Override
     public String calculate(String method, String url, TreeMap<String, Object> parameter) {
 
-        LogUtils.d("sign",method + " " + url + " " + parameter.toString() );
+//        LogUtils.d("sign",method + " " + url + " " + parameter.toString() );
         StringBuilder builder = new StringBuilder();
         builder.append(method);
         builder.append(url);
@@ -73,7 +73,7 @@ public  class DefSignCalculateImpl implements SignCalculate {
         }
         builder.append(privateKey);
         String sign = md5(builder.toString()).toUpperCase();
-        LogUtils.d("sign",builder.toString() + " " + sign);
+//        LogUtils.d("sign",builder.toString() + " " + sign);
 
         return sign;
     }

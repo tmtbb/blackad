@@ -181,7 +181,7 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
                 selectorHelper.pickImage(true, 1, true);
                 break;
             case R.id.toolbar_subtitle:
-                EditText editTexts[] = {nicknameCell.getContentText(), identityCardCell.getContentText(), emailCell.getContentText()};
+                EditText editTexts[] = {nicknameCell.getContentText(), emailCell.getContentText()};
                 for (EditText editText : editTexts)
                     if (StringUtils.isEmpty(editText.getText().toString())) {
                         showToast(editText.getHint());
@@ -217,16 +217,16 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
         model.setCompany(companyCell.getContent());
         model.setSex(sexCell.getContent());
 
-        if (StringUtils.isEmpty(userDetailModel.getIdentityCard())) {
-            String idCard = identityCardCell.getContent();
+        if( StringUtils.isEmpty(userDetailModel.getIdentityCard()) && StringUtils.isNotEmpty(identityCardCell.getContent())) {
+            String idCard = identityCardCell.getContent().trim();
             if (!ValidateUtils.isValidatedAllIdcard(idCard)) {
                 showToast("请输入正确的身份证号码");
                 return null;
             }
             model.setIdentityCard(idCard);
-        } else {
-            model.setIdentityCard(userDetailModel.getIdentityCard());
+
         }
+
 
         model.setEmail(emailCell.getContent());
         model.setNickName(nicknameCell.getContent());
