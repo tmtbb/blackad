@@ -3,6 +3,7 @@ package com.yundian.blackcard.android.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.activity.ArticleCommentActivity;
@@ -10,11 +11,13 @@ import com.yundian.blackcard.android.activity.ArticleDetailActivity;
 import com.yundian.blackcard.android.activity.DynamicAddActivity;
 import com.yundian.blackcard.android.activity.DynamicCommentActivity;
 import com.yundian.blackcard.android.activity.DynamicDetailActivity;
+import com.yundian.blackcard.android.activity.RegisterActivity;
 import com.yundian.blackcard.android.activity.ShowBigImageActivity;
 import com.yundian.blackcard.android.activity.TribeAddActivity;
 import com.yundian.blackcard.android.activity.TribeApplyActivity;
 import com.yundian.blackcard.android.activity.TribeDetailActivity;
 import com.yundian.blackcard.android.activity.TribeInviteActivity;
+import com.yundian.blackcard.android.activity.WebViewActivity;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.ArticleModel;
 import com.yundian.blackcard.android.model.DynamicModel;
@@ -98,5 +101,12 @@ public class ActivityUtil {
         intent.putExtra(ActionConstant.IntentKey.TRIBEID_ID, tribeId);
         intent.putExtra(ActionConstant.IntentKey.TRIBEID_IDENTITY, identity);
         context.startActivityForResult(intent, ActionConstant.Action.TRIBE_APPLY_REQUEST);
+    }
+
+    public static void nextWebView(Context context, String url) {
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(url));
+        intent.setClass(context, WebViewActivity.class);
+        context.startActivity(intent);
     }
 }

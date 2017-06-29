@@ -8,13 +8,17 @@ import android.widget.ListView;
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.adapter.DynamicDetailAdapter;
 import com.yundian.blackcard.android.constant.ActionConstant;
+import com.yundian.blackcard.android.manager.CurrentUserManager;
 import com.yundian.blackcard.android.model.ArticleModel;
 import com.yundian.blackcard.android.model.DynamicCommentModel;
+import com.yundian.blackcard.android.model.UserInfo;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
 import com.yundian.blackcard.android.util.ActivityUtil;
+import com.yundian.blackcard.android.view.ActionSheetDialog;
 import com.yundian.blackcard.android.view.ArticleWebHeaderView;
 import com.yundian.blackcard.android.view.DynamicCommentHeaderView;
 import com.yundian.comm.adapter.base.IListAdapter;
+import com.yundian.comm.listener.OnItemChildViewClickListener;
 import com.yundian.comm.listener.OnRefreshPageListener;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
 
@@ -81,6 +85,37 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
     @Override
     public void initListener() {
         super.initListener();
+        dynamicDetailAdapter.setOnItemChildViewClickListener(new OnItemChildViewClickListener() {
+            @Override
+            public void onItemChildViewClick(View childView, final int position, int action, Object obj) {
+                if (action == ActionConstant.Action.DYNAMIC_COMMENT_CONTENT) {
+                    final DynamicCommentModel commentModel = dynamicDetailAdapter.getItem(position);
+                    UserInfo userInfo = CurrentUserManager.getInstance().getUserInfo();
+                    if (userInfo.getUserId() == commentModel.getUserId()) {
+                        ActionSheetDialog sheetDialog = createActionSheetDialog();
+                        sheetDialog.addSheetItem("删除", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                NetworkAPIFactory.getArticleService().commentDelete(commentModel.getId(), new OnAPIListener<Object>() {
+                                    @Override
+                                    public void onError(Throwable ex) {
+                                        onShowError(ex);
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Object o) {
+                                        showToast("删除成功");
+                                        dynamicDetailAdapter.remove(position);
+                                        dynamicDetailAdapter.notifyDataSetChanged();
+                                        updateCommentHeaderView();
+                                    }
+                                });
+                            }
+                        }).show();
+                    }
+                }
+            }
+        });
         webHeaderView.setOnPageFinishListener(new ArticleWebHeaderView.OnPageFinishListener() {
             @Override
             public void onCloseLoader() {
@@ -123,10 +158,15 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
             @Override
             public void onSuccess(List<DynamicCommentModel> dynamicCommentModels) {
                 getRefreshController().refreshComplete(dynamicCommentModels);
-                commentHeaderView.update(" (" + dynamicDetailAdapter.getCount() + "条) ");
-                commentHeaderView.setVisibility(dynamicDetailAdapter.getCount() != 0 ? View.VISIBLE : View.GONE);
+                updateCommentHeaderView();
             }
         });
+    }
+
+    private void updateCommentHeaderView() {
+        commentHeaderView.update(" (" + dynamicDetailAdapter.getCount() + "条) ");
+        commentHeaderView.setVisibility(dynamicDetailAdapter.getCount() != 0 ? View.VISIBLE : View.GONE);
+
     }
 
     @OnClick(R.id.toolbar_rightimage)
@@ -144,8 +184,19 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
                 dynamicDetailAdapter.getList().add(model);
                 dynamicDetailAdapter.notifyDataSetChanged();
                 listView.setSelection(dynamicDetailAdapter.getCount());
+                updateCommentHeaderView();
             }
-
         }
     }
+
+    protected ActionSheetDialog createActionSheetDialog() {
+        ActionSheetDialog sheetDialog = new ActionSheetDialog(context)
+                .builder()
+                .setTitle("请选择类型")
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true);
+        return sheetDialog;
+    }
+
+
 }

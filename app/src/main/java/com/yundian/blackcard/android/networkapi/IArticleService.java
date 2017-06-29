@@ -61,4 +61,11 @@ public interface IArticleService {
      */
     void articleComment(String articleId, String comment, OnAPIListener<DynamicCommentModel> listener);
 
+    /**
+     * 文章评论删除
+     * @param commentId
+     * @param listener
+     */
+ void commentDelete(String commentId, OnAPIListener<Object> listener);
+
 }

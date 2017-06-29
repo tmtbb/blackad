@@ -50,6 +50,7 @@ public interface ActionConstant {
         String PAY_PASSWORD = "PAY_PASSWORD";
         String DYNAMIC = "DYNAMIC";
         String TRIBEID_ID = "TRIBEID_ID";
+        String WEBVIEW_URL = "WEBVIEW_URL";
         String TRIBEID_IDENTITY = "TRIBEID_IDENTITY";
         String TRIBEID_STATUS = "TRIBEID_STATUS";
         String DYNAMIC_COMMENT = "DYNAMIC_COMMENT";

@@ -14,7 +14,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.util.ActivityUtil;
 import com.yundian.comm.ui.view.BaseDataFrameLayout;
+import com.yundian.comm.util.StringUtils;
 
 import butterknife.BindView;
 
@@ -56,8 +58,7 @@ public class ArticleWebHeaderView extends BaseDataFrameLayout<String> {
     public void update(String data) {
         if (!TextUtils.isEmpty(data)) {
             webView.loadUrl(data);
-        }
-        else {
+        } else {
             if (onPageFinishListener != null) {
                 onPageFinishListener.onCloseLoader();
             }
@@ -94,6 +95,17 @@ public class ArticleWebHeaderView extends BaseDataFrameLayout<String> {
             if (onPageFinishListener != null) {
                 onPageFinishListener.onCloseLoader();
             }
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+            if (StringUtils.isNotEmpty(url)) {
+                if (url.startsWith("http://") || url.startsWith("https://"))
+                    ActivityUtil.nextWebView(context, url);
+                return true;
+            }
+            return super.shouldOverrideUrlLoading(view, url);
         }
     }
 

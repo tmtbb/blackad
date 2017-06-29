@@ -40,6 +40,11 @@ public class ArticleService extends OkHttpService<ArticleService.RetrofitArticle
         @ServiceMethod("commentList")
         Observable<DefResponse<List<DynamicCommentModel>>> commentList(@Field("page") int page, @Field("articleId") String articleId);
 
+        @POST("/api/article/comment/delete.json")
+        @FormUrlEncoded
+        @ServiceMethod("commentDelete")
+        Observable<DefResponse<Object>> commentDelete(@Field("commentId") String commentId);
+
 
         @POST("/api/article/info.json")
         @FormUrlEncoded
@@ -71,6 +76,11 @@ public class ArticleService extends OkHttpService<ArticleService.RetrofitArticle
     @Override
     public void articleComment(String articleId, String comment, OnAPIListener<DynamicCommentModel> listener) {
         setSubscribe(service.articleComment(articleId, comment), new DefObserver<>(listener));
+    }
+
+    @Override
+    public void commentDelete(String commentId, OnAPIListener<Object> listener) {
+        setSubscribe(service.commentDelete(commentId),new DefObserver<>(listener));
     }
 
 
