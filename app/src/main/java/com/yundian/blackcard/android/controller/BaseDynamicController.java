@@ -21,8 +21,11 @@ import com.yundian.blackcard.android.util.ActivityUtil;
 import com.yundian.blackcard.android.util.DynamicActionObservable;
 import com.yundian.blackcard.android.view.ActionSheetDialog;
 import com.yundian.comm.controller.BaseController;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 import com.yundian.comm.networkapi.listener.OnAPIListener;
+import com.yundian.comm.util.LogUtils;
 import com.yundian.comm.util.SPUtils;
+import com.yundian.comm.util.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -38,6 +41,7 @@ import java.util.ArrayList;
 public abstract class BaseDynamicController extends BaseController {
 
     protected boolean hasPermission = true;
+    private static final int TOKEN_EXPIRE = 10002;
 
     public void setHasPermission(boolean hasPermission) {
         this.hasPermission = hasPermission;
@@ -172,7 +176,7 @@ public abstract class BaseDynamicController extends BaseController {
                             public void onError(Throwable ex) {
                                 if (context instanceof DynamicDetailActivity)
                                     ((DynamicDetailActivity) context).closeLoader();
-                                showToast(ex.getMessage());
+                                onShowError(ex);
                             }
 
                             @Override
@@ -212,7 +216,7 @@ public abstract class BaseDynamicController extends BaseController {
             NetworkAPIFactory.getDynamicService().likeAdd(dynamicModel.getId(), new OnAPIListener<Object>() {
                 @Override
                 public void onError(Throwable ex) {
-                    showToast(ex.getMessage());
+                    onShowError(ex);
                 }
 
                 @Override
@@ -252,5 +256,15 @@ public abstract class BaseDynamicController extends BaseController {
 
     public void showNoPermission() {
         showToast("暂无权限");
+    }
+
+    protected void onShowError(Throwable ex) {
+        showToast(ex.getLocalizedMessage());
+        LogUtils.showException(ex);
+        if (ex instanceof NetworkAPIException) {
+            if (((NetworkAPIException) ex).getErrorCode() == TOKEN_EXPIRE) {
+                ActivityUtil.nextLoginAndClearToken(context);
+            }
+        }
     }
 }
