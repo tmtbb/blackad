@@ -11,16 +11,19 @@ import com.yundian.blackcard.android.activity.ArticleDetailActivity;
 import com.yundian.blackcard.android.activity.DynamicAddActivity;
 import com.yundian.blackcard.android.activity.DynamicCommentActivity;
 import com.yundian.blackcard.android.activity.DynamicDetailActivity;
+import com.yundian.blackcard.android.activity.LoginActivity;
 import com.yundian.blackcard.android.activity.RegisterActivity;
 import com.yundian.blackcard.android.activity.ShowBigImageActivity;
 import com.yundian.blackcard.android.activity.TribeAddActivity;
 import com.yundian.blackcard.android.activity.TribeApplyActivity;
 import com.yundian.blackcard.android.activity.TribeDetailActivity;
 import com.yundian.blackcard.android.activity.TribeInviteActivity;
+import com.yundian.blackcard.android.activity.UserSetInfoActivity;
 import com.yundian.blackcard.android.activity.WebViewActivity;
 import com.yundian.blackcard.android.constant.ActionConstant;
 import com.yundian.blackcard.android.model.ArticleModel;
 import com.yundian.blackcard.android.model.DynamicModel;
+import com.yundian.comm.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +110,13 @@ public class ActivityUtil {
         Intent intent = new Intent();
         intent.setData(Uri.parse(url));
         intent.setClass(context, WebViewActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void nextLoginAndClearToken(Context context) {
+        SPUtils.remove(context, "UserToken");
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 }

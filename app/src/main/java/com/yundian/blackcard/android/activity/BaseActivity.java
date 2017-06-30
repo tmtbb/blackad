@@ -18,9 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yundian.blackcard.android.R;
+import com.yundian.blackcard.android.util.ActivityUtil;
 import com.yundian.blackcard.android.view.LoaderLayout;
 import com.yundian.comm.listener.InitPageListener;
 import com.yundian.comm.listener.OnErrorListener;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 import com.yundian.comm.util.LogUtils;
 import com.yundian.comm.util.ToastUtils;
 
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements InitPageListener, OnErrorListener {
 
+    private static final int TOKEN_EXPIRE = 10002;
     @Nullable
     @BindView(R.id.toolbar)
     protected Toolbar toolbar;
@@ -89,6 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
             mToolbarLeftTitle.setVisibility(View.VISIBLE);
         }
     }
+
     public void setRightImage(int resId) {
         if (mToolbarRightImage != null) {
             mToolbarRightImage.setImageResource(resId);
@@ -153,6 +157,11 @@ public abstract class BaseActivity extends AppCompatActivity implements InitPage
         }
         LogUtils.showException(ex);
         closeLoader();
+        if (ex instanceof NetworkAPIException) {
+            if (((NetworkAPIException) ex).getErrorCode() == TOKEN_EXPIRE) {
+                ActivityUtil.nextLoginAndClearToken(context);
+            }
+        }
     }
 
     protected void showToast(String string) {

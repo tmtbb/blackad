@@ -15,6 +15,7 @@ import com.yundian.blackcard.android.manager.UserDetailManager;
 import com.yundian.blackcard.android.model.UploadInfo;
 import com.yundian.blackcard.android.model.UserDetailModel;
 import com.yundian.blackcard.android.networkapi.NetworkAPIFactory;
+import com.yundian.blackcard.android.util.ActivityUtil;
 import com.yundian.blackcard.android.view.ActionSheetDialog;
 import com.yundian.blackcard.android.view.UserSetInfoCell;
 import com.yundian.comm.listener.OnChildViewClickListener;
@@ -172,10 +173,7 @@ public class UserSetInfoActivity extends BaseRefreshActivity {
     protected void onClick(View view) {
         switch (view.getId()) {
             case R.id.logoutText:
-                SPUtils.remove(UserSetInfoActivity.this, "UserToken");
-                Intent intent = new Intent(context, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                ActivityUtil.nextLoginAndClearToken(context);
                 break;
             case R.id.headerLayout:
                 selectorHelper.pickImage(true, 1, true);

@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import com.yundian.blackcard.android.R;
 import com.yundian.blackcard.android.model.EmptyViewEntity;
+import com.yundian.blackcard.android.util.ActivityUtil;
 import com.yundian.blackcard.android.util.EmptyViewEntityUtil;
 import com.yundian.comm.adapter.base.IListAdapter;
 import com.yundian.comm.listener.OnItemChildViewClickListener;
 import com.yundian.comm.listener.OnRefreshPageListener;
+import com.yundian.comm.networkapi.exception.NetworkAPIException;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ public abstract class RefreshListController<TView extends View, TModel> extends 
     protected final static int MoreStatus_Error = MoreStatus_Load + 1;
     protected final static int MoreStatus_Complete = MoreStatus_Error + 1;
     protected final static int MoreStatus_NoMoreData = MoreStatus_Complete + 1;
+    private static final int TOKEN_EXPIRE = 10002;
 
     protected boolean hasEmptyView = false;
     protected OnItemChildViewClickListener onEmptyViewClickListener;
@@ -214,6 +217,11 @@ public abstract class RefreshListController<TView extends View, TModel> extends 
             refreshComplete();
         } else { //加载更多时出错
             setMoreStatus(MoreStatus_Error);
+        }
+        if (ex instanceof NetworkAPIException) {
+            if (((NetworkAPIException) ex).getErrorCode() == TOKEN_EXPIRE) {
+                ActivityUtil.nextLoginAndClearToken(context);
+            }
         }
     }
 
