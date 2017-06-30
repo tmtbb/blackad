@@ -3,6 +3,7 @@ package me.nereo.multi_image_selector;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import java.io.File;
@@ -20,9 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
 
-import me.nereo.multi_image_selector.utils.FileCacheUtil;
 import me.nereo.multi_image_selector.utils.FileUtils;
 
 /**
@@ -51,7 +51,6 @@ public class MultiImageSelectorActivity extends AppCompatActivity
      * Whether show camera，true by default
      */
     public static final String EXTRA_SHOW_CAMERA = "show_camera";
-    public static final String EXTRA_IS_CLIP = "is_clip";
     /**
      * Result data set，ArrayList&lt;String&gt;
      */
@@ -59,6 +58,8 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     public static final String EXTRA_CLIP_WIDTH = "clip_width";
     public static final String EXTRA_CLIP_HEIGHT = "clip_height";
+
+    public static final String EXTRA_IS_CLIP = "is_clip";
     /**
      * Original data set
      */
@@ -73,7 +74,6 @@ public class MultiImageSelectorActivity extends AppCompatActivity
     private int mClipWidth = 200;
     private int mClipHeight = 200;
     private File imageCropFile;
-    private boolean isClip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,6 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         mDefaultCount = intent.getIntExtra(EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
         mClipHeight = intent.getIntExtra(EXTRA_CLIP_HEIGHT, 400);
         mClipWidth = intent.getIntExtra(EXTRA_CLIP_WIDTH, 400);
-        isClip = intent.getBooleanExtra(EXTRA_IS_CLIP, true);
         final int mode = intent.getIntExtra(EXTRA_SELECT_MODE, MODE_MULTI);
         final boolean isShow = intent.getBooleanExtra(EXTRA_SHOW_CAMERA, true);
         if (mode == MODE_MULTI && intent.hasExtra(EXTRA_DEFAULT_SELECTED_LIST)) {
@@ -140,6 +139,24 @@ public class MultiImageSelectorActivity extends AppCompatActivity
                     .commit();
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                //设置状态栏颜色
+                getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
+        }
+
     }
 
     @Override
@@ -173,20 +190,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     @Override
     public void onSingleImageSelected(String path) {
-        if (isClip) {
-            startPhotoZoom(path);
-        } else {
-            if (resultList != null) {
-                resultList.add(path);
-                Intent intent = new Intent();
-                intent.putStringArrayListExtra(EXTRA_RESULT, resultList);
-                setResult(RESULT_OK, intent);
-            } else {
-                setResult(RESULT_CANCELED);
-            }
-            finish();
-        }
-
+        startPhotoZoom(path);
     }
 
     @Override
@@ -216,8 +220,8 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         intent.putExtra("outputX", mClipWidth);
         intent.putExtra("outputY", mClipHeight);
         intent.putExtra("noFaceDetection", true);
-        intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+//        intent.putExtra("return-data", true);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         if (imageCropFile == null) {
@@ -227,14 +231,20 @@ public class MultiImageSelectorActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
+
         if (imageCropFile.exists()) {
             imageCropFile.delete();
         }
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            intent.putExtra("return-data", false);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileUtils.getFileUrl(this, imageCropFile));
-        }
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+//            intent.putExtra("return-data", false);
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileUtils.getFileUrl(this, imageCropFile));
+//        }
+
+
+        intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageCropFile));
+
         startActivityForResult(intent, MultiImageSelectorHelper.REQUEST_IMAGE_CLIP);
     }
 

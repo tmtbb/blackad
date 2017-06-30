@@ -8,6 +8,7 @@
 
     <color name="colorPrimary">#434343</color>
     <color name="colorPrimaryDark">#434343</color>
+    <color name="mis_actionbar_color">#434343</color>
     <color name="colorAccent">#434343</color>
     <color name="color_434343">#434343</color>
     <color name="color_white">#ffffff</color>
