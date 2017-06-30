@@ -136,7 +136,7 @@ public class TribeAddActivity extends BaseActivity {
                 });
                 break;
             case R.id.picLayout:
-                selectorHelper.pickImage(true, 1, true);
+                selectorHelper.pickImage(true, 1, true,750,450);
                 break;
         }
     }
