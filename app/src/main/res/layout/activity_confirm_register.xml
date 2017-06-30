@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/show_agreement"
-                    android:text="《精英黑卡会籍服务章程》"
+                    android:text="《无限黑卡会籍服务章程》"
                     android:textColor="@color/color_e3a63f"
                     android:textSize="@dimen/textsize_12" />
             </LinearLayout>
