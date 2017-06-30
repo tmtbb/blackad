@@ -49,6 +49,12 @@ public class DynamicListAdapter extends MicroUpdateListViewAdapter<DynamicModel>
         }
 
         @Override
+        protected void initView() {
+            super.initView();
+            dynamicView.setContentMaxLines(6);
+        }
+
+        @Override
         protected void initListener() {
             super.initListener();
             dynamicView.setOnChildViewClickListener(new OnChildViewClickListener() {

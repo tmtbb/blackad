@@ -156,4 +156,8 @@ public class DynamicView extends BaseDataFrameLayout<DynamicModel> {
                 break;
         }
     }
+    public void setContentMaxLines(int maxlines){
+        if(contentText != null)
+            contentText.setMaxLines(maxlines);
+    }
 }
