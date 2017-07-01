@@ -167,7 +167,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
             @Override
             public void onRefresh(int pageIndex) {
                 if (pageIndex == 1) {
-                    showLoader();
+//                    showLoader();
                     NetworkAPIFactory.getTribeService().tribeInfo(tribeId, new OnAPIListener<TribeInfosModel>() {
                         @Override
                         public void onError(Throwable ex) {
@@ -176,7 +176,7 @@ public class TribeDetailActivity extends BaseRefreshAbsListControllerActivity<Dy
 
                         @Override
                         public void onSuccess(TribeInfosModel tribeInfosModel) {
-                            closeLoader();
+//                            closeLoader();
                             TribeDetailActivity.this.tribeInfosModel = tribeInfosModel;
                             updateBottomStatus(tribeInfosModel.getMemberInfo().getStatus());
                             dynamicListController.setHasPermission(tribeInfosModel.getMemberInfo().getStatus() == 2);

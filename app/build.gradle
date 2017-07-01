@@ -36,14 +36,17 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            buildConfigField "String", "SERVER_HOST", "\"http://app.jingyingheika.com\""
+            buildConfigField "String", "SERVER_HOST", "\"https://app.jingyingheika.com\""
+//            buildConfigField "String", "SERVER_HOST", "\"http://101.37.82.111:9999\""
+
         }
         debug {
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            shrinkResources false
-            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            shrinkResources false
+            minifyEnabled false
             signingConfig signingConfigs.debug
             buildConfigField "String", "SERVER_HOST", "\"http://101.37.82.111:9999\""
+//            buildConfigField "String", "SERVER_HOST", "\"http://192.168.2.105:8080\""
         }
     }
     applicationVariants.all { variant ->
