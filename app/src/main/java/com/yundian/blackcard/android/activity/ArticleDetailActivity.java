@@ -127,7 +127,7 @@ public class ArticleDetailActivity extends BaseRefreshAbsListControllerActivity<
             @Override
             public void onRefresh(final int pageIndex) {
                 if (pageIndex == 1) {
-                    showLoader();
+//                    showLoader();
                     NetworkAPIFactory.getArticleService().articleDetail(articleModel.getId(), new OnAPIListener<ArticleModel>() {
                         @Override
                         public void onError(Throwable ex) {
