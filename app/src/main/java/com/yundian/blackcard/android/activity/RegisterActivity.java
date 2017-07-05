@@ -162,6 +162,7 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
         } else {
             if (view.getId() == R.id.yes_custom_name && !isPay()) {
                 showToast(registerInfo.getBlackcardInfo().getBlackcardName() + "暂不支持定制姓名");
+                customName.setEnabled(false);
                 return;
             }
             yesCustomName.setSelected(false);
@@ -218,6 +219,7 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
             yesCustomName.setBackgroundResource(R.drawable.edittext_bg);
             noCustomName.setBackgroundResource(R.drawable.blackcard_item_sel_bg);
         }
+        customName.setEnabled(isPay());
     }
 
     @Override
