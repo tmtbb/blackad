@@ -59,8 +59,6 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
     ScrollView scrollView;
 
 
-
-
     private BlackcardInfos blackcardInfos;
     private RegisterInfo registerInfo = new RegisterInfo();
 
@@ -84,7 +82,7 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
         closeLoader();
         this.blackcardInfos = blackcardInfos;
         registerInfo.setCustomNamePrice(blackcardInfos.getCustomNamePrice());
-        customNameTips.setText(String.format("定制姓名(¥%.2f)",blackcardInfos.getCustomNamePrice()));
+        customNameTips.setText(String.format("定制姓名(¥%.2f)", blackcardInfos.getCustomNamePrice()));
         registerInfo.setBlackcardInfo(blackcardInfos.getBlackcards().get(1));
         PrivilegeInfo.blackCardId = registerInfo.getBlackcardInfo().getBlackcardId().toString();
 //        blackcardGridview.setNumColumns(blackcardInfos.getBlackcards().size());
@@ -106,7 +104,7 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
     private void bindPrivileges(Integer index) {
         List<View> gridViews = new ArrayList<View>();
         List<List<PrivilegeInfo>> lists = blackcardInfos.privilegesSpit(ITEM_COUNT_OF_PAGE);
-        for(List<PrivilegeInfo> privilegeInfos : lists ) {
+        for (List<PrivilegeInfo> privilegeInfos : lists) {
             GridView gridView = (GridView) LayoutInflater.from(this).inflate(R.layout.gridview_layout, null);
             BaseAdapter adapter = new GridViewPrivilegeInfoAdapter(this, R.layout.register_privilege_item, privilegeInfos);
             gridView.setAdapter(adapter);
@@ -116,7 +114,6 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
         viewPager.setCurrentItem(index);
         pageIndicator.setViewPager(viewPager, index);
     }
-
 
 
     @Override
@@ -142,14 +139,16 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
     @OnClick({R.id.but_next, R.id.yes_custom_name, R.id.no_custom_name})
     public void onClick(View view) {
         if (view.getId() == R.id.but_next) {
-            if( yesCustomName.isSelected() ) {
+            if (yesCustomName.isSelected()) {
                 String strCustomName = customName.getText().toString().trim().toUpperCase();
-                if( StringUtils.isEmpty(strCustomName) ) {
+                if (StringUtils.isEmpty(strCustomName)) {
                     showToast(customName.getHint());
                     return;
-                }
-                else if( ! ValidateUtils.isEnName(strCustomName) ) {
+                } else if (!ValidateUtils.isEnName(strCustomName)) {
                     showToast(customName.getHint());
+                    return;
+                } else if (registerInfo.getBlackcardInfo().getBlackcardPrice() <= 0) {
+                    showToast("当前会籍不能定制姓名");
                     return;
                 }
                 registerInfo.setCustomName(strCustomName);
@@ -159,8 +158,12 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
             Intent intent = new Intent();
             intent.putExtras(bundle);
             intent.setClass(this, RegisterInfoActivity.class);
-            startActivityForResult(intent,0);
+            startActivityForResult(intent, 0);
         } else {
+            if (view.getId() == R.id.yes_custom_name && !isPay()) {
+                showToast(registerInfo.getBlackcardInfo().getBlackcardName() + "暂不支持定制姓名");
+                return;
+            }
             yesCustomName.setSelected(false);
             noCustomName.setSelected(false);
             yesCustomName.setBackgroundResource(R.drawable.edittext_bg);
@@ -184,6 +187,7 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
                 bindPrivileges(viewPager.getCurrentItem());
                 registerInfo.setBlackcardInfo(blackcardInfo);
                 ((BaseAdapter) blackcardGridview.getAdapter()).notifyDataSetChanged();
+                switchCustomName();
             }
         });
 
@@ -198,10 +202,28 @@ public class RegisterActivity extends BaseActivity implements OnAPIListener<Blac
         });
     }
 
+    private boolean isPay() {
+        return registerInfo.getBlackcardInfo().getBlackcardPrice() > 0;
+    }
+
+    private void switchCustomName() {
+        if (isPay()) {
+            yesCustomName.setSelected(true);
+            noCustomName.setSelected(false);
+            noCustomName.setBackgroundResource(R.drawable.edittext_bg);
+            yesCustomName.setBackgroundResource(R.drawable.blackcard_item_sel_bg);
+        } else {
+            noCustomName.setSelected(true);
+            yesCustomName.setSelected(false);
+            yesCustomName.setBackgroundResource(R.drawable.edittext_bg);
+            noCustomName.setBackgroundResource(R.drawable.blackcard_item_sel_bg);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if( requestCode == 0 && resultCode == RESULT_OK ) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             finish();
         }
     }
