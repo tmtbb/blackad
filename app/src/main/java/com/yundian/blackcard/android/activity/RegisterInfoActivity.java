@@ -101,7 +101,7 @@ public class RegisterInfoActivity extends BaseActivity {
             showToast(addr.getHint());
             return;
         } else if (registerInfo.getAddr().length() < 6) {
-            showToast("详细地址长度最少3位!");
+            showToast("详细地址长度最少6位!");
             return;
         }
 

@@ -62,6 +62,7 @@ public interface ActionConstant {
         String IMG_BIG_INDEX = "IMG_BIG_INDEX";
         String TRIBEID_LIST_MODEL = "TRIBEID_LIST_MODEL";
         String USER_ID = "USER_ID";
+        String ISPAY = "ISPAY";
     }
 
     interface Broadcast {

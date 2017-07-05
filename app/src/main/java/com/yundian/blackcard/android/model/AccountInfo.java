@@ -6,6 +6,7 @@ package com.yundian.blackcard.android.model;
 
 public class AccountInfo {
     private String token;
+    private int isPay;
 
     public String getToken() {
         return token;
@@ -14,5 +15,13 @@ public class AccountInfo {
     public AccountInfo setToken(String token) {
         this.token = token;
         return this;
+    }
+
+    public int getIsPay() {
+        return isPay;
+    }
+
+    public void setIsPay(int isPay) {
+        this.isPay = isPay;
     }
 }

@@ -34,12 +34,17 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
     @BindView(R.id.but_next)
     protected Button butNext;
     private final static String REGISTER_PAY = "register_pay";
+    private boolean isPay;
 
     @Override
     public void initData() {
         super.initData();
         setTitle(R.string.title_activity_confirm_register);
         registerInfo = (RegisterInfo) getIntent().getSerializableExtra(RegisterInfo.class.getName());
+        isPay = registerInfo.getBlackcardInfo().getBlackcardPrice() > 0;
+
+        butNext.setText(isPay ? "确认注册、支付" : "立即注册");
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("黑卡会籍：%s<br/>", registerInfo.getBlackcardInfo().getBlackcardName()));
         stringBuilder.append("黑卡卡号：666随机 <br/>");
@@ -48,8 +53,11 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
             stringBuilder.append(String.format("定制姓名：%s <br/>", registerInfo.getCustomName()));
             monery += registerInfo.getCustomNamePrice();
         }
-        stringBuilder.append(String.format("支付金额：<font color=\"#E3A63F\">¥%.2f</font> <br/>", monery));
-        stringBuilder.append("支付方式：微信 <br/><br/>");
+        if (isPay) {
+            stringBuilder.append("支付方式：微信 <br/><br/>");
+            stringBuilder.append(String.format("支付金额：<font color=\"#E3A63F\">¥%.2f</font> <br/>", monery));
+        }
+
         stringBuilder.append(String.format("    收件人：%s <br/>", registerInfo.getFullName()));
         stringBuilder.append(String.format("联系电话：%s <br/>", registerInfo.getPhoneNum()));
         stringBuilder.append(String.format("收件地址：%s %s%s <br/>", registerInfo.getProvince(), registerInfo.getCity(), registerInfo.getAddr()));
@@ -100,7 +108,13 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
     @Override
     public void onSuccess(AccountInfo accountInfo) {
         this.accountInfo = accountInfo;
-        createPay();
+        if (accountInfo.getIsPay() == 0) {
+            showToast("注册成功");
+            setResult(RESULT_OK);
+            finish();
+        }else {
+            createPay();
+        }
     }
 
     private void wxPay() {
@@ -109,14 +123,14 @@ public class ConfirmRegisterActivity extends BaseActivity implements OnAPIListen
             @Override
             public void onError(Throwable ex) {
                 onShowError(ex);
-                NetworkAPIFactory.getCommService().payLog(REGISTER_PAY,payInfo,ex);
+                NetworkAPIFactory.getCommService().payLog(REGISTER_PAY, payInfo, ex);
                 butNext.setText("重新支付");
             }
 
             @Override
             public void onSuccess(Boolean aBoolean) {
                 if (aBoolean) {
-                    NetworkAPIFactory.getCommService().payLog(REGISTER_PAY,payInfo,null);
+                    NetworkAPIFactory.getCommService().payLog(REGISTER_PAY, payInfo, null);
                     closeLoader();
                     ToastUtils.show(ConfirmRegisterActivity.this, "注册成功");
                     setResult(RESULT_OK);
